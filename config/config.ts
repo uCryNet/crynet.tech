@@ -1,0 +1,1 @@
+export const SECRET_KEY = "THIS_IS_MY_PET_PROJECT"
