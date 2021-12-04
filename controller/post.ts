@@ -3,10 +3,12 @@ import jwt from "jsonwebtoken"
 
 // Component
 import PostService from '../services/post'
+import FileService from '../services/file'
 
 // Var
 import {SECRET_KEY} from "../config/config";
 import UserService from "../services/login";
+
 
 const checkLengthArticle = (res, title, description, text) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({message: "Check the length title"})
@@ -41,7 +43,7 @@ class PostController {
     try {
       if (!req.body) return res.status(400).json({message: "Post create error"})
 
-      const {token, title, description, text, image} = req.body
+      const {token, title, description, text} = req.body
       const {role, id: _id} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
@@ -51,7 +53,12 @@ class PostController {
       checkLengthArticle(res, title, description, text)
 
       const {name} = await UserService.getUser(_id, "id")
-      await PostService.create({title, description, text, author: name})
+
+      const image = req.files.image
+
+      const imageName = FileService.saveImage(image)
+
+      await PostService.create({title, description, text, author: name, image: imageName})
 
       res.json({message: "Post create"})
     } catch (e) {
