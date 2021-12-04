@@ -27,7 +27,8 @@ class PostService {
   }
 
   async update(data) {
-    await Post.findByIdAndUpdate(data._id, data, {new: true})
+    const updatedPost = Post.findByIdAndUpdate({_id: data.id}, data, {new: true})
+    return updatedPost
   }
 }
 

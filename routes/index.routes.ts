@@ -12,7 +12,7 @@ const router = new Router()
 router.get("/post/get-all", PostController.getAll)
 router.get("/post/get-one/:id", PostController.getOne)
 router.post("/post/create", PostController.create)
-router.post("post/update", PostController.update)
+router.put("/post/update", PostController.update)
 router.delete("/post/delete/:id", PostController.delete)
 
 // user model

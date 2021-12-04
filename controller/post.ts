@@ -8,6 +8,12 @@ import PostService from '../services/post'
 import {SECRET_KEY} from "../config/config";
 import UserService from "../services/login";
 
+const checkLengthArticle = (res, title, description, text) => {
+  if (title.length < 3 || title.length > 100) return res.status(400).json({message: "Check the length title"})
+  if (description.length < 10 || description.length > 200) return res.status(400).json({message: "Check the length description"})
+  if (text.length < 10 || text.length > 5000) return res.status(400).json({message: "Check the length text"})
+}
+
 
 class PostController {
   async getOne(req, res) {
@@ -41,9 +47,8 @@ class PostController {
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin") return res.status(400).json({message: "No access"})
       if (!title || !description || !text) return res.status(400).json({message: "Fill in the required fields"})
-      if (title.length < 3 || title.length > 100) return res.status(400).json({message: "Check the length title"})
-      if (description.length < 10 || description.length > 200) return res.status(400).json({message: "Check the length description"})
-      if (text.length < 10 || text.length > 5000) return res.status(400).json({message: "Check the length text"})
+
+      checkLengthArticle(res, title, description, text)
 
       const {name} = await UserService.getUser(_id, "id")
       await PostService.create({title, description, text, author: name})
@@ -65,6 +70,7 @@ class PostController {
       if (role !== "admin") return res.status(400).json({message: "No access"})
 
       await PostService.delete(id)
+
       res.json({message: "Post deleted"})
     } catch (e) {
       res.status(400).json({message: "Post delete failed", e})
@@ -72,23 +78,24 @@ class PostController {
   }
 
   async update(req, res) {
-    // TODO: доделать update
     try {
       if (!req.body) return res.status(400).json({message: "Post update error"})
-      const {token, title, description, text, id} = req.body
-      const {role, id: _id} = jwt.verify(token, SECRET_KEY)
+      const {token, title, description, text, id: postId, image} = req.body
+      const {role, id: userId} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
-      if (role !== "admin") return res.status(400).json({message: "No access"})
-      if (!title || !description || !text) return res.status(400).json({message: "Fill in the required fields"})
-      if (title.length < 3 || title.length > 100) return res.status(400).json({message: "Check the length title"})
-      if (description.length < 10 || description.length > 200) return res.status(400).json({message: "Check the length description"})
-      if (text.length < 10 || text.length > 5000) return res.status(400).json({message: "Check the length text"})
+      if (role !== "admin" || !userId) return res.status(400).json({message: "No access"})
+      if (!title || !description || !text || !postId) return res.status(400).json({message: "Fill in the required fields"})
 
-      const {name} = await UserService.getUser(_id, "id")
-      await PostService.update({title, description, text, author: name, id})
+      checkLengthArticle(res, title, description, text)
 
-      res.json({message: "Post updated"})
+      const getCurrentPost = await PostService.getOne(postId)
+      if (!getCurrentPost._id) return res.status(400).json({message: "Post not found"})
+
+      const {name} = await UserService.getUser(userId, "id")
+      const updatedPost = await PostService.update({title, description, text, author: name, id: postId})
+
+      res.json({message: "Post updated", updatedPost})
     } catch (e) {
       res.status(400).json({message: "Post update failed", e})
     }
