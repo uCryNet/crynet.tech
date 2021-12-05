@@ -54,9 +54,7 @@ class PostController {
 
       const {name} = await UserService.getUser(_id, "id")
 
-      const image = req.files.image
-
-      const imageName = FileService.saveImage(image)
+      const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
 
       await PostService.create({title, description, text, author: name, image: imageName})
 
