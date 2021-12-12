@@ -56,7 +56,7 @@ class PostController {
 
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
 
-      await PostService.create({title, description, text, author: name, image: imageName})
+      // await PostService.create({title, description, text, author: name, image: imageName})
 
       res.json({message: "Post create"})
     } catch (e) {
