@@ -1,0 +1,30 @@
+body {
+  margin: unset;
+  background: #f1f1f1;
+}
+
+#app {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+@import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css";

@@ -1,38 +1,34 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../../assets/logo.png">
-
-    <ul>
-      <li v-for="article in list" :key="article.title">
-        <h2>
-          <router-link :to="'/blog/' + article._id">{{ article.title }}</router-link>
-        </h2>
-
-        <div>{{ article.text }}</div>
-      </li>
-    </ul>
+  <div class="articles">
+    <template v-for="article in list" :key="article._id">
+      <Article
+        :title="article.title"
+        :text="article.text"
+        :description="article.description"
+        :id="article._id"
+      />
+    </template>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 // Method
 import API from "@/api/api"
 
-// Type
-import {IArticle} from "@/interfaces/interfaces";
+// Components
+import Article from "./components/Article/Article";
 
 export default {
   name: 'Home',
 
-  // TODO: может сделать блог на vuetify?
-  // установить: npm install vuetify
-  // шаблон карточки статьи: https://codesandbox.io/s/14ry9r3lll?file=/src/App.vue:829-2125
+  components: {
+    Article
+  },
 
-  data(): {
-    list: IArticle[]
-  } {
+  data() {
     return {
-      list: []
+      list: [],
+      text: 'sdadasd'
     };
   },
 
@@ -44,5 +40,14 @@ export default {
       .catch(error => console.log(error))
   }
 }
-
 </script>
+
+<style scoped>
+.articles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+</style>

@@ -8,19 +8,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="js">
 // Method
 import API from "@/api/api"
 
-// Type
-import {IArticle} from "@/interfaces/interfaces";
 
 export default {
   name: 'Article',
 
-  data(): {
-    list: IArticle[]
-  } {
+  data() {
     return {
       list: []
     };
