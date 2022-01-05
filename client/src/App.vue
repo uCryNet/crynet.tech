@@ -1,7 +1,16 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+  <Header />
 </template>
+
+<script lang="js">
+// Components
+import Header from "@/components/Header/Header";
+
+export default {
+  name: 'Home',
+
+  components: {
+    Header
+  }
+}
+</script>

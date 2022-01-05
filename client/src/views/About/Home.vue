@@ -1,13 +1,13 @@
 <template>
   <div class="articles">
-    <template v-for="article in list" :key="article._id">
+    <div class="art" v-for="article in list" :key="article._id">
       <Article
         :title="article.title"
         :text="article.text"
         :description="article.description"
         :id="article._id"
       />
-    </template>
+    </div>
   </div>
 </template>
 
@@ -42,12 +42,20 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .articles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   grid-gap: 16px;
   padding-top: 16px;
   padding-bottom: 16px;
+
+  @media (max-width: 1200px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.art {
+  width: 100%;
 }
 </style>

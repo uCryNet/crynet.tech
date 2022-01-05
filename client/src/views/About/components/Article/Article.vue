@@ -1,30 +1,15 @@
 <template>
-<!-- alt mod -->
-  <div class="article">
-    <div class="meta">
-      <div class="photo" style="background-image: url(https://storage.googleapis.com/chydlx/codepen/blog-cards/image-1.jpg)"></div>
-      <ul class="details">
-        <li class="author"><a href="#">John Doe</a></li>
-        <li class="date">Aug. 24, 2015</li>
-        <li class="tags">
-          <ul>
-            <li><a href="#">Learn</a></li>
-            <li><a href="#">Code</a></li>
-            <li><a href="#">HTML</a></li>
-            <li><a href="#">CSS</a></li>
-          </ul>
-        </li>
-      </ul>
+  <router-link class="article" :to="'/blog/' + id">
+    <div class="article__inner">
+      <img class="article__image" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/pike-place.jpg" />
+      <div class="article__details">
+        <h4 class="article__category">Category</h4>
+        <h1 class="article__title">{{ title }}</h1>
+        <p>{{ text.substring(0, 70) }}</p>
+        <p class="article__tag">Tag</p>
+      </div>
     </div>
-    <div class="description">
-      <h1><router-link :to="'/blog/' + id">{{ title }}</router-link></h1>
-      <h2>{{ description }}</h2>
-      <p>{{ text }}</p>
-      <p class="read-more">
-        <a href="#">Читать</a>
-      </p>
-    </div>
-  </div>
+  </router-link>
 </template>
 
 <style lang="scss" scoped>
