@@ -56,6 +56,8 @@ class PostController {
 
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
 
+      console.log(imageName)
+
       await PostService.create({title, text, author: name, image: imageName})
 
       res.json({message: "Post create"})
@@ -74,6 +76,7 @@ class PostController {
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin") return res.status(400).json({message: "No access"})
 
+      // TODO: добавить возможность удалить картинку. Для начала хотя бы только из шапки
       await PostService.delete(id)
 
       res.json({message: "Post deleted"})
