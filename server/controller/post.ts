@@ -10,9 +10,8 @@ import {SECRET_KEY} from "../config/config";
 import UserService from "../services/login";
 
 
-const checkLengthArticle = (res, title, description, text) => {
+const checkLengthArticle = (res, title, text) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({message: "Check the length title"})
-  if (description.length < 10 || description.length > 200) return res.status(400).json({message: "Check the length description"})
   if (text.length < 10 || text.length > 5000) return res.status(400).json({message: "Check the length text"})
 }
 
@@ -43,20 +42,21 @@ class PostController {
     try {
       if (!req.body) return res.status(400).json({message: "Post create error"})
 
-      const {token, title, description, text} = req.body
+      const {title, text} = req.body
+      const token = req.cookies.token
       const {role, id: _id} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin") return res.status(400).json({message: "No access"})
-      if (!title || !description || !text) return res.status(400).json({message: "Fill in the required fields"})
+      if (!title || !text) return res.status(400).json({message: "Fill in the required fields"})
 
-      checkLengthArticle(res, title, description, text)
+      checkLengthArticle(res, title, text)
 
       const {name} = await UserService.getUser(_id, "id")
 
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
 
-      // await PostService.create({title, description, text, author: name, image: imageName})
+      await PostService.create({title, text, author: name, image: imageName})
 
       res.json({message: "Post create"})
     } catch (e) {
@@ -85,20 +85,21 @@ class PostController {
   async update(req, res) {
     try {
       if (!req.body) return res.status(400).json({message: "Post update error"})
-      const {token, title, description, text, id: postId, image} = req.body
+      const {token, title, text, id: postId, image} = req.body
       const {role, id: userId} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin" || !userId) return res.status(400).json({message: "No access"})
-      if (!title || !description || !text || !postId) return res.status(400).json({message: "Fill in the required fields"})
+      if (!title || !text || !postId) return res.status(400).json({message: "Fill in the required fields"})
 
-      checkLengthArticle(res, title, description, text)
+      checkLengthArticle(res, title, text)
 
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost._id) return res.status(400).json({message: "Post not found"})
 
       const {name} = await UserService.getUser(userId, "id")
-      const updatedPost = await PostService.update({title, description, text, author: name, id: postId})
+      // TODO: добавить возможность сменить картинку
+      const updatedPost = await PostService.update({title, text, author: name, id: postId})
 
       res.json({message: "Post updated", updatedPost})
     } catch (e) {

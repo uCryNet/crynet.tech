@@ -3,6 +3,5 @@ export interface IArticle {
   title: string
   text: string
   author: string
-  description: string
   image: string
 }

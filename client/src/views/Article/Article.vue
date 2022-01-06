@@ -2,8 +2,6 @@
   <div class="article">
     <h2>{{ list.title }}</h2>
 
-    <div>{{ list.description }}</div>
-
     <div>{{ list.author }}</div>
   </div>
 </template>

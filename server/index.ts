@@ -3,6 +3,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import fileUpoad from "express-fileupload"
 const cors = require('cors')
+const cookieParser = require('cookie-parser')
 
 // Var
 const router = require("./routes/index.routes.ts")
@@ -13,6 +14,7 @@ const app = express()
 
 mongoose.set('useCreateIndex', true)
 
+app.use(cookieParser())
 app.use(cors())
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())

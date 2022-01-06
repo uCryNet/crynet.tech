@@ -15,6 +15,13 @@ const genToken = (id, role) => {
   return jwt.sign(payload, SECRET_KEY, {expiresIn: "24h"})
 }
 
+const setCookie = (res, token) => {
+  res.cookie('token', token, {
+    maxAge: 86400,
+    httpOnly: true
+  })
+}
+
 class UserController {
   async login(req, res) {
     try {
@@ -29,6 +36,8 @@ class UserController {
       if (!passwordValidation) return res.status(400).json({message: "Password is wrong"})
 
       const token = genToken(user._id, user.role)
+
+      setCookie(res, token)
 
       res.json({message: "Authorized", token})
     } catch (e) {

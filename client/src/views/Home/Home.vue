@@ -4,8 +4,8 @@
       <Article
         :title="article.title"
         :text="article.text"
-        :description="article.description"
         :id="article._id"
+        :image="article.image"
       />
     </div>
   </div>
@@ -27,8 +27,7 @@ export default {
 
   data() {
     return {
-      list: [],
-      text: 'sdadasd'
+      list: []
     };
   },
 
