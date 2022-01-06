@@ -4,6 +4,7 @@ import Router from 'express'
 // Component
 import PostController from "../controller/post";
 import UserController from "../controller/login";
+import FileController from "../controller/file";
 
 const router = new Router()
 
@@ -18,6 +19,9 @@ router.delete("/post/delete/:id", PostController.delete)
 // user model
 router.post("/user/login", UserController.login)
 router.post("/user/registration", UserController.registration)
+
+// file
+router.get("/static/*", FileController.get)
 
 
 module.exports = router;

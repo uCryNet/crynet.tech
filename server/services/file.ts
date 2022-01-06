@@ -36,9 +36,8 @@ class FileService {
       const fileName = genName(name)
 
       if (!isExistsFolder) fs.mkdirSync(folderPath)
-      const filePath = path.resolve(folderPath, fileName)
 
-      return filePath
+      return path.resolve(folderPath, fileName)
     } catch (e) {
       console.log(e)
     }
