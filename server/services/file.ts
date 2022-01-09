@@ -29,6 +29,8 @@ class FileService {
 
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
+      console.log(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`)
+
       return `${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`
     } catch (e) {
       console.log(e)

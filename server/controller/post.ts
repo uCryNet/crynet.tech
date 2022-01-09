@@ -42,7 +42,7 @@ class PostController {
     try {
       if (!req.body) return res.status(400).json({message: "Post create error"})
 
-      const {title, text} = req.body
+      const {title, text, tag} = req.body
       const token = req.cookies.token
       const {role, id: _id} = jwt.verify(token, SECRET_KEY)
 
@@ -51,15 +51,13 @@ class PostController {
       if (!title || !text) return res.status(400).json({message: "Fill in the required fields"})
 
       checkLengthArticle(res, title, text)
-
+      // TODO: не сохраняется картинка
       const {name} = await UserService.getUser(_id, "id")
-
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
 
-      console.log(imageName)
+      const articlesTag = tag.split(",")
 
-      await PostService.create({title, text, author: name, image: imageName})
-
+      await PostService.create({title, text, author: name, image: imageName, tag: articlesTag})
       res.json({message: "Post create"})
     } catch (e) {
       res.status(400).json({message: "Post create failed", e})

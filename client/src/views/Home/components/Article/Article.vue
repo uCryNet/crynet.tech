@@ -24,18 +24,19 @@ export default {
     title: String,
     text: String,
     id: String,
-    image: String
+    image: String,
+    tag: []
   },
 
   computed: {
     imageLink: function () {
-      if (this.image) {
-        return `http://${SERVER_API}/${this.image}`
-      } else {
-        return `http://${SERVER_API}/static/image/other/not-found-image.jpg`
-      }
-
-    }
+      return this.image
+        ? `${SERVER_API}/${this.image}`
+        : `${SERVER_API}/static/image/other/not-found-image.jpg`
+    },
+    // tag: function () {
+    //   console.log(111)
+    // }
   }
 }
 </script>
