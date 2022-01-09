@@ -1,7 +1,7 @@
 // Vendors
 import {mongo} from "mongoose";
 
-// Component
+// Components
 import Post from '../models/post'
 
 

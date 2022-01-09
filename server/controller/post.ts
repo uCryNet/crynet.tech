@@ -1,11 +1,11 @@
 // Vendors
 import jwt from "jsonwebtoken"
 
-// Component
+// Components
 import PostService from '../services/post'
 import FileService from '../services/file'
 
-// Var
+// Vars
 import {SECRET_KEY} from "../config/config";
 import UserService from "../services/login";
 

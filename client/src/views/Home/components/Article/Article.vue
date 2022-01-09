@@ -1,7 +1,7 @@
 <template>
   <router-link class="article" :to="'/blog/' + id">
     <div class="article__inner">
-      <img class="article__image" :src="image" />
+      <img class="article__image" :src="imageLink" />
       <div class="article__details">
         <h4 class="article__category">Category</h4>
         <h1 class="article__title">{{ title }}</h1>
@@ -16,7 +16,9 @@
 @import "Article";
 </style>
 
-<script lang="ts">
+<script lang="js">
+import {SERVER_API} from "@/config/api"
+
 export default {
   props: {
     title: String,
@@ -25,8 +27,15 @@ export default {
     image: String
   },
 
-  mounted() {
-    console.log(this)
+  computed: {
+    imageLink: function () {
+      if (this.image) {
+        return `http://${SERVER_API}/${this.image}`
+      } else {
+        return `http://${SERVER_API}/static/image/other/not-found-image.jpg`
+      }
+
+    }
   }
 }
 </script>

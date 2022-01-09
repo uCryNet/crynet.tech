@@ -12,7 +12,7 @@
 </template>
 
 <script lang="js">
-// Method
+// Methods
 import API from "@/api/api"
 
 // Components

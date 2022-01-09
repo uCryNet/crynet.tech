@@ -2,10 +2,10 @@
 import bcrypt from 'bcryptjs'
 import jwt from "jsonwebtoken"
 
-// Component
+// Components
 import UserService from '../services/login'
 
-// Var
+// Vars
 import {SECRET_KEY} from "../config/config";
 
 
