@@ -30,6 +30,12 @@ class PostService {
     const updatedPost = Post.findByIdAndUpdate({_id: data.id}, data, {new: true})
     return updatedPost
   }
+
+  async filter(search) {
+    const posts = await Post.find({}).select({ "title": "статьи"});
+    console.log(posts)
+    return posts
+  }
 }
 
 export default new PostService()

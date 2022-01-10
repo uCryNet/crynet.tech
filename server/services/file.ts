@@ -23,14 +23,12 @@ class FileService {
 
       const currentYears = new Date().getUTCFullYear()
       const folderPath = `${IMAGE_FOLDER_NAME}/${currentYears}`
-      const isExistsFolder = fs.existsSync(folderPath)
-
       const fileName = genName(name)
 
+      const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      console.log(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`)
-
+      file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
       return `${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`
     } catch (e) {
       console.log(e)

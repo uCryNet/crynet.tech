@@ -6,7 +6,7 @@
         <h4 class="article__category">Category</h4>
         <h1 class="article__title">{{ title }}</h1>
         <p>{{ text.substring(0, 100) }}</p>
-        <p class="article__tag">Tag</p>
+        <p class="article__tag">{{ date }}</p>
       </div>
     </div>
   </router-link>
@@ -25,7 +25,7 @@ export default {
     text: String,
     id: String,
     image: String,
-    tag: []
+    date: String,
   },
 
   computed: {
@@ -34,9 +34,6 @@ export default {
         ? `${SERVER_API}/${this.image}`
         : `${SERVER_API}/static/image/other/not-found-image.jpg`
     },
-    // tag: function () {
-    //   console.log(111)
-    // }
-  }
+  },
 }
 </script>

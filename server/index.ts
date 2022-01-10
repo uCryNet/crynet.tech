@@ -24,10 +24,6 @@ app.use(express.static(STATIC_FOLDER_NAME))
 app.use(fileUpoad({}))
 app.use('/api', router) // http://localhost:5000/api/
 
-app.use(function (req, res, next) {
-  console.log(req, res, next)
-})
-
 
 async function startApp() {
   try {

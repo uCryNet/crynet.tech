@@ -6,6 +6,7 @@
         :text="article.text"
         :id="article._id"
         :image="article.image"
+        :date="article.date"
       />
     </div>
   </div>

@@ -38,26 +38,40 @@ class PostController {
     }
   }
 
+  async filter(req, res) {
+    try {
+      const {search} = req.query
+
+      if (search.trim() === "") return res.status(400).json({message: "Search filed is empty"})
+
+
+
+      const posts = await PostService.filter(search)
+
+      return res.json(posts)
+    } catch (e) {
+      res.status(400).json(e)
+    }
+  }
+
   async create(req, res) {
     try {
       if (!req.body) return res.status(400).json({message: "Post create error"})
 
-      const {title, text, tag} = req.body
+      const {title, text} = req.body
       const token = req.cookies.token
       const {role, id: _id} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin") return res.status(400).json({message: "No access"})
       if (!title || !text) return res.status(400).json({message: "Fill in the required fields"})
-
       checkLengthArticle(res, title, text)
-      // TODO: не сохраняется картинка
+
       const {name} = await UserService.getUser(_id, "id")
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
+      const date = new Date().toLocaleDateString("ru-RU")
 
-      const articlesTag = tag.split(",")
-
-      await PostService.create({title, text, author: name, image: imageName, tag: articlesTag})
+      await PostService.create({title, text, author: name, image: imageName, date})
       res.json({message: "Post create"})
     } catch (e) {
       res.status(400).json({message: "Post create failed", e})
