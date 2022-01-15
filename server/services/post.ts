@@ -32,7 +32,7 @@ class PostService {
   }
 
   async filter(search) {
-    const posts = await Post.find({}).select({ "title": "статьи"});
+    const posts = await Post.find({}).select({ "title": "статьи","text": "статьи"});
     console.log(posts)
     return posts
   }

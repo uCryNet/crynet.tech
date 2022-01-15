@@ -44,8 +44,6 @@ class PostController {
 
       if (search.trim() === "") return res.status(400).json({message: "Search filed is empty"})
 
-
-
       const posts = await PostService.filter(search)
 
       return res.json(posts)
