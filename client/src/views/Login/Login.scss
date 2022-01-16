@@ -4,17 +4,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  max-width: 400px;
+  width: 100%;
+  margin: auto;
 
   &__field {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 400px;
     width: 100%;
-
-    &:not(:last-of-type) {
-      margin-bottom: 8px;
-    }
+    margin-bottom: 8px;
   }
 
   &__input {
@@ -23,6 +22,15 @@
   }
 
   &__btn {
-    margin-top: 16px;
+    margin-top: 8px;
+  }
+
+  &__error {
+    width: 100%;
+    color: #fff;
+    padding: 6px 8px;
+    background: #ff7c7c;
+    border-radius: 5px;
+    box-sizing: border-box;
   }
 }

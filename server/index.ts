@@ -5,6 +5,7 @@ import fileUpoad from "express-fileupload"
 import helmet from "helmet";
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const bodyParser = require("body-parser");
 
 // Vars
 const router = require("./routes/index.routes.ts")
@@ -17,6 +18,7 @@ mongoose.set('useCreateIndex', true)
 
 app.use(helmet())
 app.use(cookieParser())
+app.use(bodyParser.json({ extended: true }));
 app.use(cors())
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())

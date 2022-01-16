@@ -4,8 +4,6 @@ const PROD_HOST = ['localhost'];
 export const {hostname: HOST_NAME} = window.location
 export const SERVER_API = PROD_HOST.includes(HOST_NAME) ? `http://localhost:5000/api` : `http://localhost:5000/api`
 
-console.log(window.location)
-
 if (PROD_HOST.includes(HOST_NAME)) { // PROD
   axios.defaults.baseURL = '//localhost:5000/api/';
 } else { // DEV

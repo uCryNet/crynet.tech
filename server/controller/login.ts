@@ -16,10 +16,7 @@ const genToken = (id, role) => {
 }
 
 const setCookie = (res, token) => {
-  res.cookie('token', token, {
-    maxAge: 86400,
-    httpOnly: true
-  })
+
 }
 
 class UserController {
@@ -37,9 +34,13 @@ class UserController {
 
       const token = genToken(user._id, user.role)
 
-      setCookie(res, token)
-
-      res.json({message: "Authorized", token})
+      res
+        .cookie('token', token, {
+          maxAge: 86400,
+          httpOnly: false
+        })
+        .send('OK')
+      console.log(token)
     } catch (e) {
       res.status(400).json({message: "Login error", e})
     }

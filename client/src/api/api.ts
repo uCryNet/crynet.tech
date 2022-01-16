@@ -17,4 +17,5 @@ const login = (auth: {login: string, password: string}) => {
 export default {
   getNews,
   getOneNews,
+  login
 }
