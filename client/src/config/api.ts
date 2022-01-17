@@ -11,6 +11,7 @@ if (PROD_HOST.includes(HOST_NAME)) { // PROD
 }
 
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.withCredentials = true
 
 axios.interceptors.response.use(
   response => {

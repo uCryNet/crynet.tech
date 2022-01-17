@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 
 // Vars
 const router = require("./routes/index.routes.ts")
-import {PORT, DB_URL} from "./config/setup"
+import {PORT, DB_URL, ENV} from "./config/setup"
 import {STATIC_FOLDER_NAME} from "./config/config"
 
 const app = express()
@@ -19,7 +19,12 @@ mongoose.set('useCreateIndex', true)
 app.use(helmet())
 app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }));
-app.use(cors())
+app.use(
+  cors({
+    credentials: true,
+    ENV
+  }),
+);
 app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(express.static(STATIC_FOLDER_NAME))
