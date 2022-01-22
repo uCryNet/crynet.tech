@@ -1,13 +1,11 @@
 .header {
-  padding: 30px;
-  text-align: center;
+  position: relative;
+  background: center / cover no-repeat url("/media/img/bg/header.webp");
+  height: 400px;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  &__info {
+    width: 100%;
+    margin-top: auto;
+    margin-bottom: 80px;
   }
 }

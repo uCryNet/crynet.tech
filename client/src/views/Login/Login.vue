@@ -21,6 +21,7 @@
 <script lang="js">
 import API from "@/api/api"
 import parseResponseError from "@/utils/parseResponseError";
+import {ROUTE_LINK} from "../../router";
 
 export default {
   name: 'Login',
@@ -41,8 +42,8 @@ export default {
       e.preventDefault()
 
       API.login({login: this.login, password: this.password})
-        .then(res => {
-          console.log(res)
+        .then(() => {
+          this.$router.push(ROUTE_LINK.adminPanel)
         })
         .catch(error => {
           const message = parseResponseError(error)
@@ -51,6 +52,9 @@ export default {
           this.error.message = message
         })
     }
+  },
+  mounted() {
+    console.log(document.cookie)
   }
 }
 </script>

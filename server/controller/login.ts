@@ -36,8 +36,8 @@ class UserController {
 
       res
         .cookie('token', token, {
-          maxAge: 864000,
-          httpOnly: false
+          maxAge: 3600 * 24,
+          httpOnly: true
         })
         .send('OK')
       console.log(token)

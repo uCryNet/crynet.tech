@@ -20,7 +20,7 @@ import API from "@/api/api"
 import Article from "./components/Article/Article";
 
 export default {
-  name: 'Home',
+  name: 'Articles',
 
   components: {
     Article

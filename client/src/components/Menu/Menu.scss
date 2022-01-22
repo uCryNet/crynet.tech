@@ -1,0 +1,17 @@
+.menu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+  text-align: center;
+
+  a {
+    font-weight: bold;
+    color: #fff;
+
+    &.router-link-exact-active {
+      color: #42b983;
+    }
+  }
+}
