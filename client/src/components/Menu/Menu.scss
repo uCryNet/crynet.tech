@@ -5,13 +5,14 @@
   justify-content: center;
   padding: 30px;
   text-align: center;
+  color: #fff;
 
   a {
     font-weight: bold;
     color: #fff;
 
     &.router-link-exact-active {
-      color: #42b983;
+      color: #fcdb5a;
     }
   }
 }

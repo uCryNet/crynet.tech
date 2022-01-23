@@ -1,73 +1,83 @@
 .article {
   position: relative;
   display: block;
-  color: #777;
-  height: 100%;
-  width: 100%;
 
-  &:hover .article {
-    &__title {
-      color: #42b983;
+  &:hover {
+    .article__text {
+      top: -100px;
     }
 
-    &__image {
-      opacity: 0.9;
-    }
-  }
-
-  &__inner {
-    display: grid;
-    grid-template-columns: 180px minmax(auto, 1fr);
-    background: #fff;
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-    border-radius: 6px;
-    height: 100%;
-    overflow: hidden;
-
-    @media (max-width: 992px) {
-      grid-template-columns: 1fr;
+    .article__title {
+      color: #fcdb5a;
     }
   }
 
   &__image {
-    transition: opacity 0.3s ease;
-    display: block;
     width: 100%;
-    object-fit: cover;
     height: 100%;
+    max-height: 250px;
+    object-fit: cover;
   }
 
-  &__details {
-    padding: 24px;
+  &__time {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    top: 0;
+    left: 20px;
+    min-width: 60px;
+    min-height: 65px;
+    background: #fcdb5a;
+  }
+
+  &__date {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 900;
+    font-family: "Raleway", sans-serif;
+    color: rgb(194, 178, 111);
+
+    strong {
+      font-size: 25px;
+      color: #333;
+      margin-bottom: 2px;
+      margin-top: -3px;
+    }
+  }
+
+  &__text {
+    position: relative;
+    top: -30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 30px;
+    text-align: center;
+    background: #fff;
+    transition: .3s ease;
   }
 
   &__category {
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: 1px;
-    margin: 0 0 0.75rem 0;
-    padding: 0 0 0.25rem 0;
-    border-bottom: 2px solid #42b983;
-    //border-bottom: 2px solid #ebebeb;
+    color: #ddc051;
+    margin-bottom: 10px;
   }
 
   &__title {
-    transition: 0.3s ease;
+    font-family: "Raleway", sans-serif;
     font-size: 18px;
-    line-height: 1.4;
-    color: #121212;
+    margin-bottom: 10px;
     font-weight: 700;
-    margin-bottom: 8px;
+    transition: .3s ease;
   }
 
-  &__tag {
+  &__desc {
     font-size: 14px;
-    line-height: 1;
-    margin-top: 18px;
-    padding-top: 18px;
-    border-top: 1px solid #ebebeb;
+    font-weight: 400;
+    color: #666;
+    line-height: 22.4px;
   }
 }

@@ -1,13 +1,30 @@
 <template>
+<!--  <router-link class="article" :to="'/blog/' + id">-->
+<!--    <div class="article__inner">-->
+<!--      <img class="article__image" :src="imageLink" />-->
+<!--      <div class="article__details">-->
+<!--        <h4 class="article__category">Category</h4>-->
+<!--        <h1 class="article__title">{{ title }}</h1>-->
+<!--        <p>{{ text.substring(0, 100) }}</p>-->
+<!--        <p class="article__tag">{{ date }}</p>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </router-link>-->
+
   <router-link class="article" :to="'/blog/' + id">
-    <div class="article__inner">
-      <img class="article__image" :src="imageLink" />
-      <div class="article__details">
-        <h4 class="article__category">Category</h4>
-        <h1 class="article__title">{{ title }}</h1>
-        <p>{{ text.substring(0, 100) }}</p>
-        <p class="article__tag">{{ date }}</p>
+    <img class="article__image" :src="imageLink" />
+
+    <div class="article__time">
+      <div class="article__date">
+        <strong>{{ parseDate[0] }}</strong>
+        {{ parseDate[1] }}.{{ parseDate[2] }}
       </div>
+    </div>
+
+    <div class="article__text">
+      <h4 class="article__category">Category</h4>
+      <h1 class="article__title">{{ title }}</h1>
+      <p class="article__desc">{{ text.substring(0, 100) }}</p>
     </div>
   </router-link>
 </template>
@@ -34,6 +51,10 @@ export default {
         ? `${SERVER_API}/${this.image}`
         : `${SERVER_API}/static/image/other/not-found-image.jpg`
     },
+
+    parseDate: function () {
+      return this.date.split(".")
+    }
   },
 }
 </script>

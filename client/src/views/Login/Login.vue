@@ -19,9 +19,12 @@
 </template>
 
 <script lang="js">
-import API from "@/api/api"
+// Utils
 import parseResponseError from "@/utils/parseResponseError";
-import {ROUTE_LINK} from "../../router";
+
+// Vars
+import { ROUTE_LINK } from "../../router";
+import API from "@/api/api"
 
 export default {
   name: 'Login',

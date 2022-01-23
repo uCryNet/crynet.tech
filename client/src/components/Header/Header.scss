@@ -1,7 +1,10 @@
 .header {
   position: relative;
+  display: flex;
+  flex-direction: column;
   background: center / cover no-repeat url("/media/img/bg/header.webp");
   height: 400px;
+  margin-bottom: 80px;
 
   &__info {
     width: 100%;
