@@ -4,7 +4,7 @@ export const ROUTE_LINK = {
   root: '/',
   about: '/about',
   blog: '/blog',
-  blogArticle: '/blog:id',
+  blogArticle: '/blog/:id',
   // admin
   admin: '/admin',
   adminPanel: '/admin/panel'

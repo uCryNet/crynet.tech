@@ -1,16 +1,4 @@
 <template>
-<!--  <router-link class="article" :to="'/blog/' + id">-->
-<!--    <div class="article__inner">-->
-<!--      <img class="article__image" :src="imageLink" />-->
-<!--      <div class="article__details">-->
-<!--        <h4 class="article__category">Category</h4>-->
-<!--        <h1 class="article__title">{{ title }}</h1>-->
-<!--        <p>{{ text.substring(0, 100) }}</p>-->
-<!--        <p class="article__tag">{{ date }}</p>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </router-link>-->
-
   <router-link class="article" :to="'/blog/' + id">
     <img class="article__image" :src="imageLink" />
 

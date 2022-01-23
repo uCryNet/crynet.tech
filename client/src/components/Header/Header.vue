@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <header class="header">
     <Menu />
 
     <div class="header__info container">
@@ -11,7 +11,7 @@
         Ещё один блог ещё одного программиста, который делится своим опытом
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script lang="js">

@@ -23,7 +23,7 @@
 import parseResponseError from "@/utils/parseResponseError";
 
 // Vars
-import { ROUTE_LINK } from "../../router";
+import {ROUTE_LINK} from "../../router";
 import API from "@/api/api"
 
 export default {
