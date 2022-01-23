@@ -38,13 +38,13 @@ class PostController {
     }
   }
 
-  async filter(req, res) {
+  async search(req, res) {
     try {
-      const {search} = req.query
+      const {search} = req.body
 
       if (search.trim() === "") return res.status(400).json({message: "Search filed is empty"})
 
-      const posts = await PostService.filter(search)
+      const posts = await PostService.search(search)
 
       return res.json(posts)
     } catch (e) {

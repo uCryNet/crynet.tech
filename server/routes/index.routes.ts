@@ -15,7 +15,7 @@ router.get("/post/get-one/:id", PostController.getOne)
 router.post("/post/create", PostController.create)
 router.put("/post/update", PostController.update)
 router.delete("/post/delete/:id", PostController.delete)
-router.get("/post/filter", PostController.filter)
+router.post("/post/search", PostController.search)
 
 // user
 router.post("/user/login", UserController.login)

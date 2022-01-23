@@ -31,9 +31,8 @@ class PostService {
     return updatedPost
   }
 
-  async filter(search) {
-    const posts = await Post.find({title: /статьи/, text: /статьи/})
-    console.log(posts)
+  async search(search) {
+    const posts = await Post.find({$or:[{title: new RegExp(search, 'ig')},{text: new RegExp(search, 'ig')}]})
     return posts
   }
 }

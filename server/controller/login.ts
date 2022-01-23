@@ -40,7 +40,6 @@ class UserController {
           httpOnly: true
         })
         .send('OK')
-      console.log(token)
     } catch (e) {
       res.status(400).json({message: "Login error", e})
     }

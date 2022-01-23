@@ -2,7 +2,7 @@
   <form class="login" @submit="send">
     <label class="login__field">
       <div>Login:</div>
-      <input v-model.lazy.trim="login" class="login__input" type="text"/>
+      <input v-model.lazy.trim="login" class="login__input"/>
     </label>
 
     <label class="login__field">
@@ -14,7 +14,7 @@
       {{ this.error.message }}
     </div>
 
-    <button class="login__btn">Login</button>
+    <button type="submit" class="login__btn">Login</button>
   </form>
 </template>
 
@@ -55,9 +55,6 @@ export default {
           this.error.message = message
         })
     }
-  },
-  mounted() {
-    console.log(document.cookie)
   }
 }
 </script>

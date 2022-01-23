@@ -9,6 +9,7 @@
 <script lang="js">
 // Vars
 import API from "@/api/api"
+import parseResponseError from "../../utils/parseResponseError";
 
 
 export default {
@@ -27,7 +28,7 @@ export default {
       .then(res => {
         this.list = res.data
       })
-      .catch(error => console.log(error))
+      .catch(error => console.log(parseResponseError(error)))
   }
 }
 

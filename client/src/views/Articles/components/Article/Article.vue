@@ -22,7 +22,9 @@
 </style>
 
 <script lang="js">
-import {SERVER_API} from "@/config/api"
+// Vars
+import {SERVER_API} from "@/config/api";
+
 
 export default {
   props: {

@@ -14,8 +14,13 @@ const login = (auth: {login: string, password: string}) => {
   return axios.post(`user/login/`, auth);
 }
 
+const search = (search: string) => {
+  return axios.post(`post/search`, {search});
+}
+
 export default {
   getNews,
   getOneNews,
-  login
+  login,
+  search
 }
