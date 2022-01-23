@@ -1,5 +1,18 @@
 <template>
   <div class="articles">
+    <div class="articles__header">
+      <h2 class="title mb--20">СТАТЬИ <span>И ЗАМЕТКИ</span></h2>
+      <div class="text text--center">Делюсь опытом и записываю всякое, чтобы не забыть</div>
+    </div>
+
+    <div class="articles__search">
+      <label>
+        <input class="input" placeholder="Поиск по статьям" name="search" />
+      </label>
+
+      <button class="btn">ПОИСК</button>
+    </div>
+
     <div class="articles__lists">
       <div class="art" v-for="article in list" :key="article._id">
         <Article

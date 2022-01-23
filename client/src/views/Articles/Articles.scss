@@ -6,4 +6,18 @@
     padding-top: 16px;
     padding-bottom: 16px;
   }
+
+  &__search {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+
+    .btn {
+      margin-left: 20px;
+    }
+  }
+
+  &__header {
+    margin-bottom: 40px;
+  }
 }

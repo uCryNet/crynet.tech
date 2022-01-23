@@ -216,6 +216,11 @@ textarea {
 button,
 input {
     line-height: normal;
+    outline: unset;
+    margin: unset;
+    padding: unset;
+    border: unset;
+    background: unset;
 }
 
 /**
@@ -356,6 +361,11 @@ fieldset {
 
 textarea {
     resize: vertical;
+}
+
+a {
+    color: unset;
+    text-decoration: unset;
 }
 
 .chromeframe {

@@ -1,0 +1,9 @@
+.input {
+  height: 40px;
+  border-bottom: 1px solid #dadada;
+  color: #666;
+
+  &::placeholder {
+    color: #ccc;
+  }
+}

@@ -28,9 +28,20 @@ body {
   }
 }
 
-a {
-  color: unset;
-  text-decoration: unset;
+.btn {
+  position: relative;
+  color: rgb(190, 184, 176);
+  border: 2px solid #fcdb5a;
+  border-radius: 30px;
+  font-family: Raleway,sans-serif;
+  font-weight: 700;
+  padding: 5px 28px;
+  transition: .3s ease;
+
+  &:hover {
+    color: #4f4a37;
+    background: #fcdb5a;
+  }
 }
 
 @for $i from 1 through 20 {
@@ -42,5 +53,17 @@ a {
 @for $i from 1 through 20 {
   .mt--#{$i} {
     margin-top: #{$i}px;
+  }
+}
+
+@for $i from 1 through 20 {
+  .ml--#{$i} {
+    margin-left: #{$i}px;
+  }
+}
+
+@for $i from 1 through 20 {
+  .mr--#{$i} {
+    margin-right: #{$i}px;
   }
 }
