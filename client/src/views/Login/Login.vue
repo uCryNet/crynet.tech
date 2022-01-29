@@ -1,20 +1,18 @@
 <template>
   <form class="login" @submit="send">
     <label class="login__field">
-      <div>Login:</div>
-      <input v-model.lazy.trim="login" class="login__input"/>
+      <input placeholder="Login" v-model.lazy.trim="login" class="input login__inpu"/>
     </label>
 
     <label class="login__field">
-      <div>Password:</div>
-      <input v-model.lazy.trim="password" class="login__input" type="password"/>
+      <input placeholder="Password" v-model.lazy.trim="password" class="input login__input" type="password"/>
     </label>
 
     <div class="login__error" v-if="error.isError">
       {{ this.error.message }}
     </div>
 
-    <button type="submit" class="login__btn">Login</button>
+    <button type="submit" class="btn login__btn">Login</button>
   </form>
 </template>
 
