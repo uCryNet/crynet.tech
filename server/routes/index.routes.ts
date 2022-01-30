@@ -20,6 +20,7 @@ router.post("/post/search", PostController.search)
 // user
 router.post("/user/login", UserController.login)
 router.post("/user/registration", UserController.registration)
+router.get("/user/check-access", UserController.checkAccess)
 
 // file
 router.get("/static/*", FileController.get)

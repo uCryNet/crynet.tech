@@ -18,9 +18,14 @@ const search = (search: string) => {
   return axios.post(`post/search`, {search});
 }
 
+const checkAccess = () => {
+  return axios.get(`user/check-access`);
+}
+
 export default {
   getNews,
   getOneNews,
   login,
-  search
+  search,
+  checkAccess,
 }

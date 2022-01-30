@@ -36,7 +36,7 @@ class UserController {
 
       res
         .cookie('token', token, {
-          maxAge: 3600 * 24,
+          maxAge: new Date(Date.now() + 86400e3),
           httpOnly: true
         })
         .send('OK')
@@ -64,6 +64,24 @@ class UserController {
       res.json({message: "User is registered"})
     } catch (e) {
       res.status(400).json({message: "Registration failed", e})
+    }
+  }
+
+  async checkAccess(req, res) {
+    try {
+      const {token} = req.cookies
+
+      if (!token) return res.status(403).json({message: "Unregistred user"})
+
+      const {role} = jwt.verify(token, SECRET_KEY)
+      if (role !== "admin") return res.status(403).json({message: "Forbidden"})
+
+      res.json({
+        message: "Welcome to the board",
+        isAdmin: true,
+      })
+    } catch (e) {
+      res.status(403).json({message: "Access failed", e})
     }
   }
 }

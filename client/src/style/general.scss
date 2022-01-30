@@ -3,8 +3,25 @@ html, body, #app {
 }
 
 body {
-  margin: unset;
   font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+  color: #666;
+  margin: unset;
+}
+
+ul li {
+  &:not(:last-of-type) {
+    margin-bottom: 10px;
+  }
+}
+
+a {
+  transition: .3s ease;
+
+  &.router-link-exact-active {
+    color: #fcdb5a;
+    pointer-events: none;
+  }
 }
 
 #app {
@@ -16,6 +33,7 @@ body {
 .container {
   position: relative;
   max-width: 1280px;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
   padding-left: 32px;
@@ -34,6 +52,7 @@ body {
   border: 2px solid #fcdb5a;
   border-radius: 30px;
   font-family: Raleway,sans-serif;
+  font-size: 16px;
   font-weight: 700;
   padding: 5px 28px;
   transition: .3s ease;
@@ -41,6 +60,12 @@ body {
   &:hover {
     color: #4f4a37;
     background: #fcdb5a;
+  }
+}
+
+.router-link {
+  &:hover {
+    color: #fcdb5a;
   }
 }
 

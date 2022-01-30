@@ -1,18 +1,18 @@
 <template>
   <form class="login" @submit="send">
     <label class="login__field">
-      <input placeholder="Login" v-model.lazy.trim="login" class="input login__inpu"/>
+      <input name="login" placeholder="Login" v-model.lazy.trim="login" class="input login__input"/>
     </label>
 
     <label class="login__field">
-      <input placeholder="Password" v-model.lazy.trim="password" class="input login__input" type="password"/>
+      <input name="password" placeholder="Password" v-model.lazy.trim="password" class="input login__input" type="password"/>
     </label>
 
     <div class="login__error" v-if="error.isError">
       {{ this.error.message }}
     </div>
 
-    <button type="submit" class="btn login__btn">Login</button>
+    <button type="submit" class="btn login__btn">LOGIN</button>
   </form>
 </template>
 
@@ -29,6 +29,7 @@ export default {
 
   data() {
     return {
+      isAuthorized: false,
       error: {
         isError: false,
         message: ''
@@ -44,13 +45,33 @@ export default {
 
       API.login({login: this.login, password: this.password})
         .then(() => {
-          this.$router.push(ROUTE_LINK.adminPanel)
+          this.isAuthorized = true
         })
         .catch(error => {
           const message = parseResponseError(error)
 
           this.error.isError = true
           this.error.message = message
+        })
+    }
+  },
+
+  watch: {
+    isAuthorized() {
+      if (!this.isAuthorized) return
+
+      API.checkAccess()
+        .then(res => {
+          const {isAdmin} = res.data
+
+          isAdmin
+           ? this.$router.push(ROUTE_LINK.adminPanel)
+           : this.$router.push(ROUTE_LINK.root)
+        })
+        .catch(error => {
+          this.$router.push(ROUTE_LINK.root)
+
+          console.error(parseResponseError(error))
         })
     }
   }

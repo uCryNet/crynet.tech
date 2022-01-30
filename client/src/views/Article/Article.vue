@@ -28,7 +28,7 @@ export default {
       .then(res => {
         this.list = res.data
       })
-      .catch(error => console.log(parseResponseError(error)))
+      .catch(error => console.error(parseResponseError(error)))
   }
 }
 
