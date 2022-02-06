@@ -48,9 +48,11 @@
   &--900 {
     font-weight: 900;
   }
-}
 
-//<h2 class="text--900 text--40 text--raleway mb--20 text--center">Блог</h2>
+  &--uppercase {
+    text-transform: uppercase;
+  }
+}
 
 .title {
   font-family: "Raleway", sans-serif;

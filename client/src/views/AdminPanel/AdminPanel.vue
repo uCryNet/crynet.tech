@@ -2,9 +2,8 @@
   <div class="admin-panel">
     <Aside />
 
-
     <div class="admin-panel__wrapper">
-      Контент
+      <AddArticle />
     </div>
   </div>
 </template>
@@ -18,11 +17,13 @@ import Aside from "./components/Aside/Aside"
 // Var
 import API from "@/api/api"
 import {ROUTE_LINK} from "../../router";
+import AddArticle from "./components/AddArticle/AddArticle";
 
 export default {
   name: 'Login',
 
   components: {
+    AddArticle,
     Aside
   },
 

@@ -5,6 +5,7 @@ import Router from 'express'
 import PostController from "../controller/post";
 import UserController from "../controller/login";
 import FileController from "../controller/file";
+import CategoryController from "../controller/category";
 
 const router = new Router()
 
@@ -24,6 +25,9 @@ router.get("/user/check-access", UserController.checkAccess)
 
 // file
 router.get("/static/*", FileController.get)
+
+// category
+router.get("/category/get-all", CategoryController.getAll)
 
 
 module.exports = router;

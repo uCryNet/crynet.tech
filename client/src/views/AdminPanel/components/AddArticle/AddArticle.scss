@@ -1,0 +1,12 @@
+.add-article {
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 40px;
+
+  &__preview,
+  &__select,
+  &__text,
+  &__title {
+    margin-bottom: 25px;
+  }
+}

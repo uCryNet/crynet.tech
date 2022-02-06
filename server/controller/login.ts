@@ -36,7 +36,7 @@ class UserController {
 
       res
         .cookie('token', token, {
-          maxAge: new Date(Date.now() + 86400e3),
+          maxAge: 60 * 60 * 24 * 1000,
           httpOnly: true
         })
         .send('OK')

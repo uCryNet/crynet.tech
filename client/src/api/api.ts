@@ -22,10 +22,15 @@ const checkAccess = () => {
   return axios.get(`user/check-access`);
 }
 
+const getCategory = () => {
+  return axios.post(`category/get-all`);
+}
+
 export default {
   getNews,
   getOneNews,
   login,
   search,
   checkAccess,
+  getCategory
 }
