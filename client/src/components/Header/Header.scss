@@ -4,14 +4,17 @@
   flex-direction: column;
   background: center / cover no-repeat url("/media/img/bg/header.webp");
   height: 100%;
-  min-height: 400px;
-  max-height: 400px;
-  margin-bottom: 80px;
+  min-height: 310px;
+  max-height: 310px;
+  margin-bottom: 60px;
   overflow: hidden;
 
   &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
     width: 100%;
     margin-top: auto;
-    margin-bottom: 80px;
+    margin-bottom: 60px;
   }
 }

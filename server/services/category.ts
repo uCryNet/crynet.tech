@@ -1,10 +1,9 @@
 // Components
-import Category from "../models/category";
+import Categories from "../models/category";
 
 class CategoryService {
   async getAll() {
-    const category = await Category.find()
-    console.log(category)
+    const category = await Categories.find()
     return category
   }
 }

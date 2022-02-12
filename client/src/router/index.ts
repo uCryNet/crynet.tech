@@ -7,7 +7,8 @@ export const ROUTE_LINK = {
   blogArticle: '/blog/:id',
   // admin
   admin: '/admin',
-  adminPanel: '/admin/panel'
+  adminPanel: '/admin/add-articles',
+  notFound: '404'
 }
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     name: 'Article',
     component: () => import(/* webpackChunkName: "Article" */ '../views/Article/Article.vue')
   },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: () => import(/* webpackChunkName: "Article" */ '../views/NotFound/NotFound.vue')
+  }
 ]
 
 const router = createRouter({

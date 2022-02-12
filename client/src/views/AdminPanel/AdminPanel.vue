@@ -3,7 +3,7 @@
     <Aside />
 
     <div class="admin-panel__wrapper">
-      <AddArticle />
+      <AddArticle :category="category" />
     </div>
   </div>
 </template>
@@ -27,15 +27,38 @@ export default {
     Aside
   },
 
+  data() {
+    return {
+      isAdmin: false,
+      category: []
+    }
+  },
+
   mounted() {
     API.checkAccess()
       .then(() => {
-        // const {isAdmin} = res.data
+        this.isAdmin = true
       })
       .catch(error => {
         console.error(parseResponseError(error))
         this.$router.push(ROUTE_LINK.root)
       })
+  },
+
+  watch: {
+    isAdmin() {
+      if (!this.isAdmin) return
+
+      API.getCategory()
+        .then((res) => {
+          this.category = res.data
+
+          console.log(res.data)
+        })
+        .catch(error => {
+          console.error(parseResponseError(error))
+        })
+    }
   }
 }
 </script>

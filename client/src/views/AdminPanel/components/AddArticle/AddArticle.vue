@@ -1,6 +1,6 @@
 <template>
   <form class="add-article" @submit="getContent">
-    <input placeholder="Title" class="input add-article__title"/>
+    <input v-model.lazy.trim="title" placeholder="Title" class="input add-article__title"/>
 
     <select class="select add-article__select">
       <optgroup label="1">
@@ -15,7 +15,7 @@
     </select>
 
     <div class="add-article__text">
-      <quill-editor style="height: 250px" :content="content" :options="options"></quill-editor>
+      <quill-editor ref="editor" style="height: 250px" :options="options"></quill-editor>
     </div>
 
     <input class="add-article__preview" type="file"/>
@@ -27,6 +27,9 @@
 <script lang="js">
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+// import { ImageResize } from 'quill-image-resize-module';
+
+// QuillEditor.register('modules/imageDrop', ImageResize);
 
 export default {
   name: 'AddArticle',
@@ -35,9 +38,14 @@ export default {
     QuillEditor
   },
 
+  props: {
+    category: Array,
+  },
+
   data() {
     return {
-      content: "",
+      title: '',
+      file: null,
       options: {
         placeholder: 'Текст статьи',
         theme: 'snow',
@@ -60,6 +68,14 @@ export default {
           ]
         }
       }
+    }
+  },
+
+  methods: {
+    getContent(e) {
+      e.preventDefault()
+      // console.log(this.$refs.editor.getHTML())
+      console.log(this)
     }
   },
 }

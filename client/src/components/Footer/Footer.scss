@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 30px;
+  padding: 30.5px;
+  background: #333;
+  color: #fff;
+  white-space: break-spaces;
+
+  .router-link {
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

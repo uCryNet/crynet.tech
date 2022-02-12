@@ -23,7 +23,7 @@ const checkAccess = () => {
 }
 
 const getCategory = () => {
-  return axios.post(`category/get-all`);
+  return axios.get(`category/get-all`);
 }
 
 export default {
