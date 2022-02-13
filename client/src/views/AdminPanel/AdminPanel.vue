@@ -52,8 +52,6 @@ export default {
       API.getCategory()
         .then((res) => {
           this.category = res.data
-
-          console.log(res.data)
         })
         .catch(error => {
           console.error(parseResponseError(error))

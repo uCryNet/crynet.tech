@@ -1,24 +1,24 @@
 <template>
-  <form class="add-article" @submit="getContent">
-    <input v-model.lazy.trim="title" placeholder="Title" class="input add-article__title"/>
+  <form class="add-article" @submit.prevent="getContent">
+    <input required v-model.lazy.trim="form.title" placeholder="Title" class="input add-article__title"/>
 
-    <select class="select add-article__select">
-      <optgroup label="1">
-        <option>1</option>
-        <option>2</option>
+    <select v-model="form.category" name="category" required class="select add-article__select">
+      <optgroup :label="categoryUnit.title" v-for="categoryUnit in category" :key="categoryUnit.title">
+        <option
+          :value="subCategoriesUnit.name"
+          v-for="subCategoriesUnit in categoryUnit.subCategories"
+          :key="subCategoriesUnit.name"
+        >
+          {{subCategoriesUnit.name}}
+        </option>
       </optgroup>
-      <optgroup label="2">
-        <option>3</option>
-        <option>4</option>
-      </optgroup>
-      <option>5</option>
     </select>
 
     <div class="add-article__text">
       <quill-editor ref="editor" style="height: 250px" :options="options"></quill-editor>
     </div>
 
-    <input class="add-article__preview" type="file"/>
+    <input required @change="onFileChanged($event)" accept="image/*" class="add-article__preview" type="file"/>
 
     <button class="btn btn--bg btn--big">ДОБАВИТЬ СТАТЬЮ</button>
   </form>
@@ -27,6 +27,9 @@
 <script lang="js">
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
+import API from "@/api/api"
+import parseResponseError from "../../../../utils/parseResponseError";
 // import { ImageResize } from 'quill-image-resize-module';
 
 // QuillEditor.register('modules/imageDrop', ImageResize);
@@ -44,8 +47,11 @@ export default {
 
   data() {
     return {
-      title: '',
-      file: null,
+      form: {
+        title: '',
+        category: "css",
+        image: null,
+      },
       options: {
         placeholder: 'Текст статьи',
         theme: 'snow',
@@ -72,10 +78,23 @@ export default {
   },
 
   methods: {
-    getContent(e) {
-      e.preventDefault()
-      // console.log(this.$refs.editor.getHTML())
-      console.log(this)
+    getContent() {
+      const text = this.$refs.editor.getHTML()
+      const form = this.form
+
+      if (!text && !form.category && !form.title && !form.file) return
+
+      const data = {...this.form, text: text}
+
+      API.createNews(data)
+        .then(() => {
+          alert("Статья добавленна!")
+        })
+        .catch(error => console.error(parseResponseError(error)))
+    },
+
+    onFileChanged($event) {
+      this.form.image = $event.target.files[0]
     }
   },
 }

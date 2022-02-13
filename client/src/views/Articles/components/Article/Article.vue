@@ -12,7 +12,7 @@
     <div class="article__text">
       <h4 class="article__category">Category</h4>
       <h1 class="article__title">{{ title }}</h1>
-      <p class="article__desc">{{ text.substring(0, 100) }}</p>
+      <div class="article__desc" v-html="description"></div>
     </div>
   </router-link>
 </template>
@@ -41,7 +41,9 @@ export default {
         ? `${SERVER_API}/${this.image}`
         : `${SERVER_API}/static/image/other/not-found-image.jpg`
     },
-
+    description: function () {
+      return this.text.substring(0, 100)
+    },
     parseDate: function () {
       return this.date.split(".")
     }

@@ -10,6 +10,17 @@ const getOneNews = (uri: string | RouteParamValue[]) => {
   return axios.get(`post/get-one/${uri}`,);
 }
 
+const createNews = (form: any) => {
+  const formData = new FormData();
+
+  formData.append('title', form.title);
+  formData.append('text', form.text);
+  formData.append('category', form.category);
+  formData.append('image', form.image);
+
+  return axios.post(`post/create`, formData);
+}
+
 const login = (auth: {login: string, password: string}) => {
   return axios.post(`user/login/`, auth);
 }
@@ -29,8 +40,9 @@ const getCategory = () => {
 export default {
   getNews,
   getOneNews,
+  createNews,
   login,
   search,
   checkAccess,
-  getCategory
+  getCategory,
 }
