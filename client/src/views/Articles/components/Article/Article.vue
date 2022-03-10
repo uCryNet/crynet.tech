@@ -1,18 +1,18 @@
 <template>
   <router-link class="article" :to="'/blog/' + id">
-    <img class="article__image" :src="imageLink" />
+    <img class="article__image" :src="getImageLink" />
 
     <div class="article__time">
       <div class="article__date">
-        <strong>{{ parseDate[0] }}</strong>
-        {{ parseDate[1] }}.{{ parseDate[2] }}
+        <strong>{{ getDate[0] }}</strong>
+        {{ getDate[1] }}.{{ getDate[2] }}
       </div>
     </div>
 
     <div class="article__text">
-      <h4 class="article__category">Category</h4>
+      <h4 class="article__category">{{ getCategory }}</h4>
       <h1 class="article__title">{{ title }}</h1>
-      <div class="article__desc" v-html="description"></div>
+      <div class="article__desc" v-html="getDescription"></div>
     </div>
   </router-link>
 </template>
@@ -33,20 +33,25 @@ export default {
     id: String,
     image: String,
     date: String,
+    category: String
   },
 
   computed: {
-    imageLink: function () {
+    getImageLink: function () {
       return this.image
         ? `${SERVER_API}/${this.image}`
         : `${SERVER_API}/static/image/other/not-found-image.jpg`
     },
-    description: function () {
+    getDescription: function () {
       return this.text.substring(0, 100)
     },
-    parseDate: function () {
+    getDate: function () {
       return this.date.split(".")
-    }
+    },
+    getCategory: function () {
+      console.log(this.category)
+      return this.category ? this.category : "—"
+    },
   },
 }
 </script>

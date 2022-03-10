@@ -23,6 +23,7 @@
           :id="article._id"
           :image="article.image"
           :date="article.date"
+          :category="article.category"
         />
       </div>
     </div>
