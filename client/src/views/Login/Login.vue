@@ -53,7 +53,7 @@ export default {
           this.error.isError = true
           this.error.message = message
         })
-    }
+    },
   },
 
   watch: {
@@ -65,7 +65,7 @@ export default {
           const {isAdmin} = res.data
 
           isAdmin
-           ? this.$router.push(ROUTE_LINK.adminPanel)
+           ? this.$router.push(ROUTE_LINK.adminArticle)
            : this.$router.push(ROUTE_LINK.root)
         })
         .catch(error => {
@@ -74,6 +74,15 @@ export default {
           console.error(parseResponseError(error))
         })
     }
+  },
+
+  mounted() {
+    API.checkAccess()
+      .then(res => {
+        const {isAdmin} = res.data
+
+        isAdmin && this.$router.push(ROUTE_LINK.adminArticle)
+      })
   }
 }
 </script>

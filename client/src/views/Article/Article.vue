@@ -2,6 +2,8 @@
   <div class="article">
     <h2>{{ list.title }}</h2>
 
+    <div v-html="list.text" />
+
     <div>{{ list.author }}</div>
   </div>
 </template>

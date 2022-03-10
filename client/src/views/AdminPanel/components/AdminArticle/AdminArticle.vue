@@ -15,7 +15,23 @@
     </select>
 
     <div class="add-article__text">
-      <quill-editor ref="editor" style="height: 250px" :options="options"></quill-editor>
+      <Editor
+        v-model="form.text"
+        api-key="1d8abcfebd86c0f7a9ac63852ef8b3713a9cf0617054397350d850fe9900d503"
+        :init="{
+         height: 500,
+         menubar: true,
+         plugins: [
+           'advlist autolink lists link image charmap print preview anchor',
+           'searchreplace visualblocks code fullscreen',
+           'insertdatetime media table paste code help wordcount'
+         ],
+         toolbar:
+           'undo redo | formatselect | bold italic backcolor | \
+           alignleft aligncenter alignright alignjustify | \
+           bullist numlist outdent indent | removeformat | help'
+       }"
+      />
     </div>
 
     <input required @change="onFileChanged($event)" accept="image/*" class="add-article__preview" type="file"/>
@@ -25,20 +41,17 @@
 </template>
 
 <script lang="js">
-import { QuillEditor } from '@vueup/vue-quill'
-import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import Editor from '@tinymce/tinymce-vue'
 
 import API from "@/api/api"
-import parseResponseError from "../../../../utils/parseResponseError";
-// import { ImageResize } from 'quill-image-resize-module';
 
-// QuillEditor.register('modules/imageDrop', ImageResize);
+import parseResponseError from "@/utils/parseResponseError"
 
 export default {
-  name: 'AddArticle',
+  name: 'AdminArticle',
 
   components: {
-    QuillEditor
+    Editor
   },
 
   props: {
@@ -51,40 +64,18 @@ export default {
         title: '',
         category: "css",
         image: null,
+        text: '',
       },
-      options: {
-        placeholder: 'Текст статьи',
-        theme: 'snow',
-        modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block'],
-            [{ 'header': 1 }, { 'header': 2 }],
-            [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-            [{ 'script': 'sub' }, { 'script': 'super' }],
-            [{ 'indent': '-1' }, { 'indent': '+1' }],
-            [{ 'direction': 'rtl' }],
-            [{ 'size': ['small', false, 'large', 'huge'] }],
-            [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'font': [] }],
-            [{ 'color': [] }, { 'background': [] }],
-            [{ 'align': [] }],
-            ['clean'],
-            ['link', 'image', 'video']
-          ]
-        }
-      }
     }
   },
 
   methods: {
     getContent() {
-      const text = this.$refs.editor.getHTML()
       const form = this.form
 
-      if (!text && !form.category && !form.title && !form.file) return
+      if (!form.text && !form.category && !form.title && !form.file) return
 
-      const data = {...this.form, text: text}
+      const data = {...this.form}
 
       API.createNews(data)
         .then(() => {
@@ -101,5 +92,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "AddArticle";
+@import "AdminArticle";
 </style>

@@ -3,7 +3,9 @@
     <Aside />
 
     <div class="admin-panel__wrapper">
-      <AddArticle :category="category" />
+<!--      <AdminArticles v-if="this.$route.path === '/admin/articles'" />-->
+
+      <AdminArticle :category="category" />
     </div>
   </div>
 </template>
@@ -17,13 +19,15 @@ import Aside from "./components/Aside/Aside"
 // Var
 import API from "@/api/api"
 import {ROUTE_LINK} from "../../router";
-import AddArticle from "./components/AddArticle/AddArticle";
+import AdminArticle from "./components/AdminArticle/AdminArticle";
+// import AdminArticles from "./components/AdminArticles/AdminArticles";
 
 export default {
-  name: 'Login',
+  name: 'AdminPanel',
 
   components: {
-    AddArticle,
+    // AdminArticles,
+    AdminArticle,
     Aside
   },
 
@@ -35,6 +39,8 @@ export default {
   },
 
   mounted() {
+    console.log(this.$route.path)
+
     API.checkAccess()
       .then(() => {
         this.isAdmin = true

@@ -17,5 +17,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "AllArticles";
+@import "AdminArticles";
 </style>
