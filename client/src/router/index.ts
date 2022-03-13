@@ -5,10 +5,8 @@ export const ROUTE_LINK = {
   about: '/about',
   blog: '/blog',
   blogArticle: '/blog/:id',
-  // admin
-  admin: '/admin',
-  adminArticle: '/admin/article',
-  adminArticles: '/admin/articles',
+  login: '/login',
+  adminPanel: '/admin-panel',
   notFound: '404'
 }
 
@@ -28,23 +26,16 @@ const routes = [
     name: 'Article',
     component: () => import(/* webpackChunkName: "Article" */ '../views/Article/Article.vue')
   },
-  // admin START
   {
-    path: ROUTE_LINK.admin,
+    path: ROUTE_LINK.login,
     name: 'Login',
     component: () => import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue')
   },
   {
-    path: ROUTE_LINK.adminArticle,
+    path: ROUTE_LINK.adminPanel,
     name: 'AdminPanel',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/AdminPanel/AdminPanel.vue')
+    component: () => import(/* webpackChunkName: "AdminPanel" */ '../views/AdminPanel/AdminPanel.vue')
   },
-  {
-    path: ROUTE_LINK.adminArticles,
-    name: 'AdminPanel',
-    component: () => import(/* webpackChunkName: "Article" */ '../views/AdminPanel/AdminPanel.vue')
-  },
-  // admin END
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

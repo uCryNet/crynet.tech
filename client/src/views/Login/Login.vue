@@ -65,7 +65,7 @@ export default {
           const {isAdmin} = res.data
 
           isAdmin
-           ? this.$router.push(ROUTE_LINK.adminArticle)
+           ? this.$router.push(ROUTE_LINK.adminPanel)
            : this.$router.push(ROUTE_LINK.root)
         })
         .catch(error => {
@@ -81,7 +81,7 @@ export default {
       .then(res => {
         const {isAdmin} = res.data
 
-        isAdmin && this.$router.push(ROUTE_LINK.adminArticle)
+        isAdmin && this.$router.push(ROUTE_LINK.adminPanel)
       })
   }
 }

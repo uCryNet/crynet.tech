@@ -1,13 +1,18 @@
 <template>
   <div class="admin-panel">
-    <Aside />
+    <Aside
+      :switchBlock="switchBlock"
+      :block="this.block"
+    />
 
-    <div class="admin-panel__wrapper">
-<!--      <AdminArticles v-if="this.$route.path === '/admin/articles'" />-->
-
-      <AdminArticle :category="category" />
+    <div>
+      <AdminArticle v-if="this.block === 'article'" :category="category" />
+      <div v-else-if="this.block === 'articles'">1</div>
+      <div v-else-if="this.block === 'category'">2</div>
     </div>
   </div>
+
+
 </template>
 
 <script lang="js">
@@ -34,7 +39,8 @@ export default {
   data() {
     return {
       isAdmin: false,
-      category: []
+      category: [],
+      block: 'article'
     }
   },
 
@@ -49,6 +55,12 @@ export default {
         console.error(parseResponseError(error))
         this.$router.push(ROUTE_LINK.root)
       })
+  },
+
+  methods: {
+    switchBlock(block) {
+      if (this.block !== block) this.block = block
+    }
   },
 
   watch: {
