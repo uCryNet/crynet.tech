@@ -79,8 +79,8 @@ class PostController {
 
   async delete(req, res) {
     try {
-      const token = req?.body.token
       const id = req?.params.id
+      const token = req.cookies.token
       const {role} = jwt.verify(token, SECRET_KEY)
 
       if (!id) return res.status(400).json({message: "Post not found"})

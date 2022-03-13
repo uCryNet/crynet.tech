@@ -37,6 +37,10 @@ const getCategory = () => {
   return axios.get(`category/get-all`);
 }
 
+const deletePost = (id: string) => {
+  return axios.delete(`/post/delete/${id}`);
+}
+
 export default {
   getNews,
   getOneNews,
@@ -45,4 +49,5 @@ export default {
   search,
   checkAccess,
   getCategory,
+  deletePost,
 }

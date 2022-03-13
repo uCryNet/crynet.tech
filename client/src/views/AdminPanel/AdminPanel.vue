@@ -7,7 +7,7 @@
 
     <div>
       <AdminArticle v-if="this.block === 'article'" :category="category" />
-      <div v-else-if="this.block === 'articles'">1</div>
+      <AdminArticles v-else-if="this.block === 'articles'" />
       <div v-else-if="this.block === 'category'">2</div>
     </div>
   </div>
@@ -16,22 +16,24 @@
 </template>
 
 <script lang="js">
-// Utils
-import parseResponseError from "../../utils/parseResponseError";
 // Components
 import Aside from "./components/Aside/Aside"
+import AdminArticle from "./components/AdminArticle/AdminArticle";
+import AdminArticles from "./components/AdminArticles/AdminArticles";
+
+// Utils
+import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
 import {ROUTE_LINK} from "../../router";
-import AdminArticle from "./components/AdminArticle/AdminArticle";
-// import AdminArticles from "./components/AdminArticles/AdminArticles";
+
 
 export default {
   name: 'AdminPanel',
 
   components: {
-    // AdminArticles,
+    AdminArticles,
     AdminArticle,
     Aside
   },
@@ -45,8 +47,6 @@ export default {
   },
 
   mounted() {
-    console.log(this.$route.path)
-
     API.checkAccess()
       .then(() => {
         this.isAdmin = true

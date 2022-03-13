@@ -49,7 +49,6 @@ export default {
       return this.date.split(".")
     },
     getCategory: function () {
-      console.log(this.category)
       return this.category ? this.category : "—"
     },
   },

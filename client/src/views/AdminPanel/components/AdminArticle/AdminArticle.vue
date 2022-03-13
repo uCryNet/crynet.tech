@@ -1,8 +1,8 @@
 <template>
-  <form class="add-article" @submit.prevent="getContent">
-    <input required v-model.lazy.trim="form.title" placeholder="Title" class="input add-article__title"/>
+  <form class="admin-article" @submit.prevent="getContent">
+    <input required v-model.lazy.trim="form.title" placeholder="Title" class="input admin-article__title"/>
 
-    <select v-model="form.category" name="category" required class="select add-article__select">
+    <select v-model="form.category" name="category" required class="select admin-article__select">
       <optgroup :label="categoryUnit.title" v-for="categoryUnit in category" :key="categoryUnit.title">
         <option
           :value="subCategoriesUnit.name"
@@ -14,10 +14,10 @@
       </optgroup>
     </select>
 
-    <div class="add-article__text">
+    <div class="admin-article__text">
       <Editor
         v-model="form.text"
-        api-key="1d8abcfebd86c0f7a9ac63852ef8b3713a9cf0617054397350d850fe9900d503"
+        :api-key="this.apiKey"
         :init="{
          height: 500,
          menubar: true,
@@ -34,7 +34,7 @@
       />
     </div>
 
-    <input required @change="onFileChanged($event)" accept="image/*" class="add-article__preview" type="file"/>
+    <input required @change="onFileChanged($event)" accept="image/*" class="admin-article__preview" type="file"/>
 
     <button class="btn btn--bg btn--big">ДОБАВИТЬ СТАТЬЮ</button>
   </form>
@@ -44,6 +44,7 @@
 import Editor from '@tinymce/tinymce-vue'
 
 import API from "@/api/api"
+import {TINYMCE_KEY} from "@/config/constant"
 
 import parseResponseError from "@/utils/parseResponseError"
 
@@ -88,6 +89,10 @@ export default {
       this.form.image = $event.target.files[0]
     }
   },
+
+  created() {
+    this.apiKey = TINYMCE_KEY
+  }
 }
 </script>
 
