@@ -1,6 +1,3 @@
-// Vendors
-import {mongo} from "mongoose";
-
 // Components
 import Post from '../models/post'
 
@@ -18,12 +15,13 @@ class PostService {
   }
 
   async getOne(id) {
-    const post = await Post.findOne({_id: new mongo.ObjectID(id)})
+    const post = await Post.findOne({_id: id})
     return post
   }
 
   async delete(id) {
-    Post.findByIdAndDelete(id)
+    const post = await Post.findByIdAndDelete({_id: id})
+    return post
   }
 
   async update(data) {

@@ -14,7 +14,7 @@
         <div class="all-articles__list-date">{{ list.date }}</div>
         <div class="all-articles__list-category">{{ getCategory(list.category) }}</div>
         <button class="all-articles__list-nav all-articles__list-nav-edit">Редактировать</button>
-        <button class="all-articles__list-nav all-articles__list-nav-del" @click="deletePost(list.id, list.title)">Удалить</button>
+        <button class="all-articles__list-nav all-articles__list-nav-del" @click="deletePost(list._id, list.title)">Удалить</button>
       </div>
     </div>
   </div>
@@ -43,10 +43,12 @@ export default {
     },
 
     deletePost: function (id, title) {
-      if (confirm(`Вы точно хотите удалить пост: "${title}"`)) {
+      const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
+
+      if (isDelete) {
         API.deletePost(id)
-          .then(res => {
-            this.list = res.data
+          .then(() => {
+            this.getNews()
           })
           .catch(error => console.error(parseResponseError(error)))
       }
