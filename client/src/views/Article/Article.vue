@@ -26,7 +26,7 @@ export default {
   mounted() {
     const {id} = this.$route.params
 
-    API.getOneNews(id)
+    API.getOnePost(id)
       .then(res => {
         this.list = res.data
       })

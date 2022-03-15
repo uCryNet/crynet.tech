@@ -57,6 +57,15 @@ export default {
 
   props: {
     category: Array,
+    edit: {
+      author: String,
+      category: String,
+      date: String,
+      image: String,
+      text: String,
+      title: String,
+      _id: String,
+    }
   },
 
   data() {
@@ -78,15 +87,28 @@ export default {
 
       const data = {...this.form}
 
-      API.createNews(data)
+      const postAction = this.edit ? API.updatePost({...data, id: this.edit._id}) : API.createNews(data)
+
+      postAction
         .then(() => {
-          alert("Статья добавленна!")
+          this.edit ? alert("Статья обновлена!") : alert("Статья добавленна!")
         })
         .catch(error => console.error(parseResponseError(error)))
     },
 
     onFileChanged($event) {
       this.form.image = $event.target.files[0]
+    }
+  },
+
+  mounted() {
+    if (this.edit?._id) {
+      this.form = {
+        title: this.edit.title,
+        category: this.edit.category,
+        image: this.edit.image,
+        text: this.edit.text,
+      }
     }
   },
 

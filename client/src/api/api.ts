@@ -2,12 +2,24 @@ import axios from 'axios';
 import {RouteParamValue} from "vue-router";
 
 
-const getNews = () => {
+const getPosts = () => {
   return axios.get(`post/get-all`);
 }
 
-const getOneNews = (uri: string | RouteParamValue[]) => {
+const getOnePost = (uri: string | RouteParamValue[]) => {
   return axios.get(`post/get-one/${uri}`,);
+}
+
+const updatePost = (form: any) => {
+  const formData = new FormData();
+
+  formData.append('title', form.title);
+  formData.append('text', form.text);
+  formData.append('category', form.category);
+  formData.append('id', form.id);
+  // formData.append('image', form.image);
+
+  return axios.put(`post/update/`, formData);
 }
 
 const createNews = (form: any) => {
@@ -42,8 +54,9 @@ const deletePost = (id: string) => {
 }
 
 export default {
-  getNews,
-  getOneNews,
+  getPosts,
+  getOnePost,
+  updatePost,
   createNews,
   login,
   search,

@@ -13,7 +13,7 @@
         <div class="all-articles__list-title">{{ list.title }}</div>
         <div class="all-articles__list-date">{{ list.date }}</div>
         <div class="all-articles__list-category">{{ getCategory(list.category) }}</div>
-        <button class="all-articles__list-nav all-articles__list-nav-edit" @click="editArticle(list._id)">Редактировать</button>
+        <button class="all-articles__list-nav all-articles__list-nav-edit" @click="editArticle(list)">Редактировать</button>
         <button class="all-articles__list-nav all-articles__list-nav-del" @click="deleteArticle(list._id, list.title)">Удалить</button>
       </div>
     </div>

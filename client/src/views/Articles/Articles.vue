@@ -58,7 +58,7 @@ export default {
     send() {
       const updateArticles = this.search.trim() !== ""
         ? API.search(this.search)
-        : API.getNews()
+        : API.getPosts()
 
       updateArticles
         .then(res => {
@@ -79,7 +79,7 @@ export default {
   },
 
   mounted() {
-    API.getNews()
+    API.getPosts()
       .then(res => {
         this.list = res.data
       })

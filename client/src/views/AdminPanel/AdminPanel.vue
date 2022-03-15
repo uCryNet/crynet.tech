@@ -8,6 +8,7 @@
     <div>
       <AdminArticle
         v-if="this.block === 'article'"
+        :edit="edit"
         :category="category"
       />
 
@@ -53,15 +54,15 @@ export default {
     return {
       isAdmin: false,
       category: [],
-      block: 'article',
+      block: "article",
       edit: {
-        author: String,
-        category: String,
-        date: String,
-        image: String,
-        text: String,
-        title: String,
-        _id: String,
+        author: "",
+        category: "",
+        date: "",
+        image: "",
+        text: "",
+        title: "",
+        _id: "",
       },
       articles: []
     }
@@ -93,14 +94,14 @@ export default {
       if (isDelete) {
         API.deletePost(id)
           .then(() => {
-            this.getNews()
+            this.getPosts()
           })
           .catch(error => console.error(parseResponseError(error)))
       }
     },
 
-    getNews: function () {
-      API.getNews()
+    getPosts: function () {
+      API.getPosts()
         .then(res => {
           this.articles = res.data
         })
@@ -113,7 +114,7 @@ export default {
       if (!this.isAdmin) return
 
       axios.all([
-        API.getNews(),
+        API.getPosts(),
         API.getCategory()
       ])
         .then(axios.spread((
@@ -126,6 +127,20 @@ export default {
         .catch(error => {
           console.error(parseResponseError(error))
         })
+    },
+
+    block() {
+      if (this.block === "article" && !this.edit._id) {
+        this.edit = {
+          author: "",
+            category: "",
+            date: "",
+            image: "",
+            text: "",
+            title: "",
+            _id: "",
+        }
+      }
     }
   }
 }
