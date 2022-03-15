@@ -6,8 +6,18 @@
     />
 
     <div>
-      <AdminArticle v-if="this.block === 'article'" :category="category" />
-      <AdminArticles v-else-if="this.block === 'articles'" />
+      <AdminArticle
+        v-if="this.block === 'article'"
+        :category="category"
+      />
+
+      <AdminArticles
+        v-else-if="this.block === 'articles'"
+        :editArticle="editArticle"
+        :deleteArticle="deleteArticle"
+        :lists="this.articles"
+      />
+
       <div v-else-if="this.block === 'category'">2</div>
     </div>
   </div>
@@ -27,6 +37,7 @@ import parseResponseError from "../../utils/parseResponseError";
 // Var
 import API from "@/api/api"
 import {ROUTE_LINK} from "../../router";
+import axios from "axios";
 
 
 export default {
@@ -42,7 +53,17 @@ export default {
     return {
       isAdmin: false,
       category: [],
-      block: 'article'
+      block: 'article',
+      edit: {
+        author: String,
+        category: String,
+        date: String,
+        image: String,
+        text: String,
+        title: String,
+        _id: String,
+      },
+      articles: []
     }
   },
 
@@ -51,8 +72,7 @@ export default {
       .then(() => {
         this.isAdmin = true
       })
-      .catch(error => {
-        console.error(parseResponseError(error))
+      .catch(() => {
         this.$router.push(ROUTE_LINK.root)
       })
   },
@@ -60,6 +80,31 @@ export default {
   methods: {
     switchBlock(block) {
       if (this.block !== block) this.block = block
+    },
+
+    editArticle(article) {
+      this.block = "article"
+      this.edit = {...article}
+    },
+
+    deleteArticle: function (id, title) {
+      const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
+
+      if (isDelete) {
+        API.deletePost(id)
+          .then(() => {
+            this.getNews()
+          })
+          .catch(error => console.error(parseResponseError(error)))
+      }
+    },
+
+    getNews: function () {
+      API.getNews()
+        .then(res => {
+          this.articles = res.data
+        })
+        .catch(error => console.error(parseResponseError(error)))
     }
   },
 
@@ -67,10 +112,17 @@ export default {
     isAdmin() {
       if (!this.isAdmin) return
 
-      API.getCategory()
-        .then((res) => {
-          this.category = res.data
-        })
+      axios.all([
+        API.getNews(),
+        API.getCategory()
+      ])
+        .then(axios.spread((
+          newsResponse,
+          categoryResponse
+        ) => {
+          this.category = categoryResponse.data
+          this.articles = newsResponse.data
+        }))
         .catch(error => {
           console.error(parseResponseError(error))
         })
