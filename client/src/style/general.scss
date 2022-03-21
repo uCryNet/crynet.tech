@@ -41,7 +41,7 @@ a {
   margin-right: auto;
   padding-left: 32px;
   padding-right: 32px;
-  //color: #2c3e50;
+  box-sizing: border-box;
 
   @media (max-width: 992px) {
     padding-left: 16px;

@@ -34,9 +34,12 @@
       />
     </div>
 
-    <input required @change="onFileChanged($event)" accept="image/*" class="admin-article__preview" type="file"/>
+    <input :required="!this.edit?._id" @change="onFileChanged($event)" accept="image/*" class="admin-article__preview" type="file"/>
 
-    <button class="btn btn--bg btn--big">ДОБАВИТЬ СТАТЬЮ</button>
+    <button class="btn btn--bg btn--big">
+      <template v-if="this.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
+      <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
+    </button>
   </form>
 </template>
 

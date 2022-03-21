@@ -15,7 +15,7 @@
       </div>
     </div>
 
-    <div class="articles__lists">
+    <div class="articles__lists" v-if="list.length">
       <div class="art" v-for="article in list" :key="article._id">
         <Article
           :title="article.title"
@@ -27,6 +27,8 @@
         />
       </div>
     </div>
+
+    <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">Упс! Записей не обнаруженно</div>
   </div>
 </template>
 
