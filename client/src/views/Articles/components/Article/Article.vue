@@ -10,7 +10,7 @@
     </div>
 
     <div class="article__text">
-      <h4 class="article__category">{{ getCategory }}</h4>
+      <h4 class="article__category">{{ category }}</h4>
       <h1 class="article__title">{{ title }}</h1>
       <div class="article__desc" v-html="getDescription"></div>
     </div>
@@ -47,9 +47,6 @@ export default {
     },
     getDate() {
       return this.date.split(".")
-    },
-    getCategory() {
-      return this.category ? this.category : "—"
     },
   },
 }
