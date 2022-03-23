@@ -1,5 +1,5 @@
 <template>
-  <form class="admin-article" @submit.prevent="getContent">
+  <form class="admin-article">
     <input required v-model.lazy.trim="form.title" placeholder="Title" class="input admin-article__title"/>
 
     <select v-model="form.category" name="category" required class="select admin-article__select">
@@ -9,7 +9,7 @@
           v-for="subCategoriesUnit in categoryUnit.subCategories"
           :key="subCategoriesUnit.name"
         >
-          {{subCategoriesUnit.name}}
+          {{ subCategoriesUnit.name }}
         </option>
       </optgroup>
     </select>
@@ -34,11 +34,21 @@
       />
     </div>
 
-    <input :required="!this.edit?._id" @change="onFileChanged($event)" accept="image/*" class="admin-article__preview" type="file"/>
+    <input
+      :required="!this.edit?._id"
+      @change="onFileChanged($event)"
+      accept="image/*"
+      class="admin-article__preview"
+      type="file"
+    />
 
-    <button class="btn btn--bg btn--big">
+    <button class="btn btn--yellow btn--big" @click.prevent="getContent">
       <template v-if="this.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
       <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
+    </button>
+
+    <button class="btn btn--red btn--big mt--20" v-if="this.edit?._id" @click.prevent="cancel">
+      ОТМЕНИТЬ РЕДАКТИРОВАНИЕ
     </button>
   </form>
 </template>
@@ -59,6 +69,8 @@ export default {
   },
 
   props: {
+    getPosts: Function,
+    clearEditPostData: Function,
     category: Array,
     edit: {
       author: String,
@@ -83,24 +95,51 @@ export default {
   },
 
   methods: {
-    getContent() {
+    async getContent() {
       const form = this.form
+      const isUpdate = this.edit?._id
 
-      if (!form.text && !form.category && !form.title && !form.file) return
+      if (!form.text) return alert("Заполните все поля!")
 
       const data = {...this.form}
 
-      const postAction = this.edit ? API.updatePost({...data, id: this.edit._id}) : API.createNews(data)
+      isUpdate
+        ? await API.updatePost({...data, id: this.edit._id})
+        : await API.createPost(data)
 
-      postAction
-        .then(() => {
-          this.edit ? alert("Статья обновлена!") : alert("Статья добавленна!")
-        })
-        .catch(error => console.error(parseResponseError(error)))
+      this.getPosts()
+      this.clearEditPostData()
+      this.clearPostData()
     },
 
     onFileChanged($event) {
       this.form.image = $event.target.files[0]
+    },
+
+    clearPostData() {
+      this.form = {
+        title: '',
+        category: "css",
+        image: null,
+        text: '',
+      }
+    },
+
+    update(data) {
+      API.updatePost({...data})
+        .then(() => alert(`Статья обновлена!`))
+        .catch(error => console.error(parseResponseError(error)))
+    },
+
+    create(data) {
+      API.createPost({...data})
+        .then(() => alert(`Статья добавленна!`))
+        .catch(error => console.error(parseResponseError(error)))
+    },
+
+    cancel() {
+      this.clearEditPostData()
+      this.clearPostData()
     }
   },
 

@@ -65,7 +65,11 @@ a {
     background: #fcdb5a;
   }
 
-  &--bg {
+  &--big {
+    height: 45px;
+  }
+
+  &--yellow {
     color: #4f4a37;
     background-color: #fcdb5a;
     font-size: 12px;
@@ -77,8 +81,17 @@ a {
     }
   }
 
-  &--big {
-    height: 45px;
+  &--red {
+    color: #fff;
+    background-color: #c94b4b;
+    font-size: 12px;
+    border-color: #c94b4b;
+    transition: background-color .25s ease-in-out, border-color .25s ease-in-out, color .25s ease-in-out;
+
+    &:hover {
+      color: #4f4a37;
+      background-color: transparent;
+    }
   }
 }
 

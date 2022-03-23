@@ -37,18 +37,18 @@ export default {
   },
 
   computed: {
-    getImageLink: function () {
+    getImageLink() {
       return this.image
         ? `${SERVER_API}/${this.image}`
         : `${SERVER_API}/static/image/other/not-found-image.jpg`
     },
-    getDescription: function () {
+    getDescription() {
       return this.text.substring(0, 100)
     },
-    getDate: function () {
+    getDate() {
       return this.date.split(".")
     },
-    getCategory: function () {
+    getCategory() {
       return this.category ? this.category : "—"
     },
   },

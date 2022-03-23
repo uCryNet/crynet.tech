@@ -21,9 +21,9 @@ app.use(cookieParser())
 app.use(bodyParser.json({ extended: true }));
 app.use(
   cors({
-    origin:ENV,
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200,
+    origin: ENV,
+    credentials:true, //access-control-allow-credentials:true
+    optionSuccessStatus: 200,
   }),
 );
 app.use(express.urlencoded({extended: false}))

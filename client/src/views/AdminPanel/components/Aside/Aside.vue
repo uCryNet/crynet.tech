@@ -19,7 +19,6 @@ import {ROUTE_LINK} from "@/router/index";
 const MENUS = [
   {text: "Добавить статью", value: "article"},
   {text: "Все статьи", value: "articles"},
-  {text: "Добавить категорию", value: "category"},
 ]
 
 export default {

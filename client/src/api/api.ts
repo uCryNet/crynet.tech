@@ -22,7 +22,7 @@ const updatePost = (form: any) => {
   return axios.put(`post/update/`, formData);
 }
 
-const createNews = (form: any) => {
+const createPost = (form: any) => {
   const formData = new FormData();
 
   formData.append('title', form.title);
@@ -57,7 +57,7 @@ export default {
   getPosts,
   getOnePost,
   updatePost,
-  createNews,
+  createPost,
   login,
   search,
   checkAccess,

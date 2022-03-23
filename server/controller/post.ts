@@ -99,14 +99,14 @@ class PostController {
   async update(req, res) {
     try {
       if (!req.body) return res.status(400).json({message: "Post update error"})
-      const {title, text, id: postId} = req.body
+      const {title, text, category, id: postId} = req.body
 
       const token = req.cookies.token
       const {role, id: userId} = jwt.verify(token, SECRET_KEY)
 
       if (!token) return res.status(400).json({message: "User is not authorized"})
       if (role !== "admin" || !userId) return res.status(400).json({message: "No access"})
-      if (!postId) return res.status(400).json({message: "Fill in the required fields"})
+      if (!postId && !category) return res.status(400).json({message: "Fill in the required fields"})
       await checkLengthArticle(res, title, text)
 
       const getCurrentPost = await PostService.getOne(postId)
@@ -115,7 +115,7 @@ class PostController {
       // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
       const {name} = await UserService.getUser(userId, "id")
 
-      const updatedPost = await PostService.update({title, text, author: name, id: postId})
+      const updatedPost = await PostService.update({title, text, category, author: name, id: postId})
 
       res.json({message: "Post updated", updatedPost})
     } catch (e) {

@@ -1,1 +1,1 @@
-export const TINYMCE_KEY = "1d8abcfebd86c0f7a9ac63852ef8b3713a9cf0617054397350d850fe9900d503"
+export const TINYMCE_KEY = "2by8mtybmxl5k80mkmf28mbcgz3rnz24b6nw9xqbavp8am76"

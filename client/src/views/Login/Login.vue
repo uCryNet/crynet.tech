@@ -40,7 +40,7 @@ export default {
   },
 
   methods: {
-    send: function (e) {
+    send(e) {
       e.preventDefault()
 
       API.login({login: this.login, password: this.password})

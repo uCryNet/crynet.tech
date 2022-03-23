@@ -10,6 +10,8 @@
         v-if="this.block === 'article'"
         :edit="edit"
         :category="category"
+        :getPosts="getPosts"
+        :clearEditPostData="clearEditPostData"
       />
 
       <AdminArticles
@@ -18,8 +20,6 @@
         :deleteArticle="deleteArticle"
         :lists="this.articles"
       />
-
-      <div v-else-if="this.block === 'category'">2</div>
     </div>
   </div>
 
@@ -88,24 +88,35 @@ export default {
       this.edit = {...article}
     },
 
-    deleteArticle: function (id, title) {
+    async deleteArticle(id, title) {
       const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
 
       if (isDelete) {
-        API.deletePost(id)
-          .then(() => {
-            this.getPosts()
-          })
+        await API.deletePost(id)
           .catch(error => console.error(parseResponseError(error)))
+
+        await this.getPosts()
       }
     },
 
-    getPosts: function () {
+    getPosts() {
       API.getPosts()
         .then(res => {
           this.articles = res.data
         })
         .catch(error => console.error(parseResponseError(error)))
+    },
+
+    clearEditPostData() {
+      this.edit = {
+        author: "",
+        category: "",
+        date: "",
+        image: "",
+        text: "",
+        title: "",
+        _id: "",
+      }
     }
   },
 
@@ -124,22 +135,12 @@ export default {
           this.category = categoryResponse.data
           this.articles = newsResponse.data
         }))
-        .catch(error => {
-          console.error(parseResponseError(error))
-        })
+        .catch(error => console.error(parseResponseError(error)))
     },
 
     block() {
       if (this.block === "article" && !this.edit._id) {
-        this.edit = {
-          author: "",
-            category: "",
-            date: "",
-            image: "",
-            text: "",
-            title: "",
-            _id: "",
-        }
+        this.clearEditPostData()
       }
     }
   }
