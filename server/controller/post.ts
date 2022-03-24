@@ -16,6 +16,10 @@ const checkLengthArticle = (res, title, text) => {
 }
 
 
+const stringValidate = (string: string) => {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
 class PostController {
   async getOne(req, res) {
     try {
@@ -40,12 +44,13 @@ class PostController {
 
   async search(req, res) {
     try {
-      const {search} = req.body
+      const {search, category} = req.body
 
-      if (search.trim() === "") return res.status(400).json({message: "Search filed is empty"})
+      if (!search) return res.status(400).json({message: "Search filed is empty"})
 
-      const posts = await PostService.search(search)
+      const searchValid = stringValidate(search)
 
+      const posts = await PostService.search(searchValid, category)
       return res.json(posts)
     } catch (e) {
       res.status(400).json(e)
