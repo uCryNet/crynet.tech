@@ -21,24 +21,13 @@
 </template>
 
 <script lang="js">
-// Var
-import API from "@/api/api"
-
-
 export default {
   name: 'Menu',
 
-  data() {
-    return {
-      category: []
+  computed: {
+    category() {
+      return this.$store.getters.getAllCategory;
     }
-  },
-
-  mounted() {
-    API.getCategory()
-      .then(res => {
-        this.category = res.data
-      })
   }
 }
 </script>

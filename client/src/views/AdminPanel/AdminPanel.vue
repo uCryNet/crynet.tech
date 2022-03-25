@@ -37,8 +37,7 @@ import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
-import {ROUTE_LINK} from "../../router";
-import axios from "axios";
+import {ROUTE_LINK} from "../../router"
 
 
 export default {
@@ -124,17 +123,8 @@ export default {
     isAdmin() {
       if (!this.isAdmin) return
 
-      axios.all([
-        API.getPosts(),
-        API.getCategory()
-      ])
-        .then(axios.spread((
-          newsResponse,
-          categoryResponse
-        ) => {
-          this.category = categoryResponse.data
-          this.articles = newsResponse.data
-        }))
+      API.getPosts()
+        .then(res => this.articles = res.data)
         .catch(error => console.error(parseResponseError(error)))
     },
 

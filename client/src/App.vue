@@ -1,11 +1,13 @@
 <template>
-  <Header/>
+  <div>
+    <Header/>
 
-  <div class="container">
-    <router-view></router-view>
+    <div class="container">
+      <router-view></router-view>
+    </div>
+
+    <Footer/>
   </div>
-
-  <Footer/>
 </template>
 
 <script lang="js">
@@ -20,6 +22,10 @@ export default {
   components: {
     Header,
     Footer
-  }
+  },
+
+  created() {
+    this.$store.dispatch("getCategory");
+  },
 }
 </script>

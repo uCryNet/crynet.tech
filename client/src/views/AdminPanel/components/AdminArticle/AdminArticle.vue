@@ -3,7 +3,7 @@
     <input required v-model.lazy.trim="form.title" placeholder="Title" class="input admin-article__title"/>
 
     <select v-model="form.category" name="category" required class="select admin-article__select">
-      <optgroup :label="categoryUnit.title" v-for="categoryUnit in category" :key="categoryUnit.title">
+      <optgroup :label="categoryUnit.title" v-for="categoryUnit in allcategory" :key="categoryUnit.title">
         <option
           :value="subCategoriesUnit.name"
           v-for="subCategoriesUnit in categoryUnit.subCategories"
@@ -96,16 +96,18 @@ export default {
 
   methods: {
     async getContent() {
-      const form = this.form
+      if (!this.form.text) return alert("Заполните все поля!")
+
       const isUpdate = this.edit?._id
-
-      if (!form.text) return alert("Заполните все поля!")
-
       const data = {...this.form}
 
       isUpdate
         ? await API.updatePost({...data, id: this.edit._id})
+          .then(() => alert(`Статья обновлена!`))
+          .catch(error => console.error(parseResponseError(error)))
         : await API.createPost(data)
+          .then(() => alert(`Статья добавленна!`))
+          .catch(error => console.error(parseResponseError(error)))
 
       this.getPosts()
       this.clearEditPostData()
@@ -123,18 +125,6 @@ export default {
         image: null,
         text: '',
       }
-    },
-
-    update(data) {
-      API.updatePost({...data})
-        .then(() => alert(`Статья обновлена!`))
-        .catch(error => console.error(parseResponseError(error)))
-    },
-
-    create(data) {
-      API.createPost({...data})
-        .then(() => alert(`Статья добавленна!`))
-        .catch(error => console.error(parseResponseError(error)))
     },
 
     cancel() {
@@ -156,7 +146,13 @@ export default {
 
   created() {
     this.apiKey = TINYMCE_KEY
-  }
+  },
+
+  computed: {
+    allcategory() {
+      return this.$store.getters.getAllCategory;
+    }
+  },
 }
 </script>
 

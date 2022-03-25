@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 // Method
 import "/src/config/api"
 import router from './router'
+import store from "./store";
 
 // Components
 import App from './App.vue'
@@ -11,4 +12,7 @@ import App from './App.vue'
 import "./style/index.scss"
 
 
-createApp(App).use(router).mount('#app')
+createApp(App)
+  .use(router)
+  .use(store)
+  .mount('#app')
