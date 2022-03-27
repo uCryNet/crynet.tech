@@ -14,6 +14,7 @@ const getters = {
   }
 }
 
+
 const actions = {
   async getAllPosts({ commit } : {commit: any}) {
     API.getPosts()
@@ -26,8 +27,10 @@ const actions = {
       })
   },
 
-  search({ commit }: any, data: string) {
-    API.search(data)
+  search({commit} : {commit : any}, data : any) {
+    const {text} = data
+
+    API.search(text)
       .then(res => {
         commit("setPosts", res.data)
       })

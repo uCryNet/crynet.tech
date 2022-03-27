@@ -9,7 +9,7 @@
 
       <div class="menu__subcategory-lists">
         <div v-for="subCategoriesUnit in categoryUnit.subCategories" :key="subCategoriesUnit.name" class="menu__subcategory-unit">
-          {{ subCategoriesUnit.name }}
+          <div>{{ subCategoriesUnit.name }}</div>
         </div>
       </div>
     </div>

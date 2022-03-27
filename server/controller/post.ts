@@ -17,7 +17,9 @@ const checkLengthArticle = (res, title, text) => {
 
 
 const stringValidate = (string: string) => {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  return string
+    ? string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    : ''
 }
 
 class PostController {
@@ -46,12 +48,15 @@ class PostController {
     try {
       const {search, category} = req.body
 
-      if (!search) return res.status(400).json({message: "Search filed is empty"})
+      if (!!search || !!category) {
+        const searchValid = stringValidate(search)
+        const categoryValid = stringValidate(category)
 
-      const searchValid = stringValidate(search)
-
-      const posts = await PostService.search(searchValid, category)
-      return res.json(posts)
+        const posts = await PostService.search(searchValid, categoryValid)
+        return res.json(posts)
+      } else {
+        return res.status(400).json({message: "Search filed is empty"})
+      }
     } catch (e) {
       res.status(400).json(e)
     }
