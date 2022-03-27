@@ -1,9 +1,8 @@
-// import {set} from "vue";
 import API from "../api/api";
 import parseResponseError from "@/utils/parseResponseError";
 
 const state = {
-  category: {}
+  category: []
 }
 
 const getters = {
@@ -18,7 +17,7 @@ const actions = {
       .then(res => commit("setCategory", res.data))
       .catch(error => {
         console.error(parseResponseError(error))
-        commit("setCategory", {})
+        commit("setCategory", [])
       })
   }
 }
@@ -27,7 +26,7 @@ const mutations = {
   setCategory(state: any, category: any) {
     state.category = category;
   }
-};
+}
 
 export default {
   state,

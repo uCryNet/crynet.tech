@@ -26,6 +26,7 @@ export default {
 
   created() {
     this.$store.dispatch("getCategory");
+    this.$store.dispatch("getAllPosts");
   },
 }
 </script>

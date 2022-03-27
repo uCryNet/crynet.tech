@@ -59,9 +59,14 @@
   &__subcategory-unit {
     text-transform: uppercase;
     cursor: pointer;
+    transition: 0.3s ease;
 
     &:not(:last-child) {
       margin-bottom: 15px;
+    }
+
+    &:hover {
+      color: #ddc051;
     }
   }
 }

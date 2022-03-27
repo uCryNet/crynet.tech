@@ -1,7 +1,7 @@
 <template>
   <div class="menu">
     <div class="menu__category">
-      <router-link class="router-link" to="/">Home</router-link>
+      <router-link class="router-link" :to="ROUTE_LINK.root">Home</router-link>
     </div>
 
     <div v-for="categoryUnit in category" :key="categoryUnit.title" class="menu__category">
@@ -15,12 +15,14 @@
     </div>
 
     <div class="menu__category">
-      <router-link class="router-link" to="/about">About</router-link>
+      <router-link class="router-link" :to="ROUTE_LINK.about">About</router-link>
     </div>
   </div>
 </template>
 
 <script lang="js">
+import {ROUTE_LINK} from "@/router";
+
 export default {
   name: 'Menu',
 
@@ -28,6 +30,10 @@ export default {
     category() {
       return this.$store.getters.getAllCategory;
     }
+  },
+
+  created() {
+    this.ROUTE_LINK = ROUTE_LINK
   }
 }
 </script>

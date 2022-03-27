@@ -1,5 +1,5 @@
 <template>
-  <div class="admin-panel">
+  <div v-if="this.isAdmin" class="admin-panel">
     <Aside
       :switchBlock="switchBlock"
       :block="this.block"
@@ -18,12 +18,18 @@
         v-else-if="this.block === 'articles'"
         :editArticle="editArticle"
         :deleteArticle="deleteArticle"
-        :lists="this.articles"
+        :lists="posts"
       />
     </div>
   </div>
 
+  <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">
+    <div>Отказанно в доступе</div>
 
+<!--    <div class="text&#45;&#45;100 text&#45;&#45;14 text&#45;&#45;center text&#45;&#45;open-sans mb&#45;&#45;10 mt&#45;&#45;10">-->
+<!--      Вы будете переадрессованы на главную страницу-->
+<!--    </div>-->
+  </div>
 </template>
 
 <script lang="js">
@@ -37,7 +43,7 @@ import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
-import {ROUTE_LINK} from "../../router"
+// import {ROUTE_LINK} from "../../router"
 
 
 export default {
@@ -52,7 +58,7 @@ export default {
   data() {
     return {
       isAdmin: false,
-      category: [],
+      // category: [],
       block: "article",
       edit: {
         author: "",
@@ -63,18 +69,13 @@ export default {
         title: "",
         _id: "",
       },
-      articles: []
     }
   },
 
   mounted() {
     API.checkAccess()
-      .then(() => {
-        this.isAdmin = true
-      })
-      .catch(() => {
-        this.$router.push(ROUTE_LINK.root)
-      })
+      .then(() => this.isAdmin = true)
+      .catch(error => console.error(parseResponseError(error)))
   },
 
   methods: {
@@ -121,11 +122,11 @@ export default {
 
   watch: {
     isAdmin() {
-      if (!this.isAdmin) return
-
-      API.getPosts()
-        .then(res => this.articles = res.data)
-        .catch(error => console.error(parseResponseError(error)))
+      if (this.isAdmin) {
+        API.getPosts()
+          .then(res => this.articles = res.data)
+          .catch(error => console.error(parseResponseError(error)))
+      }
     },
 
     block() {
@@ -133,7 +134,17 @@ export default {
         this.clearEditPostData()
       }
     }
-  }
+  },
+
+  computed: {
+    category() {
+      return this.$store.getters.getAllCategory;
+    },
+
+    posts() {
+      return this.$store.getters.getAllPost
+    }
+  },
 }
 </script>
 
