@@ -1,13 +1,14 @@
 import axios from 'axios';
-import {RouteParamValue} from "vue-router";
+import { RouteParamValue } from "vue-router";
+import { IGetPosts } from "@/interfaces/interfaces";
 
 
-const getPosts = () => {
-  return axios.get(`post/get-all`);
+const getPosts = (data: IGetPosts | {}) => {
+  return axios.post(`post/get-all`, data);
 }
 
 const getOnePost = (uri: string | RouteParamValue[]) => {
-  return axios.get(`post/get-one/${uri}`,);
+  return axios.get(`post/get-one/${ uri }`,);
 }
 
 const updatePost = (form: any) => {
@@ -33,12 +34,12 @@ const createPost = (form: any) => {
   return axios.post(`post/create`, formData);
 }
 
-const login = (auth: {login: string, password: string}) => {
+const login = (auth: { login: string, password: string }) => {
   return axios.post(`user/login/`, auth);
 }
 
-const search = (search: string) => {
-  return axios.post(`post/search`, {search});
+const search = (search: any) => {
+  return axios.post(`post/search`, { search });
 }
 
 const checkAccess = () => {
@@ -50,7 +51,7 @@ const getCategory = () => {
 }
 
 const deletePost = (id: string) => {
-  return axios.delete(`/post/delete/${id}`);
+  return axios.delete(`/post/delete/${ id }`);
 }
 
 export default {

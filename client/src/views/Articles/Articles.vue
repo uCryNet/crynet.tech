@@ -57,21 +57,21 @@ export default {
 
   methods: {
     send() {
-      const searchText = this.filters.searchText
+      const search = this.filters.searchText
 
-      searchText
-        ? debounce(() => this.search(searchText), 500)
-        : this.searchText.trim() !== " " && this.post()
+      search
+        ? debounce(() => this.get({search}), 500)
+        : this.get({})
     },
 
     clear() {
       this.filters.searchText = ""
-      this.post()
+      this.get({})
     },
 
-    search(text) { this.$store.dispatch("search", {text}) },
-
-    post() { this.$store.dispatch("getAllPosts") },
+    get(data) {
+      this.$store.dispatch("getAllPosts", data)
+    },
   },
 
   watch: {

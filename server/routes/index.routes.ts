@@ -11,13 +11,11 @@ const router = new Router()
 
 
 // post
-router.get("/post/get-all", PostController.getAll)
+router.post("/post/get-all", PostController.get)
 router.get("/post/get-one/:id", PostController.getOne)
 router.post("/post/create", PostController.create)
 router.put("/post/update", PostController.update)
 router.delete("/post/delete/:id", PostController.delete)
-router.post("/post/search", PostController.search)
-
 // user
 router.post("/user/login", UserController.login)
 router.post("/user/registration", UserController.registration)

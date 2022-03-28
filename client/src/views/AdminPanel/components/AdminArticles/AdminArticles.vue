@@ -28,6 +28,10 @@ export default {
     editArticle: Function,
     deleteArticle: Function,
     lists: []
+  },
+
+  mounted() {
+    console.log(this.lists)
   }
 }
 </script>

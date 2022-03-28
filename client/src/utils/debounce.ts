@@ -1,8 +1,8 @@
 export default (() => {
-  let timer: NodeJS.Timeout
+  let timer: number
 
   return (callback: () => void, ms: number) => {
-    clearTimeout(timer);
-    timer = setTimeout(callback, ms);
-  };
-})();
+    clearTimeout(timer)
+    timer = setTimeout(callback, ms)
+  }
+})()

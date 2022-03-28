@@ -3,9 +3,37 @@ import Post from '../models/post'
 
 
 class PostService {
-  async getAll() {
-    const post = await Post.find()
-    return post
+  async get(search = "", category = "") {
+    let posts
+
+    // TODO: переписать нормально
+
+    if (search && category) {
+      posts = await Post.find({
+        $or:[
+          {title: new RegExp(search, 'ig')},
+          {text: new RegExp(search, 'ig')},
+          {category: new RegExp(category, 'ig')}
+        ]
+      })
+    } else if (search) {
+      posts = await Post.find({
+        $or:[
+          {title: new RegExp(search, 'ig')},
+          {text: new RegExp(search, 'ig')}
+        ]
+      })
+    } else if (category) {
+      posts = await Post.find({
+        $or:[
+          {category: new RegExp(category, 'ig')}
+        ]
+      })
+    } else {
+      posts = await Post.find()
+    }
+
+    return posts
   }
 
   async create(data) {
@@ -27,17 +55,6 @@ class PostService {
   async update(data) {
     const updatedPost = Post.findByIdAndUpdate({_id: data.id}, data, {new: true})
     return updatedPost
-  }
-
-  async search(search, category) {
-    const posts = await Post.find({
-      $or:[
-        {title: new RegExp(search, 'ig')},
-        {text: new RegExp(search, 'ig')},
-        // {category: new RegExp(category, 'ig')}
-      ]
-    })
-    return posts
   }
 }
 

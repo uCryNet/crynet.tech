@@ -100,11 +100,7 @@ export default {
     },
 
     getPosts() {
-      API.getPosts()
-        .then(res => {
-          this.articles = res.data
-        })
-        .catch(error => console.error(parseResponseError(error)))
+      this.$store.dispatch("getAllPosts", {})
     },
 
     clearEditPostData() {
@@ -121,14 +117,6 @@ export default {
   },
 
   watch: {
-    isAdmin() {
-      if (this.isAdmin) {
-        API.getPosts()
-          .then(res => this.articles = res.data)
-          .catch(error => console.error(parseResponseError(error)))
-      }
-    },
-
     block() {
       if (this.block === "article" && !this.edit._id) {
         this.clearEditPostData()

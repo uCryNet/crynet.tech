@@ -35,28 +35,15 @@ class PostController {
     }
   }
 
-  async getAll(req, res) {
-    try {
-      const posts = await PostService.getAll()
-      return res.json(posts)
-    } catch (e) {
-      res.status(400).json(e)
-    }
-  }
-
-  async search(req, res) {
+  async get(req, res) {
     try {
       const {search, category} = req.body
 
-      if (!!search || !!category) {
-        const searchValid = stringValidate(search)
-        const categoryValid = stringValidate(category)
+      const searchValid = stringValidate(search)
+      const categoryValid = stringValidate(category)
 
-        const posts = await PostService.search(searchValid, categoryValid)
-        return res.json(posts)
-      } else {
-        return res.status(400).json({message: "Search filed is empty"})
-      }
+      const posts = await PostService.get(searchValid, categoryValid)
+      return res.json(posts)
     } catch (e) {
       res.status(400).json(e)
     }
