@@ -3,7 +3,11 @@ import parseResponseError from "@/utils/parseResponseError";
 import { IGetPosts } from "@/interfaces/interfaces";
 
 const state = {
-  posts: []
+  posts: [],
+  filters: {
+    search: "",
+    category: ""
+  }
 }
 
 const getters = {
@@ -28,6 +32,10 @@ const actions = {
 const mutations = {
   setPosts(state: any, posts: any) {
     state.posts = posts;
+  },
+
+  setFilters(state: any, filters: any) {
+    state.posts = filters;
   }
 }
 

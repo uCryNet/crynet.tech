@@ -3,7 +3,6 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 export const ROUTE_LINK = {
   root: '/',
   about: '/about',
-  blog: '/blog',
   blogArticle: '/blog/:id',
   login: '/login',
   adminPanel: '/admin-panel',

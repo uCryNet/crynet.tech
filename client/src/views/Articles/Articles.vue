@@ -38,6 +38,7 @@ import Article from "./components/Article/Article";
 
 // Utils
 import debounce from "../../utils/debounce";
+// import { ROUTE_LINK } from "../../router";
 
 export default {
   name: 'Articles',
@@ -85,6 +86,18 @@ export default {
       return this.$store.getters.getAllPost
     }
   },
+
+  // created() {
+  //   this.ROUTE_LINK = ROUTE_LINK
+  // },
+
+  // mounted() {
+  //   if (this.$route.fullPath === this.ROUTE_LINK.root) return
+  //
+  //   console.log(
+  //     this.$route.params.category
+  //   )
+  // }
 }
 </script>
 
