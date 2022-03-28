@@ -13,7 +13,7 @@ const getters = {
 }
 
 const actions = {
-  async getAllPosts({ commit }: { commit: any }, data: IGetPosts | {}) {
+  async getAllPosts({ commit }: { commit: any }, data: IGetPosts | {} = {}) {
     API.getPosts(data)
       .then(res => {
         commit("setPosts", res.data)

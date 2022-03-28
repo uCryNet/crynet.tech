@@ -100,7 +100,7 @@ export default {
     },
 
     getPosts() {
-      this.$store.dispatch("getAllPosts", {})
+      this.$store.dispatch("getAllPosts")
     },
 
     clearEditPostData() {

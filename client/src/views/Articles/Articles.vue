@@ -61,12 +61,12 @@ export default {
 
       search
         ? debounce(() => this.get({search}), 500)
-        : this.get({})
+        : this.get()
     },
 
     clear() {
       this.filters.searchText = ""
-      this.get({})
+      this.get()
     },
 
     get(data) {

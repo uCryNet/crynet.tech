@@ -3,7 +3,7 @@ import { RouteParamValue } from "vue-router";
 import { IGetPosts } from "@/interfaces/interfaces";
 
 
-const getPosts = (data: IGetPosts | {}) => {
+const getPosts = (data: IGetPosts | {} = {}) => {
   return axios.post(`post/get-all`, data);
 }
 
