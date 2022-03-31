@@ -1,6 +1,6 @@
 <template>
   <div class="menu">
-    <div class="menu__category">
+    <div class="menu__category" @click="clear">
       <router-link class="router-link" :to="ROUTE_LINK.root">Home</router-link>
     </div>
 
@@ -33,7 +33,11 @@ export default {
 
   methods: {
     get(category) {
-      this.$store.dispatch("getAllPosts", { category })
+      this.$store.dispatch("setFilters", { category });
+    },
+
+    clear() {
+      this.$store.dispatch("setFilters", { category: "", search: "" });
     }
   },
 

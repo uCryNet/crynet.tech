@@ -32,13 +32,9 @@ const actions = {
       })
   },
 
-  setSearchFilters({ commit }: { commit: any }, data: string) {
-    commit("setSearchFilters", data)
+  setFilters({ commit }: { commit: any }, data: {}) {
+    commit("setFilters", data)
   },
-
-  setCategoryFilters({ commit }: { commit: any }, data: string) {
-    commit("setCategoryFilters", data)
-  }
 }
 
 const mutations = {
@@ -46,12 +42,16 @@ const mutations = {
     state.posts = posts;
   },
 
-  setSearchFilters(search: string) {
-    state.filters.search = search;
-  },
+  setFilters(state: any, data: any) {
+    const { search, category } = data
 
-  setCategoryFilters(search: string) {
-    state.filters.search = search;
+    // state.filters = {
+    //   ...state.filters.prev,
+    //   search: search ? search : state.filters.prev.search
+    // }
+
+    if (search !== undefined) state.filters.search = search
+    if (category !== undefined) state.filters.category = category
   }
 }
 
