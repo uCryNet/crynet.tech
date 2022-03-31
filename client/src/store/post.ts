@@ -13,6 +13,10 @@ const state = {
 const getters = {
   getAllPost(state: any) {
     return state.posts
+  },
+
+  getFilter(state: any) {
+    return state.filters
   }
 }
 
@@ -26,6 +30,14 @@ const actions = {
         console.error(parseResponseError(error))
         commit("setPosts", [])
       })
+  },
+
+  setSearchFilters({ commit }: { commit: any }, data: string) {
+    commit("setSearchFilters", data)
+  },
+
+  setCategoryFilters({ commit }: { commit: any }, data: string) {
+    commit("setCategoryFilters", data)
   }
 }
 
@@ -34,8 +46,12 @@ const mutations = {
     state.posts = posts;
   },
 
-  setFilters(state: any, filters: any) {
-    state.posts = filters;
+  setSearchFilters(search: string) {
+    state.filters.search = search;
+  },
+
+  setCategoryFilters(search: string) {
+    state.filters.search = search;
   }
 }
 

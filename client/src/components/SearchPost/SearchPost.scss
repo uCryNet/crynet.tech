@@ -1,10 +1,10 @@
-.articles {
-  &__search {
+.search-post {
+  &__wrap {
     display: flex;
     justify-content: center;
     margin-bottom: 25px;
 
-    .btn {
+    .search-post__search-clear {
       margin-left: 20px;
     }
   }

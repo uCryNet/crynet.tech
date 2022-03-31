@@ -46,7 +46,7 @@
     top: calc(100% + 10px);
     left: -10px;
     text-align: left;
-    padding: 20px;
+    padding: 10px 20px;
     background-color: #282828;
     min-width: 150px;
     opacity: 0;
@@ -60,10 +60,7 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s ease;
-
-    &:not(:last-child) {
-      margin-bottom: 15px;
-    }
+    padding: 8px 0;
 
     &:hover {
       color: #ddc051;

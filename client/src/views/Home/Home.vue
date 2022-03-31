@@ -1,11 +1,26 @@
 <template>
-  <Articles/>
+  <div>
+    <div class="mb--20">
+      <h2 class="title mb--20">СТАТЬИ <span>И ЗАМЕТКИ</span></h2>
+      <div class="text text--center">Делюсь опытом и записываю всякое</div>
+    </div>
+
+    <SearchPost />
+
+    <Posts />
+  </div>
 </template>
 
 <script lang="js">
-import Articles from "../Articles/Articles";
+import SearchPost from "../../components/SearchPost/SearchPost";
+import Posts from "../../components/Posts/Posts";
+
 export default {
   name: "Home",
-  components: { Articles }
+
+  components: {
+    Posts,
+    SearchPost
+  }
 }
 </script>

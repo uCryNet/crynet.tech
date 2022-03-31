@@ -2,7 +2,7 @@
   <div class="article">
     <h2>{{ list.title }}</h2>
 
-    <div v-html="list.text" />
+    <div v-html="list.text"/>
 
     <div>{{ list.author }}</div>
   </div>
@@ -24,7 +24,7 @@ export default {
   },
 
   mounted() {
-    const {id} = this.$route.params
+    const { id } = this.$route.params
 
     API.getOnePost(id)
       .then(res => {
@@ -33,5 +33,4 @@ export default {
       .catch(error => console.error(parseResponseError(error)))
   }
 }
-
 </script>

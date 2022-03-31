@@ -8,9 +8,13 @@
       <div class="router-link">{{ categoryUnit.title }}</div>
 
       <div class="menu__subcategory-lists">
-        <div v-for="subCategoriesUnit in categoryUnit.subCategories" :key="subCategoriesUnit.name"
-             class="menu__subcategory-unit">
-          <div @click="get(subCategoriesUnit.name)">{{ subCategoriesUnit.name }}</div>
+        <div
+          v-for="subCategoriesUnit in categoryUnit.subCategories"
+          :key="subCategoriesUnit.name"
+          class="menu__subcategory-unit"
+          @click="get(subCategoriesUnit.name)"
+        >
+          <router-link :to="`/blog/${subCategoriesUnit.name}`">{{ subCategoriesUnit.name }}</router-link>
         </div>
       </div>
     </div>
@@ -27,17 +31,9 @@ import { ROUTE_LINK } from "@/router";
 export default {
   name: 'Menu',
 
-  data() {
-    return {
-      selectedCategory: ""
-    }
-  },
-
   methods: {
     get(category) {
-      this.selectedCategory = category
-      console.log(category)
-      this.$store.dispatch("getAllPosts", {category})
+      this.$store.dispatch("getAllPosts", { category })
     }
   },
 
