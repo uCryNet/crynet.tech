@@ -41,7 +41,7 @@ export default {
         : `/media/img/post/not-found-image.jpg`
     },
     getDescription() {
-      return this.text.substring(0, 100)
+      return this.text.substring(0, 200) + "..."
     },
     getDate() {
       return this.date.split(".")

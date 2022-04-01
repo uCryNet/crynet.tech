@@ -29,7 +29,7 @@ class FileService {
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      // file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
+      file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
 
       return `http://${ HOST }:${ PORT }/${ API_LINK }/${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`
     } catch (e) {
