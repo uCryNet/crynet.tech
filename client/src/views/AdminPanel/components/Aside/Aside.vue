@@ -14,11 +14,11 @@
 
 <script lang="js">
 // Var
-import {ROUTE_LINK} from "@/router/index";
+import { ROUTE_LINK } from "@/router/index";
 
 const MENUS = [
-  {text: "Добавить статью", value: "article"},
-  {text: "Все статьи", value: "articles"},
+  { text: "Добавить статью", value: "article" },
+  { text: "Все статьи", value: "articles" },
 ]
 
 export default {

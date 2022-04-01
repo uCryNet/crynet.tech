@@ -18,19 +18,7 @@
       <Editor
         v-model="form.text"
         :api-key="this.apiKey"
-        :init="{
-         height: 500,
-         menubar: true,
-         plugins: [
-           'advlist autolink lists link image charmap print preview anchor',
-           'searchreplace visualblocks code fullscreen',
-           'insertdatetime media table paste code help wordcount'
-         ],
-         toolbar:
-           'undo redo | formatselect | bold italic backcolor | \
-           alignleft aligncenter alignright alignjustify | \
-           bullist numlist outdent indent | removeformat | help'
-       }"
+        :init="conf"
       />
     </div>
 
@@ -57,9 +45,11 @@
 import Editor from '@tinymce/tinymce-vue'
 
 import API from "@/api/api"
-import {TINYMCE_KEY} from "@/config/constant"
+import { TINYMCE_KEY } from "@/config/constant"
 
 import parseResponseError from "@/utils/parseResponseError"
+
+
 
 export default {
   name: 'AdminArticle',
@@ -91,6 +81,30 @@ export default {
         image: null,
         text: '',
       },
+
+      conf: {
+        height: 500,
+        images_upload_handler: (blobInfo) => {
+          const random = Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
+
+          const formData = new FormData()
+          formData.append(random, blobInfo.blob(), blobInfo.filename())
+
+          formData.forEach(el => {
+            console.log(el)
+          })
+        },
+        menubar: true,
+        plugins: [
+          'advlist autolink lists link image charmap print preview anchor',
+          'searchreplace visualblocks code fullscreen',
+          'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar:
+          'undo redo | formatselect | bold italic backcolor | \
+          alignleft aligncenter alignright alignjustify | \
+          bullist numlist outdent indent | removeformat | help'
+      }
     }
   },
 
@@ -99,10 +113,10 @@ export default {
       if (!this.form.text) return alert("Заполните все поля!")
 
       const isUpdate = this.edit?._id
-      const data = {...this.form}
+      const data = { ...this.form }
 
       isUpdate
-        ? await API.updatePost({...data, id: this.edit._id})
+        ? await API.updatePost({ ...data, id: this.edit._id })
           .then(() => alert(`Статья обновлена!`))
           .catch(error => console.error(parseResponseError(error)))
         : await API.createPost(data)
@@ -130,6 +144,11 @@ export default {
     cancel() {
       this.clearEditPostData()
       this.clearPostData()
+    },
+
+    loadImage(blobInfo, success) {
+      console.log(blobInfo, success)
+      // console.log(success)
     }
   },
 

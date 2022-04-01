@@ -23,6 +23,7 @@ router.get("/user/check-access", UserController.checkAccess)
 
 // file
 router.get("/static/*", FileController.get)
+router.post("/file/upload", FileController.upload)
 
 // category
 router.get("/category/get-all", CategoryController.getAll)
