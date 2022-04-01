@@ -23,7 +23,7 @@
 
 <script lang="js">
 // Vars
-import { SERVER_API } from "@/config/api";
+// import { SERVER_API } from "@/config/api";
 
 
 export default {
@@ -41,8 +41,8 @@ export default {
   computed: {
     getImageLink() {
       return this.image
-        ? `${ SERVER_API }/${ this.image }`
-        : `${ SERVER_API }/static/image/other/not-found-image.jpg`
+        ? this.image
+        : `/media/img/post/not-found-image.jpg`
     },
     getDescription() {
       return this.text.substring(0, 100)

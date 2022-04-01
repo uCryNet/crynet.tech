@@ -43,10 +43,15 @@ class FileController {
   async upload(req, res) {
     try {
       const { file } = req.files
+      // TODO: не забыть добавить проверку на админа
+
+      // console.log(req.files)
 
       const imageName = file && await FileService.saveImage(file)
 
-      console.log(imageName)
+      // console.log(imageName)
+
+      res.json({ link: imageName })
     } catch (e) {
       return res.status(400).json({ message: "File upload error", e })
     }

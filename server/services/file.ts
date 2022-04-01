@@ -8,6 +8,7 @@ import { checkForPicture } from "../utils";
 
 // Vars
 import { IMAGE_FOLDER_NAME } from "../config/config";
+import { API_LINK, HOST, PORT } from "../config/setup";
 
 
 const genName = (name: string) => `${ uuid.v4() }${ path.extname(name) }`
@@ -28,8 +29,9 @@ class FileService {
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      // file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
-      return `${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`
+      file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
+
+      return `http://${ HOST }:${ PORT }/${ API_LINK }/${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`
     } catch (e) {
       console.log(e)
     }

@@ -3,14 +3,15 @@ import express from 'express'
 import mongoose from 'mongoose'
 import fileUpoad from "express-fileupload"
 import helmet from "helmet";
+
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser");
 
 // Vars
 const router = require("./routes/index.routes.ts")
-import {PORT, DB_URL, ENV} from "./config/setup"
-import {STATIC_FOLDER_NAME} from "./config/config"
+import { PORT, DB_URL, ENV, API_LINK } from "./config/setup"
+import { STATIC_FOLDER_NAME } from "./config/config"
 
 const app = express()
 
@@ -22,15 +23,15 @@ app.use(bodyParser.json({ extended: true }));
 app.use(
   cors({
     origin: ENV,
-    credentials:true, //access-control-allow-credentials:true
+    credentials: true, //access-control-allow-credentials:true
     optionSuccessStatus: 200,
   }),
 );
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.static(STATIC_FOLDER_NAME))
 app.use(fileUpoad({}))
-app.use('/api', router) // http://localhost:5000/api/
+app.use(`/${ API_LINK }`, router) // http://localhost:5000/api/
 
 
 async function startApp() {

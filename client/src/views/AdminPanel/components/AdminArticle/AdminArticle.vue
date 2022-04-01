@@ -84,15 +84,20 @@ export default {
 
       conf: {
         height: 500,
-        images_upload_handler: (blobInfo) => {
-          const random = Math.floor(Math.random() * (1000000 - 100000 + 1)) + 100000
-
+        images_upload_handler: (blobInfo, success) => {
           const formData = new FormData()
-          formData.append(random, blobInfo.blob(), blobInfo.filename())
+          formData.append("file", blobInfo.blob(), blobInfo.filename())
 
-          formData.forEach(el => {
-            console.log(el)
-          })
+          API.uploadImage(formData)
+            .then(res => {
+              success(res.data.link);
+            })
+            .catch(error => {
+              console.error(parseResponseError(error))
+            })
+          // success(`/dasdsad/sdsd.png`);
+
+
         },
         menubar: true,
         plugins: [

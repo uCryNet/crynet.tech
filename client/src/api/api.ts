@@ -54,6 +54,10 @@ const deletePost = (id: string) => {
   return axios.delete(`/post/delete/${ id }`);
 }
 
+const uploadImage = (data: any) => {
+  return axios.post(`file/upload`, data);
+}
+
 export default {
   getPosts,
   getOnePost,
@@ -64,4 +68,5 @@ export default {
   checkAccess,
   getCategory,
   deletePost,
+  uploadImage
 }
