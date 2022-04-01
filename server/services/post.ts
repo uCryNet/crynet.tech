@@ -10,10 +10,10 @@ class PostService {
 
     if (search && category) {
       posts = await Post.find({
+        category: new RegExp(category, 'ig'),
         $or:[
           {title: new RegExp(search, 'ig')},
           {text: new RegExp(search, 'ig')},
-          {category: new RegExp(category, 'ig')}
         ]
       })
     } else if (search) {
