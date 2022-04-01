@@ -22,10 +22,6 @@
 </style>
 
 <script lang="js">
-// Vars
-// import { SERVER_API } from "@/config/api";
-
-
 export default {
   name: 'Post',
 

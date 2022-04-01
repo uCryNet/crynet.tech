@@ -4,6 +4,7 @@ import mongoose from 'mongoose'
 import fileUpoad from "express-fileupload"
 import helmet from "helmet";
 
+// TODO: заменить require на import
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const bodyParser = require("body-parser");

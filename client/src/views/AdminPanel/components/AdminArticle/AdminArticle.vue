@@ -50,7 +50,6 @@ import { TINYMCE_KEY } from "@/config/constant"
 import parseResponseError from "@/utils/parseResponseError"
 
 
-
 export default {
   name: 'AdminArticle',
 
@@ -95,9 +94,6 @@ export default {
             .catch(error => {
               console.error(parseResponseError(error))
             })
-          // success(`/dasdsad/sdsd.png`);
-
-
         },
         menubar: true,
         plugins: [

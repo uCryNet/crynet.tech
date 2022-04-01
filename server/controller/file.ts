@@ -1,12 +1,13 @@
 // Vendors
 import * as fs from "fs";
 import path from "path";
+import jwt from "jsonwebtoken"
 
 // Utils
 import { checkForPicture } from "../utils";
 
 // Vars
-import { STATIC_FOLDER_NAME } from "../config/config";
+import { SECRET_KEY, STATIC_FOLDER_NAME } from "../config/config";
 import FileService from "../services/file";
 
 
@@ -43,13 +44,13 @@ class FileController {
   async upload(req, res) {
     try {
       const { file } = req.files
-      // TODO: не забыть добавить проверку на админа
 
-      // console.log(req.files)
+      const token = req.cookies.token
+      const { role } = jwt.verify(token, SECRET_KEY)
+
+      if (role !== "admin") return res.status(400).json({ message: "No access" })
 
       const imageName = file && await FileService.saveImage(file)
-
-      // console.log(imageName)
 
       res.json({ link: imageName })
     } catch (e) {
