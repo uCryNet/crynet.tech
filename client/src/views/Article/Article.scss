@@ -1,0 +1,60 @@
+.article {
+  max-width: 992px;
+  margin: auto;
+
+  &__title {
+    margin-bottom: 80px;
+  }
+
+  &__text ::v-deep {
+    p {
+      font-family: "Open Sans", sans-serif;
+      margin-top: 25px;
+      margin-bottom: 25px;
+      line-height: 1.6;
+      font-weight: 400;
+    }
+
+    blockquote {
+      font-size: 17px;
+      //font-family: 'Roboto', sans-serif;
+      font-style: italic;
+      color: #696248;
+      border-left: 5px solid #fcdb5a;
+      margin-top: 40px;
+      margin-bottom: 40px;
+      padding-left: 20px;
+    }
+
+    a {
+      color: #baa245;
+
+      &:focus,
+      &:hover {
+        color: #fcdb5a;
+      }
+    }
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  &__author,
+  &__date {
+    font-size: 12px;
+    color: #c1c1c1;
+  }
+
+  &__author {
+    span {
+      //font-size: 14px;
+      font-family: Raleway, sans-serif;
+      font-weight: 700;
+      color: #333;
+    }
+  }
+}

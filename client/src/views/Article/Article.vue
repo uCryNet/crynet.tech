@@ -1,10 +1,13 @@
 <template>
   <div class="article">
-    <h2>{{ list.title }}</h2>
+    <h1 class="article__title title">{{ list.title }}</h1>
 
-    <div v-html="list.text"/>
+    <div class="article__text" v-html="list.text"/>
 
-    <div>{{ list.author }}</div>
+    <div class="article__info">
+      <div class="article__author">Автор: <span>{{ list.author }}</span></div>
+      <div class="article__date">{{ list.date }}</div>
+    </div>
   </div>
 </template>
 
@@ -34,3 +37,7 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+@import "Article";
+</style>
