@@ -25,6 +25,10 @@ a {
   }
 }
 
+p {
+  line-height: (14px/10px);
+}
+
 #app {
   position: relative;
   display: flex;
