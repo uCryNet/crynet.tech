@@ -96,6 +96,7 @@ export default {
               console.error(parseResponseError(error))
             })
         },
+        codesample_global_prismjs: true,
         menubar: true,
         plugins: [
           'advlist autolink lists link image charmap print preview anchor',
@@ -147,11 +148,6 @@ export default {
       this.clearEditPostData()
       this.clearPostData()
     },
-
-    loadImage(blobInfo, success) {
-      console.log(blobInfo, success)
-      // console.log(success)
-    }
   },
 
   mounted() {

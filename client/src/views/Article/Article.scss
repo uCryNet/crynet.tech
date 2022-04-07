@@ -34,6 +34,10 @@
         color: #fcdb5a;
       }
     }
+
+    pre {
+      max-height: 400px;
+    }
   }
 
   &__info {
@@ -43,18 +47,8 @@
     margin-top: 30px;
   }
 
-  &__author,
   &__date {
     font-size: 12px;
     color: #c1c1c1;
-  }
-
-  &__author {
-    span {
-      //font-size: 14px;
-      font-family: Raleway, sans-serif;
-      font-weight: 700;
-      color: #333;
-    }
   }
 }
