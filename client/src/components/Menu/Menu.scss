@@ -1,9 +1,10 @@
 .menu {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  padding: 30.5px;
+  padding: 25px;
   text-align: center;
   color: #fff;
 
@@ -22,7 +23,7 @@
     position: relative;
     display: flex;
     justify-content: flex-start;
-    padding: 0 8px;
+    padding: 3px 8px;
 
     &:hover {
       .menu__subcategory-lists {
@@ -36,7 +37,7 @@
         content: "|";
         position: absolute;
         right: -3px;
-        top: -1px;
+        top: 1px;
       }
     }
   }

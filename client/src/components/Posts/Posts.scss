@@ -2,8 +2,17 @@
   &__lists {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-gap: 16px;
+    grid-column-gap: 16px;
+    grid-row-gap: 5px;
     padding-top: 16px;
     padding-bottom: 16px;
+
+    @media (max-width: 992px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 576px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
 }

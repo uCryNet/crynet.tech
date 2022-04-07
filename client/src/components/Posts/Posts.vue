@@ -1,7 +1,6 @@
 <template>
   <div class="posts">
     <div class="posts__lists" v-if="posts.length">
-      <div class="art" v-for="article in posts" :key="article._id">
         <Post
           :title="article.title"
           :text="article.text"
@@ -9,8 +8,9 @@
           :image="article.image"
           :date="article.date"
           :category="article.category"
+          v-for="article in posts"
+          :key="article._id"
         />
-      </div>
     </div>
 
     <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">Упс! Записей не обнаруженно</div>
