@@ -21,6 +21,10 @@ export default {
   components: {
     Posts,
     SearchPost
+  },
+
+  mounted() {
+    document.title = "CryNet"
   }
 }
 </script>

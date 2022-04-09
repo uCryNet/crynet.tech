@@ -58,6 +58,10 @@
 <script lang="js">
 export default {
   name: 'About',
+
+  mounted() {
+    document.title = "About of CryNet"
+  }
 }
 </script>
 

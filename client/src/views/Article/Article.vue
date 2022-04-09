@@ -38,6 +38,18 @@ export default {
       .catch(error => console.error(parseResponseError(error)))
 
     await Prism.highlightAll()
+
+
+
+    const description = this.post.text
+      .substring(0, 200)
+      .replace(/<\/?[a-zA-Z]+>/gi,'');
+
+    const location = window.location.href
+
+    document.title = this.post.title
+    document.querySelector('meta[property="og:description"]').setAttribute("content", description)
+    document.querySelector('meta[property="og:url"]').setAttribute("content", location)
   },
 }
 </script>
