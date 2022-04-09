@@ -12,7 +12,7 @@
       {{ this.error.message }}
     </div>
 
-    <button type="submit" class="btn login__btn">LOGIN</button>
+    <button type="submit" class="btn btn--big login__btn">LOGIN</button>
   </form>
 </template>
 
