@@ -53,7 +53,6 @@ import parseResponseError from "@/utils/parseResponseError"
 export default {
   name: 'AdminArticle',
 
-
   components: {
     Editor
   },

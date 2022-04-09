@@ -130,7 +130,7 @@ html {
  */
 
 a:focus {
-    outline: thin dotted;
+    outline: unset;
 }
 
 /**
