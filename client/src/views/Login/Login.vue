@@ -33,7 +33,7 @@ import { onMounted, ref, watch, } from "vue";
 import { useRouter } from "vue-router";
 
 // Utils
-import parseResponseError from "../../utils/parseResponseError";
+import parseResponseError from "@/utils/parseResponseError";
 
 // Vars
 import { ROUTE_LINK } from "@/router";
@@ -61,7 +61,7 @@ export default {
         .then(res => {
           const { isAdmin } = res.data
 
-          isAdmin && this.$router.push(ROUTE_LINK.adminPanel)
+          isAdmin && router.push(ROUTE_LINK.adminPanel)
         })
     })
 

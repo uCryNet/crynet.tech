@@ -14,6 +14,7 @@
           class="menu__subcategory-unit"
           @click="get(subCategoriesUnit.name)"
         >
+          <!-- TODO: fix this -->
           <router-link :to="`/blog/${subCategoriesUnit.name}`">{{ subCategoriesUnit.name }}</router-link>
         </div>
       </div>
@@ -26,29 +27,31 @@
 </template>
 
 <script lang="js">
+// Vendors
+import { computed } from "vue";
+import { useStore } from "vuex";
+
+// Variables
 import { ROUTE_LINK } from "@/router";
+
 
 export default {
   name: 'Menu',
 
-  methods: {
-    get(category) {
-      this.$store.dispatch("setFilters", { category });
-    },
+  setup() {
+    const store = useStore()
 
-    clear() {
-      this.$store.dispatch("setFilters", { category: "", search: "" });
+    const category = computed(() => store.getters.getAllCategory)
+
+    const get = (category) => {
+      store.dispatch("setFilters", { category })
     }
-  },
 
-  computed: {
-    category() {
-      return this.$store.getters.getAllCategory;
+    return {
+      ROUTE_LINK,
+      get,
+      category
     }
-  },
-
-  created() {
-    this.ROUTE_LINK = ROUTE_LINK
   }
 }
 </script>

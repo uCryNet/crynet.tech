@@ -1,9 +1,10 @@
 <template>
   <div class="articles">
     <div class="title text--center mb--20">
-      <template v-if="!this.$route.params.category">БЛОГ</template>
+      {{  }}
+      <template v-if="!route.params.category">БЛОГ</template>
 
-      <template v-else>{{ this.$route.params.category }}</template>
+      <template v-else>{{ route.params.category }}</template>
     </div>
 
     <SearchPost/>
@@ -15,6 +16,7 @@
 <script lang="js">
 // Vendors
 import { onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 // Components
 import Posts from "@/components/Posts/Posts";
@@ -30,9 +32,15 @@ export default {
   },
 
   setup() {
+    const route = useRoute()
+
     onMounted(() => {
       document.title = "CryNet blog"
     })
+
+    return {
+      route
+    }
   }
 }
 </script>

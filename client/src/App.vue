@@ -25,6 +25,7 @@ import debounce from "@/utils/debounce";
 
 // Variables
 import { ROUTE_LINK } from "@/router";
+import { useRoute, } from "vue-router";
 
 
 export default {
@@ -38,12 +39,14 @@ export default {
   setup() {
     const store = useStore()
 
+    const route = useRoute()
+
     onMounted(() => {
       store.dispatch("getCategory")
       store.dispatch("getAllPosts")
     })
 
-    const routes = computed(() => store.getters.fullPath)
+    const routes = computed(() => route.fullPath)
     const filters = computed(() => store.getters.getFilter)
 
     watch(
@@ -51,15 +54,15 @@ export default {
       ({ value }) => {
         if (value !== ROUTE_LINK.root) return
 
-        if (!this.filters.search || !this.filters.category)
-          store.dispatch("setFilters", {search: "", category: ""})
+        if (!filters.search || !filters.category)
+          store.dispatch("setFilters", { search: "", category: "" })
       },
       { deep: true }
     )
 
     watch(
       () => filters,
-      ({ value }) => debounce(() => store.dispatch("getAllPosts", value),600),
+      ({ value }) => debounce(() => store.dispatch("getAllPosts", value), 600),
       { deep: true }
     )
   }

@@ -1,4 +1,5 @@
 <template>
+  <!-- TODO: fix this -->
   <router-link class="post" :to="'/blog/' + category + '/' + id">
     <img class="post__image" :src="getImageLink"/>
 
@@ -22,6 +23,10 @@
 </style>
 
 <script lang="js">
+// Vendors
+import { toRefs } from "vue";
+
+
 export default {
   name: 'Post',
 
@@ -34,18 +39,18 @@ export default {
     category: String
   },
 
-  computed: {
-    getImageLink() {
-      return this.image
-        ? this.image
-        : `/media/img/post/not-found-image.jpg`
-    },
-    getDescription() {
-      return this.text.substring(0, 200) + "..."
-    },
-    getDate() {
-      return this.date.split(".")
-    },
-  },
+  setup(props) {
+    const { text, image, date } = toRefs(props)
+
+    const getDate = date.value.split(".")
+    const getDescription = text.value.substring(0, 200) + "..."
+    const getImageLink = image.value ? image.value : `/media/img/post/not-found-image.jpg`
+
+    return {
+      getDate,
+      getDescription,
+      getImageLink
+    }
+  }
 }
 </script>

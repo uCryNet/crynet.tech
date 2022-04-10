@@ -18,6 +18,10 @@
 </template>
 
 <script lang="js">
+// Vendors
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 // Components
 import Post from "./components/Post/Post";
 
@@ -29,9 +33,13 @@ export default {
     Post
   },
 
-  computed: {
-    posts() {
-      return this.$store.getters.getAllPost
+  setup() {
+    const store = useStore()
+
+    const posts = computed(() => store.getters.getAllPost)
+
+    return {
+      posts
     }
   }
 }
