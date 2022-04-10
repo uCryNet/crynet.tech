@@ -12,13 +12,19 @@
 
 
 <script lang="js">
+// Vendors
+import { computed, onMounted, watch } from "vue";
+import { useStore } from "vuex";
+
 // Components
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import { ROUTE_LINK } from "@/router";
 
 // Utils
 import debounce from "@/utils/debounce";
+
+// Variables
+import { ROUTE_LINK } from "@/router";
 
 
 export default {
@@ -29,37 +35,33 @@ export default {
     Footer
   },
 
-  created() {
-    this.$store.dispatch("getCategory");
-    this.$store.dispatch("getAllPosts");
-  },
+  setup() {
+    const store = useStore()
 
-  watch: {
-    filters: {
-      handler(value) {
-        debounce(() => this.$store.dispatch("getAllPosts", value),600)
-      },
-      deep: true,
-    },
+    onMounted(() => {
+      store.dispatch("getCategory")
+      store.dispatch("getAllPosts")
+    })
 
-    routes: {
-      handler(value) {
+    const routes = computed(() => store.getters.fullPath)
+    const filters = computed(() => store.getters.getFilter)
+
+    watch(
+      () => routes,
+      ({ value }) => {
         if (value !== ROUTE_LINK.root) return
 
         if (!this.filters.search || !this.filters.category)
-          this.$store.dispatch("setFilters", {search: "", category: ""})
-      }
-    }
-  },
+          store.dispatch("setFilters", {search: "", category: ""})
+      },
+      { deep: true }
+    )
 
-  computed: {
-    filters() {
-      return this.$store.getters.getFilter
-    },
-
-    routes() {
-      return this.$route.fullPath
-    }
-  },
+    watch(
+      () => filters,
+      ({ value }) => debounce(() => store.dispatch("getAllPosts", value),600),
+      { deep: true }
+    )
+  }
 }
 </script>
