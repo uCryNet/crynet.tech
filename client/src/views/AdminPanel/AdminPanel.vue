@@ -25,10 +25,6 @@
 
   <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">
     <div>Отказанно в доступе</div>
-
-<!--    <div class="text&#45;&#45;100 text&#45;&#45;14 text&#45;&#45;center text&#45;&#45;open-sans mb&#45;&#45;10 mt&#45;&#45;10">-->
-<!--      Вы будете переадрессованы на главную страницу-->
-<!--    </div>-->
   </div>
 </template>
 
@@ -43,7 +39,6 @@ import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
-// import {ROUTE_LINK} from "../../router"
 
 
 export default {
@@ -58,7 +53,6 @@ export default {
   data() {
     return {
       isAdmin: false,
-      // category: [],
       block: "article",
       edit: {
         author: "",

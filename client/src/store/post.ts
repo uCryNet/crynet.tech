@@ -22,7 +22,6 @@ const getters = {
 
 const actions = {
   async getAllPosts({ commit }: { commit: any }, data: IGetPosts | {} = {}) {
-    console.log(data)
 
     API.getPosts(data)
       .then(res => {

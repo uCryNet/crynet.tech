@@ -5,8 +5,6 @@
 </template>
 
 <script>
-// Var
-// import {ROUTE_LINK} from "@/router/index";
 
 export default {
   name: "NotFound"

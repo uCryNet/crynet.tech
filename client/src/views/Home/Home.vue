@@ -5,15 +5,20 @@
       <div class="text text--center">Делюсь опытом и записываю всякое</div>
     </div>
 
-    <SearchPost />
+    <SearchPost/>
 
-    <Posts />
+    <Posts/>
   </div>
 </template>
 
 <script lang="js">
+// Vendors
+import { onMounted } from "vue";
+
+// Components
 import SearchPost from "../../components/SearchPost/SearchPost";
 import Posts from "../../components/Posts/Posts";
+
 
 export default {
   name: "Home",
@@ -23,8 +28,10 @@ export default {
     SearchPost
   },
 
-  mounted() {
-    document.title = "CryNet"
+  setup() {
+    onMounted(() => {
+      document.title = "CryNet"
+    })
   }
 }
 </script>

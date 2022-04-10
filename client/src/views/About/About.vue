@@ -56,11 +56,17 @@
 </template>
 
 <script lang="js">
+// Vendors
+import { onMounted } from "vue"
+
+
 export default {
   name: 'About',
 
-  mounted() {
-    document.title = "About of CryNet"
+  setup() {
+    onMounted(() => {
+      document.title = "About of CryNet"
+    })
   }
 }
 </script>

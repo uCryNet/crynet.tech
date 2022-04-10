@@ -6,13 +6,16 @@
       <template v-else>{{ this.$route.params.category }}</template>
     </div>
 
-    <SearchPost />
+    <SearchPost/>
 
-    <Posts />
+    <Posts/>
   </div>
 </template>
 
 <script lang="js">
+// Vendors
+import { onMounted } from "vue";
+
 // Components
 import Posts from "@/components/Posts/Posts";
 import SearchPost from "@/components/SearchPost/SearchPost";
@@ -26,8 +29,10 @@ export default {
     SearchPost
   },
 
-  mounted() {
-    document.title = "CryNet blog"
+  setup() {
+    onMounted(() => {
+      document.title = "CryNet blog"
+    })
   }
 }
 </script>
