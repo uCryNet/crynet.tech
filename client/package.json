@@ -12,7 +12,7 @@
     "axios": "^0.24.0",
     "core-js": "^3.21.1",
     "prismjs": "^1.27.0",
-    "sass": "^1.49.9",
+    "sass": "^1.50.0",
     "vue": "^3.2.31",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.14",
