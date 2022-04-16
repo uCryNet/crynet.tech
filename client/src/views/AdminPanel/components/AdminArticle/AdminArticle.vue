@@ -1,9 +1,9 @@
 <template>
   <form class="admin-article">
-    <input required v-model.lazy.trim="form.title" placeholder="Title" class="input admin-article__title"/>
+    <input required v-model.lazy.trim="state.title" placeholder="Title" class="input admin-article__title"/>
 
-    <select v-model="form.category" name="category" required class="select admin-article__select">
-      <optgroup :label="categoryUnit.title" v-for="categoryUnit in allcategory" :key="categoryUnit.title">
+    <select v-model="state.category" name="category" required class="select admin-article__select">
+      <optgroup :label="categoryUnit.title" v-for="categoryUnit in allCategory" :key="categoryUnit.title">
         <option
           :value="subCategoriesUnit.name"
           v-for="subCategoriesUnit in categoryUnit.subCategories"
@@ -16,14 +16,14 @@
 
     <div class="admin-article__text">
       <Editor
-        v-model="form.text"
-        :api-key="this.apiKey"
-        :init="conf"
+        v-model="state.text"
+        :api-key="TINYMCE_KEY"
+        :init="CONFIG"
       />
     </div>
 
     <input
-      :required="!this.edit?._id"
+      :required="!state.edit?._id"
       @change="onFileChanged($event)"
       accept="image/*"
       class="admin-article__preview"
@@ -31,11 +31,11 @@
     />
 
     <button class="btn btn--yellow btn--big" @click.prevent="getContent">
-      <template v-if="this.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
+      <template v-if="state.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
       <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
     </button>
 
-    <button class="btn btn--red btn--big mt--20" v-if="this.edit?._id" @click.prevent="cancel">
+    <button class="btn btn--red btn--big mt--20" v-if="state.edit?._id" @click.prevent="cancel">
       ОТМЕНИТЬ РЕДАКТИРОВАНИЕ
     </button>
   </form>
@@ -48,6 +48,8 @@ import API from "@/api/api"
 import { TINYMCE_KEY } from "@/config/constant"
 
 import parseResponseError from "@/utils/parseResponseError"
+import { computed, onMounted, ref, toRefs } from "vue";
+import { useStore } from "vuex";
 
 
 export default {
@@ -69,106 +71,109 @@ export default {
       text: String,
       title: String,
       _id: String,
+      __v: Number
     }
   },
 
-  data() {
-    return {
-      form: {
+  setup(props) {
+    const { getPosts, clearEditPostData, edit } = toRefs(props)
+
+    const store = useStore()
+
+    const state = ref({
+      title: '',
+      category: "css",
+      image: null,
+      text: '',
+    })
+
+    const CONFIG = {
+      height: 500,
+      images_upload_handler: (blobInfo, success) => {
+        const formData = new FormData()
+        formData.append("file", blobInfo.blob(), blobInfo.filename())
+
+        API.uploadImage(formData)
+          .then(res => {
+            success(res.data.link);
+          })
+          .catch(error => {
+            console.error(parseResponseError(error))
+          })
+      },
+      codesample_global_prismjs: true,
+      menubar: true,
+      plugins: [
+        'advlist autolink lists link image charmap print preview anchor',
+        'searchreplace visualblocks code fullscreen',
+        'insertdatetime media table paste code help wordcount codesample'
+      ],
+      toolbar:
+        'undo redo | formatselect | bold italic backcolor | \
+        alignleft aligncenter alignright alignjustify | \
+        bullist numlist outdent indent | removeformat | help | codesample'
+    }
+
+    const clearPostData = () => {
+      state.value = {
         title: '',
         category: "css",
         image: null,
         text: '',
-      },
-
-      conf: {
-        height: 500,
-        images_upload_handler: (blobInfo, success) => {
-          const formData = new FormData()
-          formData.append("file", blobInfo.blob(), blobInfo.filename())
-
-          API.uploadImage(formData)
-            .then(res => {
-              success(res.data.link);
-            })
-            .catch(error => {
-              console.error(parseResponseError(error))
-            })
-        },
-        codesample_global_prismjs: true,
-        menubar: true,
-        plugins: [
-          'advlist autolink lists link image charmap print preview anchor',
-          'searchreplace visualblocks code fullscreen',
-          'insertdatetime media table paste code help wordcount codesample'
-        ],
-        toolbar:
-          'undo redo | formatselect | bold italic backcolor | \
-          alignleft aligncenter alignright alignjustify | \
-          bullist numlist outdent indent | removeformat | help | codesample'
       }
     }
-  },
 
-  methods: {
-    async getContent() {
-      if (!this.form.text) return alert("Заполните все поля!")
+    const getContent = async () => {
+      if (!state.value.text) return alert("Заполните все поля!")
 
-      const isUpdate = this.edit?._id
-      const data = { ...this.form }
+      const isUpdate = edit?._id
+      const data = { ...state.value }
 
       isUpdate
-        ? await API.updatePost({ ...data, id: this.edit._id })
+        ? await API.updatePost({ ...data, id: state.value._id })
           .then(() => alert(`Статья обновлена!`))
           .catch(error => console.error(parseResponseError(error)))
         : await API.createPost(data)
           .then(() => alert(`Статья добавленна!`))
           .catch(error => console.error(parseResponseError(error)))
 
-      this.getPosts()
-      this.clearEditPostData()
-      this.clearPostData()
-    },
-
-    onFileChanged($event) {
-      this.form.image = $event.target.files[0]
-    },
-
-    clearPostData() {
-      this.form = {
-        title: '',
-        category: "css",
-        image: null,
-        text: '',
-      }
-    },
-
-    cancel() {
-      this.clearEditPostData()
-      this.clearPostData()
-    },
-  },
-
-  mounted() {
-    if (this.edit?._id) {
-      this.form = {
-        title: this.edit.title,
-        category: this.edit.category,
-        image: this.edit.image,
-        text: this.edit.text,
-      }
+      getPosts
+      clearEditPostData
+      clearPostData()
     }
-  },
 
-  created() {
-    this.apiKey = TINYMCE_KEY
-  },
-
-  computed: {
-    allcategory() {
-      return this.$store.getters.getAllCategory;
+    const onFileChanged = ($event) => {
+      state.value.image = $event.target.files[0]
     }
-  },
+
+    const cancel = () => {
+      clearEditPostData()
+      clearPostData()
+    }
+
+    onMounted(() => {
+      if (edit?._id) {
+        state.value = {
+          title: edit.title,
+          category: edit.category,
+          image: edit.image,
+          text: edit.text,
+        }
+      }
+    })
+
+    const allCategory = computed(() => store.getters.getAllCategory)
+
+    return {
+      allCategory,
+      cancel,
+      onFileChanged,
+      getContent,
+      CONFIG,
+      TINYMCE_KEY,
+      state
+    }
+  }
 }
 </script>
 

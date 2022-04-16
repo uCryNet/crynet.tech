@@ -3,7 +3,7 @@
     <h6 class="block-title">МЕНЮ</h6>
 
     <ul class="aside__lists">
-      <li v-for="menu in menus" :key="menu.value">
+      <li v-for="menu in MENUS" :key="menu.value">
         <div :class="[block === menu.value && 'aside__active']" @click="switchBlock(menu.value)">
           {{ menu.text }}
         </div>
@@ -13,14 +13,6 @@
 </template>
 
 <script lang="js">
-// Var
-import { ROUTE_LINK } from "@/router/index";
-
-const MENUS = [
-  { text: "Добавить статью", value: "article" },
-  { text: "Все статьи", value: "articles" },
-]
-
 export default {
   name: 'Aside',
 
@@ -29,9 +21,15 @@ export default {
     block: String
   },
 
-  created() {
-    this.ROUTE_LINK = ROUTE_LINK
-    this.menus = MENUS
+  setup() {
+    const MENUS = [
+      { text: "Добавить статью", value: "article" },
+      { text: "Все статьи", value: "articles" },
+    ]
+
+    return {
+      MENUS
+    }
   }
 }
 </script>

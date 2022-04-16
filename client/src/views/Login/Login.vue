@@ -2,7 +2,7 @@
   <form class="login" @submit.prevent="send">
     <label class="login__field">
       <input
-        v-model.lazy.trim="data.login"
+        v-model.lazy.trim="state.login"
         name="login"
         placeholder="Login"
         class="input login__input"
@@ -11,7 +11,7 @@
 
     <label class="login__field">
       <input
-        v-model.lazy.trim="data.password"
+        v-model.lazy.trim="state.password"
         name="password"
         placeholder="Password"
         class="input login__input"
@@ -19,8 +19,8 @@
       />
     </label>
 
-    <div class="login__error" v-if="data.error.isError">
-      {{ data.error.message }}
+    <div class="login__error" v-if="state.error.isError">
+      {{ state.error.message }}
     </div>
 
     <button type="submit" class="btn btn--big login__btn">LOGIN</button>
@@ -46,7 +46,7 @@ export default {
   setup() {
     const router = useRouter()
 
-    const data = ref({
+    const state = ref({
       isAuthorized: false,
       login: '',
       password: '',
@@ -66,7 +66,7 @@ export default {
     })
 
     watch(
-      () => data.value.isAuthorized,
+      () => state.value.isAuthorized,
       (isAuthorized) => {
         if (!isAuthorized) return
 
@@ -86,22 +86,22 @@ export default {
     )
 
     const send = () => {
-      const { login, password } = data.value
+      const { login, password } = state.value
 
       API.login({ login, password })
         .then(() => {
-          data.value.isAuthorized = true
+          state.value.isAuthorized = true
         })
         .catch(error => {
           const message = parseResponseError(error)
 
-          data.value.error.isError = true
-          data.value.error.message = message
+          state.value.error.isError = true
+          state.value.error.message = message
         })
     }
 
     return {
-      data,
+      state,
       send
     }
   }

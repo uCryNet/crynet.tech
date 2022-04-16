@@ -1,7 +1,6 @@
 <template>
   <div class="articles">
     <div class="title text--center mb--20">
-      {{  }}
       <template v-if="!route.params.category">БЛОГ</template>
 
       <template v-else>{{ route.params.category }}</template>
