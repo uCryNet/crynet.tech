@@ -8,6 +8,12 @@
   text-align: center;
   color: #fff;
 
+  @media (max-width: 576px) {
+    flex-direction: column;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
   .router-link {
     text-transform: uppercase;
     font-weight: bold;
@@ -25,6 +31,10 @@
     justify-content: flex-start;
     padding: 3px 8px;
 
+    @media (max-width: 576px) {
+      margin-bottom: 15px;
+    }
+
     &:hover {
       .menu__subcategory-lists {
         opacity: 1;
@@ -38,6 +48,10 @@
         position: absolute;
         right: -3px;
         top: 1px;
+
+        @media (max-width: 576px) {
+          display: none;
+        }
       }
     }
   }

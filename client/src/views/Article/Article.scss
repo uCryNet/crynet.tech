@@ -5,6 +5,11 @@
   &__title {
     margin-bottom: 50px;
     text-align: center;
+
+    @media (max-width: 576px) {
+      margin-bottom: 20px;
+      font-size: 25px;
+    }
   }
 
   &__text ::v-deep {

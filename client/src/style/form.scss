@@ -5,6 +5,7 @@
   border-bottom: 1px solid #dadada;
   color: #666;
   transition: .3s ease;
+  box-sizing: border-box;
 
   &::placeholder {
     color: #ccc;

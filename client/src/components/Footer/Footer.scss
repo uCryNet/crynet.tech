@@ -8,6 +8,10 @@
   color: #fff;
   white-space: break-spaces;
 
+  @media (max-width: 576px) {
+    margin-top: 20px;
+  }
+
   .router-link {
     &:hover {
       text-decoration: underline;

@@ -1,15 +1,32 @@
 .about {
   margin-top: 100px;
 
+  @media (max-width: 992px) {
+    margin-top: 50px;
+  }
+
   .title {
     margin-bottom: 50px;
+
+    @media (max-width: 576px) {
+      margin-bottom: 30px;
+    }
   }
 
   &__wrap {
     display: grid;
-    grid-template-columns: 2fr 1fr;
+    grid-template-columns: 1fr 380px;
     grid-gap: 30px;
     font-size: 16px;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr 300px;
+    }
+
+    @media (max-width: 992px) {
+      grid-template-columns: 1fr;
+      grid-gap: 30px;
+    }
   }
 
   svg {
@@ -24,7 +41,22 @@
   &__nav {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
     margin-top: 40px;
+
+    @media (max-width: 1200px) {
+      justify-content: center;
+    }
+
+    @media (max-width: 576px) {
+      margin-top: 20px;
+    }
+
+    .btn {
+      @media (max-width: 1200px) {
+        margin: 5px 10px;
+      }
+    }
   }
 
   .btn--small {

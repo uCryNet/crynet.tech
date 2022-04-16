@@ -12,15 +12,17 @@
 
 <script lang="js">
 // Vendor
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import Prism from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
+// Utils
+import parseResponseError from "../../utils/parseResponseError";
+
 // Vars
 import API from "@/api/api"
-import parseResponseError from "../../utils/parseResponseError";
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
 
 
 export default {

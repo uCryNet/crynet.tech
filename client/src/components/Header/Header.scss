@@ -9,6 +9,11 @@
   margin-bottom: 60px;
   overflow: hidden;
 
+  @media (max-width: 576px) {
+    max-height: unset;
+    margin-bottom: 30px;
+  }
+
   &__info {
     display: flex;
     flex-direction: column;
@@ -17,6 +22,7 @@
     margin-bottom: 60px;
     margin-left: 0;
     padding-left: 6%;
+    word-wrap: break-word;
 
     @media (max-width: 768px) {
       margin-bottom: 40px;

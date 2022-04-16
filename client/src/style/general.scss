@@ -51,6 +51,11 @@ p {
     padding-left: 16px;
     padding-right: 16px;
   }
+
+  @media (max-width: 576px) {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 
 .btn {
