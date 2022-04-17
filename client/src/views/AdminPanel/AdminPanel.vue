@@ -105,7 +105,7 @@ export default {
     }
 
     const clearEditPostData = () => {
-      state.value = {
+      state.value.edit = {
         author: "",
         category: "",
         date: "",

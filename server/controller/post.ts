@@ -18,7 +18,7 @@ const checkLengthArticle = (res, title, text) => {
 
 const stringValidate = (string: string) => {
   return string
-    ? string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    ? string.replace(/[.*+?^$<>{}()|[\]\\]/g, "\\$&")
     : ''
 }
 

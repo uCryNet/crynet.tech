@@ -3,7 +3,7 @@
     <div class="title text--center mb--20">
       <template v-if="!route.params.category">БЛОГ</template>
 
-      <template v-else>{{ route.params.category }}</template>
+      <template v-else>{{ stringValidate(route.params.category) }}</template>
     </div>
 
     <SearchPost/>
@@ -20,6 +20,9 @@ import { useRoute } from "vue-router";
 // Components
 import Posts from "@/components/Posts/Posts";
 import SearchPost from "@/components/SearchPost/SearchPost";
+
+// Utils
+import { stringValidate } from "@/utils";
 
 
 export default {
@@ -38,7 +41,8 @@ export default {
     })
 
     return {
-      route
+      route,
+      stringValidate
     }
   }
 }
