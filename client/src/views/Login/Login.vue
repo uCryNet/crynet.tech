@@ -2,6 +2,7 @@
   <form class="login" @submit.prevent="send">
     <label class="login__field">
       <input
+        required
         v-model.lazy.trim="state.login"
         name="login"
         placeholder="Login"
@@ -11,6 +12,7 @@
 
     <label class="login__field">
       <input
+        required
         v-model.lazy.trim="state.password"
         name="password"
         placeholder="Password"

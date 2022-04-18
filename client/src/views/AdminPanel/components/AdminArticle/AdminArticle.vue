@@ -1,5 +1,5 @@
 <template>
-  <form class="admin-article">
+  <form class="admin-article" @submit.prevent="getContent">
     <input required v-model.lazy.trim="state.title" placeholder="Title" class="input admin-article__title"/>
 
     <select v-model="state.category" name="category" required class="select admin-article__select">
@@ -30,12 +30,12 @@
       type="file"
     />
 
-    <button class="btn btn--yellow btn--big" @click.prevent="getContent">
+    <button type="submit" class="btn btn--yellow btn--big">
       <template v-if="state.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
       <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
     </button>
 
-    <button class="btn btn--red btn--big mt--20" v-if="state.edit?._id" @click.prevent="cancel">
+    <button class="btn btn--red btn--big mt--20" v-if="state.edit?._id" @click="cancel">
       ОТМЕНИТЬ РЕДАКТИРОВАНИЕ
     </button>
   </form>
