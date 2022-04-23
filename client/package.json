@@ -10,10 +10,10 @@
   "dependencies": {
     "@tinymce/tinymce-vue": "^4.0.7",
     "axios": "^0.24.0",
-    "core-js": "^3.21.1",
-    "prismjs": "^1.27.0",
+    "core-js": "^3.22.0",
+    "prismjs": "^1.28.0",
     "sass": "^1.50.0",
-    "vue": "^3.2.31",
+    "vue": "^3.2.33",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.14",
     "vuex": "^4.0.2"
@@ -27,7 +27,7 @@
     "@vue/cli-plugin-typescript": "^4.5.17",
     "@vue/cli-plugin-vuex": "^4.5.17",
     "@vue/cli-service": "^4.5.17",
-    "@vue/compiler-sfc": "^3.2.31",
+    "@vue/compiler-sfc": "^3.2.33",
     "@vue/eslint-config-typescript": "^7.0.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",

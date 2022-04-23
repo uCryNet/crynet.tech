@@ -68,6 +68,7 @@ export default {
         text: "",
         title: "",
         _id: "",
+        __v: 0
       },
     })
 
@@ -94,7 +95,7 @@ export default {
     }
 
     const deleteArticle = async (id, title) => {
-      const isDelete = confirm(`Вы точно хотите удалить пост: "${ title }"`)
+      const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
 
       if (isDelete) {
         await API.deletePost(id)
@@ -112,7 +113,6 @@ export default {
         image: "",
         text: "",
         title: "",
-        _id: ""
       }
     }
 
@@ -120,6 +120,7 @@ export default {
       () => state.value.block,
       () => {
         if (state.value.block === "article" && !state.value._id) {
+          console.log(state.value.block === "article")
           clearEditPostData()
         }
       }
