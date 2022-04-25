@@ -1,6 +1,7 @@
 <template>
   <div v-if="state.isAdmin" class="admin-panel">
     <Aside
+      :menus="MENUS"
       :switchBlock="switchBlock"
       :block="state.block"
     />
@@ -70,6 +71,11 @@ export default {
       },
     })
 
+    const MENUS = {
+      article:  { text: "Добавить статью", value: "article" },
+      articles: { text: "Все статьи", value: "articles" },
+    }
+
     onMounted(() => {
       API.checkAccess()
         .then(() => state.value.isAdmin = true)
@@ -111,16 +117,15 @@ export default {
         image: "",
         text: "",
         title: "",
+        _id: "",
       }
     }
 
     watch(
       () => state.value.block,
       () => {
-        if (state.value.block === "article" && !state.value._id) {
-          // console.log(state.value.block === "article")
-          // console.log(state)
-          // clearEditPostData()
+        if (state.value.block === MENUS.articles.value && state.value.edit._id) {
+          clearEditPostData()
         }
       }
     )
@@ -132,7 +137,8 @@ export default {
       switchBlock,
       posts,
       category,
-      state
+      state,
+      MENUS
     }
   }
 }

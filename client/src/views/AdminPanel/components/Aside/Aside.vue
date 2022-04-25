@@ -3,7 +3,7 @@
     <h6 class="block-title">МЕНЮ</h6>
 
     <ul class="aside__lists">
-      <li v-for="menu in MENUS" :key="menu.value">
+      <li v-for="menu in Object.values(menus)" :key="menu.value">
         <div :class="[block === menu.value && 'aside__active']" @click="switchBlock(menu.value)">
           {{ menu.text }}
         </div>
@@ -17,19 +17,9 @@ export default {
   name: 'Aside',
 
   props: {
+    menus: Array,
     switchBlock: Function,
     block: String
-  },
-
-  setup() {
-    const MENUS = [
-      { text: "Добавить статью", value: "article" },
-      { text: "Все статьи", value: "articles" },
-    ]
-
-    return {
-      MENUS
-    }
   }
 }
 </script>
