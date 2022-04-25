@@ -1,7 +1,6 @@
 .admin-article {
   display: flex;
   flex-direction: column;
-  padding-bottom: 40px;
 
   &__preview,
   &__select,
@@ -12,5 +11,10 @@
 
   &__select {
     text-transform: uppercase;
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
   }
 }

@@ -1,44 +1,46 @@
 <template>
-  <form class="admin-article" @submit.prevent="getContent">
-    <input required v-model.lazy.trim="state.title" placeholder="Title" class="input admin-article__title"/>
+  <div class="admin-article">
+    <form @submit.prevent="getContent">
+      <input required v-model.lazy.trim="state.title" placeholder="Title" class="input admin-article__title"/>
 
-    <select v-model="state.category" name="category" required class="select admin-article__select">
-      <optgroup :label="categoryUnit.title" v-for="categoryUnit in allCategory" :key="categoryUnit.title">
-        <option
-          :value="subCategoriesUnit.name"
-          v-for="subCategoriesUnit in categoryUnit.subCategories"
-          :key="subCategoriesUnit.name"
-        >
-          {{ subCategoriesUnit.name }}
-        </option>
-      </optgroup>
-    </select>
+      <select v-model="state.category" name="category" required class="select admin-article__select">
+        <optgroup :label="categoryUnit.title" v-for="categoryUnit in allCategory" :key="categoryUnit.title">
+          <option
+            :value="subCategoriesUnit.name"
+            v-for="subCategoriesUnit in categoryUnit.subCategories"
+            :key="subCategoriesUnit.name"
+          >
+            {{ subCategoriesUnit.name }}
+          </option>
+        </optgroup>
+      </select>
 
-    <div class="admin-article__text">
-      <Editor
-        v-model="state.text"
-        :api-key="TINYMCE_KEY"
-        :init="CONFIG"
+      <div class="admin-article__text">
+        <Editor
+          v-model="state.text"
+          :api-key="TINYMCE_KEY"
+          :init="CONFIG"
+        />
+      </div>
+
+      <input
+        :required="!state?._id"
+        @change="onFileChanged($event)"
+        accept="image/*"
+        class="admin-article__preview"
+        type="file"
       />
-    </div>
 
-    <input
-      :required="!state.edit?._id"
-      @change="onFileChanged($event)"
-      accept="image/*"
-      class="admin-article__preview"
-      type="file"
-    />
+      <button type="submit" class="btn btn--yellow btn--big">
+        <template v-if="state?._id">ОБНОВИТЬ СТАТЬЮ</template>
+        <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
+      </button>
+    </form>
 
-    <button type="submit" class="btn btn--yellow btn--big">
-      <template v-if="state.edit?._id">ОБНОВИТЬ СТАТЬЮ</template>
-      <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
-    </button>
-
-    <button class="btn btn--red btn--big mt--20" v-if="state.edit?._id" @click="cancel">
+    <button class="btn btn--red btn--big mt--20" v-if="state?._id" @click="cancel">
       ОТМЕНИТЬ РЕДАКТИРОВАНИЕ
     </button>
-  </form>
+  </div>
 </template>
 
 <script lang="js">
@@ -79,6 +81,7 @@ export default {
     const store = useStore()
 
     const state = ref({
+      _id: '',
       title: '',
       category: "css",
       image: null,
@@ -114,6 +117,7 @@ export default {
 
     const clearPostData = () => {
       state.value = {
+        _id: '',
         title: '',
         category: "css",
         image: null,
@@ -126,14 +130,14 @@ export default {
     }
 
     const cancel = () => {
-      clearEditPostData()
+      clearEditPostData
       clearPostData()
     }
 
     const getContent = async () => {
       if (!state.value.text) return alert("Заполните все поля!")
 
-      const isUpdate = edit?._id
+      const isUpdate = edit.value?._id
       const data = { ...state.value }
 
       const getPosts = () => {
@@ -154,12 +158,13 @@ export default {
     }
 
     onMounted(() => {
-      if (edit?._id) {
+      if (edit.value?._id) {
         state.value = {
-          title: edit.title,
-          category: edit.category,
-          image: edit.image,
-          text: edit.text,
+          _id: edit.value._id,
+          title: edit.value.title,
+          category: edit.value.category,
+          image: edit.value.image,
+          text: edit.value.text,
         }
       }
     })

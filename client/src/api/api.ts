@@ -18,6 +18,7 @@ const updatePost = (form: any) => {
   formData.append('text', form.text);
   formData.append('category', form.category);
   formData.append('id', form.id);
+  // TODO: обновлять картинку при редактировании
   // formData.append('image', form.image);
 
   return axios.put(`post/update/`, formData);

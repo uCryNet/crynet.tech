@@ -118,7 +118,9 @@ export default {
       () => state.value.block,
       () => {
         if (state.value.block === "article" && !state.value._id) {
-          clearEditPostData()
+          // console.log(state.value.block === "article")
+          // console.log(state)
+          // clearEditPostData()
         }
       }
     )
