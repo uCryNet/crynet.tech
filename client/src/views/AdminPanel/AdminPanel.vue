@@ -10,7 +10,6 @@
         v-if="state.block === 'article'"
         :edit="state.edit"
         :category="category"
-        :getPosts="getPosts"
         :clearEditPostData="clearEditPostData"
       />
 
@@ -120,7 +119,6 @@ export default {
       () => state.value.block,
       () => {
         if (state.value.block === "article" && !state.value._id) {
-          console.log(state.value.block === "article")
           clearEditPostData()
         }
       }
@@ -129,7 +127,6 @@ export default {
     return {
       clearEditPostData,
       deleteArticle,
-      getPosts,
       editArticle,
       switchBlock,
       posts,

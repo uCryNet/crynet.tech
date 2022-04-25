@@ -60,7 +60,6 @@ export default {
   },
 
   props: {
-    getPosts: Function,
     clearEditPostData: Function,
     category: Array,
     edit: {
@@ -76,7 +75,7 @@ export default {
   },
 
   setup(props) {
-    const { getPosts, clearEditPostData, edit } = toRefs(props)
+    const { clearEditPostData, edit } = toRefs(props)
 
     const store = useStore()
 
@@ -123,11 +122,24 @@ export default {
       }
     }
 
+    const onFileChanged = ($event) => {
+      state.value.image = $event.target.files[0]
+    }
+
+    const cancel = () => {
+      clearEditPostData()
+      clearPostData()
+    }
+
     const getContent = async () => {
       if (!state.value.text) return alert("Заполните все поля!")
 
       const isUpdate = edit?._id
       const data = { ...state.value }
+
+      const getPosts = () => {
+        store.dispatch("getAllPosts")
+      }
 
       isUpdate
         ? await API.updatePost({ ...data, id: state.value._id })
@@ -137,17 +149,8 @@ export default {
           .then(() => alert(`Статья добавленна!`))
           .catch(error => console.error(parseResponseError(error)))
 
-      getPosts
+      getPosts()
       clearEditPostData
-      clearPostData()
-    }
-
-    const onFileChanged = ($event) => {
-      state.value.image = $event.target.files[0]
-    }
-
-    const cancel = () => {
-      clearEditPostData()
       clearPostData()
     }
 
