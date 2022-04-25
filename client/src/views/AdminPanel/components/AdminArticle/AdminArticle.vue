@@ -70,7 +70,6 @@ export default {
       text: String,
       title: String,
       _id: String,
-      __v: Number
     }
   },
 

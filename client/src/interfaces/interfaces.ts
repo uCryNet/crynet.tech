@@ -4,7 +4,6 @@ export interface IArticle {
   text: string
   author: string
   image: string
-  __v: number
 }
 
 export interface IGetPosts {

@@ -22,11 +22,9 @@ const getters = {
 
 const actions = {
   async getAllPosts({ commit }: { commit: any }, data: IGetPosts | {} = {}) {
-    console.log(1)
 
     API.getPosts(data)
       .then(res => {
-        console.log(2)
         commit("setPosts", res.data)
       })
       .catch(error => {

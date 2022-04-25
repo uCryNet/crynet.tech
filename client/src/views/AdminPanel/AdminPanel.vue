@@ -67,7 +67,6 @@ export default {
         text: "",
         title: "",
         _id: "",
-        __v: 0
       },
     })
 
