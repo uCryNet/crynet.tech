@@ -21,12 +21,15 @@ class FileController {
       const baseName = path.basename(fullPath)
 
 
+      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
       fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, baseName), (err, image) => {
         if (checkForPicture(image)) {
           const fileType = path.extname(req.url).substring(1)
 
           // TODO: добавить либу для получения MIME-type файла или написать функционал самому
 
+          // TODO: тут точно нужен setHeader и set?
+          // TODO: заменить на res.sendFIle(createPath("ссылка на файл"))
           res
             .setHeader("Cross-Origin-Resource-Policy", "*")
             .set("Content-Type", `image/${ fileType }`)

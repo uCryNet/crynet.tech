@@ -28,7 +28,7 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { useStore } from "vuex";
 import { computed, onMounted, ref, watch } from "vue";

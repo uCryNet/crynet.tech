@@ -10,7 +10,7 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendor
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";

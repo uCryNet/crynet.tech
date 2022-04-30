@@ -20,7 +20,8 @@ mongoose.set('useCreateIndex', true)
 
 app.use(helmet())
 app.use(cookieParser())
-app.use(bodyParser.json({ extended: true }));
+// TODO bodyParser ненужен
+// app.use(bodyParser.json({ extended: true }));
 app.use(
   cors({
     origin: ENV,

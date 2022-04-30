@@ -5,7 +5,7 @@
   </footer>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vars
 import { ROUTE_LINK } from "@/router";
 

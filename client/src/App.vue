@@ -11,14 +11,14 @@
 </template>
 
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 // Components
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
+import Header from "@/components/Header/Header.vue";
+import Footer from "@/components/Footer/Footer.vue";
 
 // Utils
 import debounce from "@/utils/debounce";

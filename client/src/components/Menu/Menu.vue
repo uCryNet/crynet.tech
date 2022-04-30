@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { computed } from "vue";
 import { useStore } from "vuex";
@@ -43,7 +43,7 @@ export default {
 
     const category = computed(() => store.getters.getAllCategory)
 
-    const get = (category) => {
+    const get = (category: any) => {
       store.dispatch("setFilters", { category })
     }
 

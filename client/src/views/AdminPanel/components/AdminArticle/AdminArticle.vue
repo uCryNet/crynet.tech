@@ -43,15 +43,18 @@
   </div>
 </template>
 
-<script lang="js">
-import Editor from '@tinymce/tinymce-vue'
-
-import API from "@/api/api"
-import { TINYMCE_KEY } from "@/config/constant"
-
-import parseResponseError from "@/utils/parseResponseError"
+<script lang="ts">
+// Vendors
 import { computed, onMounted, ref, toRefs } from "vue";
 import { useStore } from "vuex";
+import Editor from '@tinymce/tinymce-vue'
+
+// Utils
+import parseResponseError from "@/utils/parseResponseError"
+
+// Vars
+import API from "@/api/api"
+import { TINYMCE_KEY } from "@/config/constant"
 
 
 export default {
@@ -75,7 +78,7 @@ export default {
     }
   },
 
-  setup(props) {
+  setup(props: any) {
     const { clearEditPostData, edit } = toRefs(props)
 
     const store = useStore()

@@ -1,13 +1,7 @@
 <template>
   <form class="login" @submit.prevent="send">
     <label class="login__field">
-      <input
-        required
-        v-model.lazy.trim="state.login"
-        name="login"
-        placeholder="Login"
-        class="input login__input"
-      />
+      <input v-model.lazy.trim="state.login" />
     </label>
 
     <label class="login__field">
@@ -29,7 +23,7 @@
   </form>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { onMounted, ref, watch, } from "vue";
 import { useRouter } from "vue-router";

@@ -14,7 +14,7 @@ const routes = [
   {
     path: ROUTE_LINK.root,
     name: 'Home',
-    component: () => import(/* webpackChunkName: "Posts" */ '../views/Home/Home.vue')
+    component: () => import(/* webpackChunkName: "Home" */ '../views/Home/Home.vue')
   },
 
   // Admin START
@@ -34,12 +34,12 @@ const routes = [
   {
     path: ROUTE_LINK.blogArticle,
     name: 'Article',
-    component: () => import(/* webpackChunkName: "Post" */ '../views/Article/Article.vue')
+    component: () => import(/* webpackChunkName: "Article" */ '../views/Article/Article.vue')
   },
   {
     path: ROUTE_LINK.blogArticles,
     name: 'Articles',
-    component: () => import(/* webpackChunkName: "Post" */ '../views/Articles/Articles.vue')
+    component: () => import(/* webpackChunkName: "Articles" */ '../views/Articles/Articles.vue')
   },
   // Post END
 
@@ -54,7 +54,7 @@ const routes = [
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
-    component: () => import(/* webpackChunkName: "Post" */ '../views/NotFound/NotFound.vue')
+    component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound/NotFound.vue')
   }
 ]
 

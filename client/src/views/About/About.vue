@@ -55,7 +55,7 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { onMounted } from "vue"
 

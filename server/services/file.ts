@@ -23,12 +23,14 @@ class FileService {
       if (!checkForPicture(file.data)) return console.error("File is no valid")
 
       const currentYears = new Date().getUTCFullYear()
+      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
       const folderPath = `${ IMAGE_FOLDER_NAME }/${ currentYears }`
       const fileName = genName(name)
 
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
+      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
       file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
 
       return `http://${ HOST }:${ PORT }/${ API_LINK }/${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`

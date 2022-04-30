@@ -17,13 +17,13 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { computed } from "vue";
 import { useStore } from "vuex";
 
 // Components
-import Post from "./components/Post/Post";
+import Post from "./components/Post/Post.vue";
 
 
 export default {

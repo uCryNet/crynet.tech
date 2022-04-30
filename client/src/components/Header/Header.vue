@@ -14,8 +14,10 @@
   </header>
 </template>
 
-<script lang="js">
-import Menu from "@/components/Menu/Menu"
+<script lang="ts">
+// Components
+import Menu from "@/components/Menu/Menu.vue"
+
 
 export default {
   name: 'Header',

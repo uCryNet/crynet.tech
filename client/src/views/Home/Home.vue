@@ -11,13 +11,13 @@
   </div>
 </template>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { onMounted } from "vue";
 
 // Components
 import SearchPost from "../../components/SearchPost/SearchPost";
-import Posts from "../../components/Posts/Posts";
+import Posts from "@/components/Posts/Posts.vue";
 
 
 export default {

@@ -1,5 +1,5 @@
 // Vendors
-import {mongo} from "mongoose"
+import { mongo } from "mongoose"
 
 // Components
 import User from '../models/user'
@@ -8,9 +8,9 @@ import User from '../models/user'
 class UserService {
   async getUser(data, findBy: "id" | 'login') {
     if (findBy === "login") {
-      return User.findOne({login: data});
+      return User.findOne({ login: data });
     } else {
-      return User.findOne({_id: new mongo.ObjectID(data)});
+      return User.findOne({ _id: new mongo.ObjectID(data) });
     }
   }
 

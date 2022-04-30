@@ -22,7 +22,7 @@
 @import "Post";
 </style>
 
-<script lang="js">
+<script lang="ts">
 // Vendors
 import { toRefs } from "vue";
 
@@ -39,7 +39,7 @@ export default {
     category: String
   },
 
-  setup(props) {
+  setup(props: any) {
     const { text, image, date } = toRefs(props)
 
     const getDate = date.value.split(".")
