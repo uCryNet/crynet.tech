@@ -16,7 +16,7 @@
 import { onMounted } from "vue";
 
 // Components
-import SearchPost from "../../components/SearchPost/SearchPost";
+import SearchPost from "@/components/SearchPost/SearchPost.vue";
 import Posts from "@/components/Posts/Posts.vue";
 
 

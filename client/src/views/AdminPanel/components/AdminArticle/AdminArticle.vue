@@ -93,7 +93,7 @@ export default {
 
     const CONFIG = {
       height: 500,
-      images_upload_handler: (blobInfo, success) => {
+      images_upload_handler: (blobInfo: any, success: any) => {
         const formData = new FormData()
         formData.append("file", blobInfo.blob(), blobInfo.filename())
 
@@ -128,7 +128,7 @@ export default {
       }
     }
 
-    const onFileChanged = ($event) => {
+    const onFileChanged = ($event: any) => {
       state.value.image = $event.target.files[0]
     }
 

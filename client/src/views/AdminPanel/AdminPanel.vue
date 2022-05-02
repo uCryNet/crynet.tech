@@ -34,9 +34,9 @@ import { useStore } from "vuex";
 import { computed, onMounted, ref, watch } from "vue";
 
 // Components
-import Aside from "./components/Aside/Aside"
-import AdminArticle from "./components/AdminArticle/AdminArticle";
-import AdminArticles from "./components/AdminArticles/AdminArticles";
+import Aside from "./components/Aside/Aside.vue"
+import AdminArticle from "./components/AdminArticle/AdminArticle.vue";
+import AdminArticles from "./components/AdminArticles/AdminArticles.vue";
 
 // Utils
 import parseResponseError from "../../utils/parseResponseError";
@@ -85,11 +85,11 @@ export default {
     const category = computed(() => store.getters.getAllCategory)
     const posts = computed(() => store.getters.getAllPost)
 
-    const switchBlock = (block) => {
+    const switchBlock = (block: any) => {
       if (state.value.block !== block) state.value.block = block
     }
 
-    const editArticle = (article) => {
+    const editArticle = (article: any) => {
       state.value.block = "article"
       state.value.edit = { ...article }
     }
@@ -98,7 +98,7 @@ export default {
       store.dispatch("getAllPosts")
     }
 
-    const deleteArticle = async (id, title) => {
+    const deleteArticle = async (id: any, title: any) => {
       const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
 
       if (isDelete) {

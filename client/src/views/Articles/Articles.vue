@@ -18,8 +18,8 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 // Components
-import Posts from "@/components/Posts/Posts";
-import SearchPost from "@/components/SearchPost/SearchPost";
+import Posts from "@/components/Posts/Posts.vue";
+import SearchPost from "@/components/SearchPost/SearchPost.vue";
 
 // Utils
 import { stringValidate } from "@/utils";

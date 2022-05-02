@@ -14,7 +14,8 @@
 // Vendor
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import Prism from "prismjs"
+// @ts-ignore
+import {highlightAll} from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
@@ -31,8 +32,18 @@ export default {
   setup() {
     const route = useRoute()
 
-    const state = ref({
-      post: {}
+    const state = ref<{
+      post: {
+        title: string
+        date: string
+        text: string
+      }
+    }>({
+      post: {
+        title: '',
+        date: '',
+        text: ''
+      }
     })
 
     onMounted(async () => {
@@ -42,7 +53,10 @@ export default {
         .then(res => state.value.post = res.data)
         .catch(error => console.error(parseResponseError(error)))
 
-      await Prism.highlightAll()
+      await highlightAll()
+
+      // if (!!state.value.post.text as string)
+
 
       const description = state.value.post.text
         .substring(0, 200)
@@ -51,8 +65,8 @@ export default {
       const location = window.location.href
 
       document.title = state.value.post.title
-      document.querySelector('meta[property="og:description"]').setAttribute("content", description)
-      document.querySelector('meta[property="og:url"]').setAttribute("content", location)
+      document.querySelector('meta[property="og:description"]')?.setAttribute("content", description)
+      document.querySelector('meta[property="og:url"]')?.setAttribute("content", location)
     })
 
     return {

@@ -47,7 +47,7 @@ export default {
     })
 
     const routes = computed(() => route.fullPath)
-    const filters = computed(() => store.getters.getFilter)
+    const filters: any = computed(() => store.getters.getFilter)
 
     watch(
       () => routes,
