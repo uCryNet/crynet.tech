@@ -43,6 +43,17 @@ import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
+import { IArticle } from "@/interfaces/interfaces";
+
+
+type IMenusType = 'article' | 'articles'
+
+interface IMenus {
+  [ key: string ]: {
+    text: string
+    value: IMenusType
+  }
+}
 
 
 export default {
@@ -57,7 +68,11 @@ export default {
   setup() {
     const store = useStore()
 
-    const state = ref({
+    const state = ref<{
+      isAdmin: boolean,
+      block: IMenusType,
+      edit: IArticle
+    }>({
       isAdmin: false,
       block: "article",
       edit: {
@@ -71,8 +86,8 @@ export default {
       },
     })
 
-    const MENUS = {
-      article:  { text: "Добавить статью", value: "article" },
+    const MENUS: IMenus = {
+      article: { text: "Добавить статью", value: "article" },
       articles: { text: "Все статьи", value: "articles" },
     }
 
@@ -85,11 +100,11 @@ export default {
     const category = computed(() => store.getters.getAllCategory)
     const posts = computed(() => store.getters.getAllPost)
 
-    const switchBlock = (block: any) => {
+    const switchBlock = (block: IMenusType) => {
       if (state.value.block !== block) state.value.block = block
     }
 
-    const editArticle = (article: any) => {
+    const editArticle = (article: IArticle) => {
       state.value.block = "article"
       state.value.edit = { ...article }
     }
@@ -98,7 +113,7 @@ export default {
       store.dispatch("getAllPosts")
     }
 
-    const deleteArticle = async (id: any, title: any) => {
+    const deleteArticle = async (id: string, title: string) => {
       const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
 
       if (isDelete) {

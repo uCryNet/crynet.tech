@@ -26,6 +26,14 @@
 // Vendors
 import { toRefs } from "vue";
 
+// Types
+import { IArticle } from "@/interfaces/interfaces";
+
+
+interface IPost extends IArticle {
+  id: string
+}
+
 
 export default {
   name: 'Post',
@@ -39,8 +47,8 @@ export default {
     category: String
   },
 
-  setup(props: any) {
-    const { text, image, date } = toRefs(props)
+  setup(props: IPost) {
+    const { text, image, date } = toRefs<IPost>(props)
 
     const getDate = date.value.split(".")
     const getDescription = text.value.substring(0, 200) + "..."

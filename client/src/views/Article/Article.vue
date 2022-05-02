@@ -15,7 +15,7 @@
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 // @ts-ignore
-import {highlightAll} from "prismjs"
+import { highlightAll } from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
@@ -60,7 +60,7 @@ export default {
 
       const description = state.value.post.text
         .substring(0, 200)
-        .replace(/<\/?[a-zA-Z]+>/gi,'');
+        .replace(/<\/?[a-zA-Z]+>/gi, '');
 
       const location = window.location.href
 

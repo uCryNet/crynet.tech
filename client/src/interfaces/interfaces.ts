@@ -4,6 +4,8 @@ export interface IArticle {
   text: string
   author: string
   image: string
+  date: string
+  category: string
 }
 
 export interface IGetPosts {

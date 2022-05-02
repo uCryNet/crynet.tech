@@ -42,7 +42,15 @@ export default {
   setup() {
     const router = useRouter()
 
-    const state = ref({
+    const state = ref<{
+      isAuthorized: boolean
+      login: string
+      password: string
+      error: {
+        isError: boolean
+        message: string
+      }
+    }>({
       isAuthorized: false,
       login: '',
       password: '',
