@@ -45,9 +45,12 @@
 
 <script lang="ts">
 // Vendors
-import { computed, onMounted, ref, toRefs } from "vue";
+import { computed, defineComponent, onMounted, PropType, ref, toRefs } from "vue";
 import { useStore } from "vuex";
 import Editor from '@tinymce/tinymce-vue'
+
+// Types
+import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
 
 // Utils
 import parseResponseError from "@/utils/parseResponseError"
@@ -57,7 +60,7 @@ import API from "@/api/api"
 import { TINYMCE_KEY } from "@/config/constant"
 
 
-export default {
+export default defineComponent({
   name: 'AdminArticle',
 
   components: {
@@ -66,29 +69,33 @@ export default {
 
   props: {
     clearEditPostData: Function,
-    category: Array,
+    category: {
+      type: Object as PropType<ICategory>,
+      required: true
+    },
     edit: {
-      author: String,
-      category: String,
-      date: String,
-      image: String,
-      text: String,
-      title: String,
-      _id: String,
+      type: Object as PropType<IArticle>,
+      required: true
     }
   },
 
-  setup(props: any) {
+  setup(props) {
     const { clearEditPostData, edit } = toRefs(props)
 
     const store = useStore()
 
-    const state = ref({
-      _id: '',
-      title: '',
+    const state = ref<{
+      _id: string,
+      title: string,
+      category: string,
+      image: string | File,
+      text: string,
+    }>({
+      _id: "",
+      title: "",
       category: "css",
-      image: null,
-      text: '',
+      image: "",
+      text: "",
     })
 
     const CONFIG = {
@@ -120,16 +127,16 @@ export default {
 
     const clearPostData = () => {
       state.value = {
-        _id: '',
-        title: '',
+        _id: "",
+        title: "",
         category: "css",
-        image: null,
-        text: '',
+        image: "",
+        text: "",
       }
     }
 
-    const onFileChanged = ($event: any) => {
-      state.value.image = $event.target.files[0]
+    const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
+      state.value.image = $event.target.files ? $event.target.files[0] : ""
     }
 
     const cancel = () => {
@@ -184,7 +191,7 @@ export default {
       state
     }
   }
-}
+})
 </script>
 
 <style scoped lang="scss">

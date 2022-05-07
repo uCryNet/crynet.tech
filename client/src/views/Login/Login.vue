@@ -1,7 +1,13 @@
 <template>
   <form class="login" @submit.prevent="send">
     <label class="login__field">
-      <input v-model.lazy.trim="state.login" />
+      <input
+        required
+        v-model.lazy.trim="state.login"
+        name="login"
+        placeholder="Login"
+        class="input login__input"
+      />
     </label>
 
     <label class="login__field">

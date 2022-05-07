@@ -21,13 +21,22 @@
 </template>
 
 <script lang="ts">
+// Vendors
+import { PropType } from "vue";
+
+// Types
+import { IArticle } from "@/interfaces/interfaces";
+
 export default {
   name: 'AllArticles',
 
   props: {
     editArticle: Function,
     deleteArticle: Function,
-    lists: []
+    lists: {
+      type: Object as PropType<IArticle[]>,
+      required: true
+    }
   }
 }
 </script>

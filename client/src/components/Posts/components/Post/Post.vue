@@ -24,31 +24,40 @@
 
 <script lang="ts">
 // Vendors
-import { toRefs } from "vue";
-
-// Types
-import { IArticle } from "@/interfaces/interfaces";
+import { defineComponent, toRefs } from "vue";
 
 
-interface IPost extends IArticle {
-  id: string
-}
-
-
-export default {
+export default defineComponent({
   name: 'Post',
 
   props: {
-    title: String,
-    text: String,
-    id: String,
-    image: String,
-    date: String,
-    category: String
+    title: {
+      type: String,
+      required: true
+    },
+    text: {
+      type: String,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    },
+    image: {
+      type: String,
+    },
+    date: {
+      type: String,
+      required: true
+    },
+    category: {
+      type: String,
+      required: true
+    }
   },
 
-  setup(props: IPost) {
-    const { text, image, date } = toRefs<IPost>(props)
+  setup(props) {
+    const { text, image, date } = toRefs(props)
 
     const getDate = date.value.split(".")
     const getDescription = text.value.substring(0, 200) + "..."
@@ -60,5 +69,5 @@ export default {
       getImageLink
     }
   }
-}
+})
 </script>

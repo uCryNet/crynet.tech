@@ -12,3 +12,15 @@ export interface IGetPosts {
   text: string
   category: string
 }
+
+export interface IEvent<T = EventTarget> {
+  target: T;
+}
+
+export interface ICategory {
+  _id: string
+  subCategory: {
+    name: string
+  }[]
+  title: string
+}[]

@@ -6,6 +6,7 @@
       <div class="article__date">{{ state.post.date }}</div>
     </div>
 
+
     <div class="article__text" v-html="state.post.text"/>
   </div>
 </template>
@@ -54,9 +55,6 @@ export default {
         .catch(error => console.error(parseResponseError(error)))
 
       await highlightAll()
-
-      // if (!!state.value.post.text as string)
-
 
       const description = state.value.post.text
         .substring(0, 200)

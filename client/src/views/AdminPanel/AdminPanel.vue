@@ -33,6 +33,10 @@
 import { useStore } from "vuex";
 import { computed, onMounted, ref, watch } from "vue";
 
+// Types
+import { IArticle } from "@/interfaces/interfaces";
+import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.types";
+
 // Components
 import Aside from "./components/Aside/Aside.vue"
 import AdminArticle from "./components/AdminArticle/AdminArticle.vue";
@@ -43,17 +47,6 @@ import parseResponseError from "../../utils/parseResponseError";
 
 // Var
 import API from "@/api/api"
-import { IArticle } from "@/interfaces/interfaces";
-
-
-type IMenusType = 'article' | 'articles'
-
-interface IMenus {
-  [ key: string ]: {
-    text: string
-    value: IMenusType
-  }
-}
 
 
 export default {

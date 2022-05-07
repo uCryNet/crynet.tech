@@ -1,18 +1,27 @@
+// Types
+import { ICategoryStore } from "@/store/store.types";
+import { Commit } from "vuex";
+import { ICategory } from "@/interfaces/interfaces";
+
+// Vars
 import API from "../api/api";
+
+// Utils
 import parseResponseError from "@/utils/parseResponseError";
 
-const state = {
+
+const state: ICategoryStore = {
   category: []
 }
 
 const getters = {
-  getAllCategory(state: any) {
+  getAllCategory(state: ICategoryStore) {
     return state.category
   }
 }
 
 const actions = {
-  async getCategory({ commit } : {commit: any}) {
+  async getCategory({ commit } : {commit: Commit}) {
     API.getCategory()
       .then(res => commit("setCategory", res.data))
       .catch(error => {
@@ -23,7 +32,7 @@ const actions = {
 }
 
 const mutations = {
-  setCategory(state: any, category: any) {
+  setCategory(state: ICategoryStore, category: ICategory[]) {
     state.category = category;
   }
 }

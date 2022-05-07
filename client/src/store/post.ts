@@ -1,8 +1,16 @@
-import API from "../api/api";
-import parseResponseError from "@/utils/parseResponseError";
-import { IGetPosts } from "@/interfaces/interfaces";
+// Types
+import { IArticle, IGetPosts } from "@/interfaces/interfaces";
+import { IFiltersStore, IPostStore } from "@/store/store.types";
+import { Commit } from "vuex";
 
-const state = {
+// Vars
+import API from "../api/api";
+
+// Utils
+import parseResponseError from "@/utils/parseResponseError";
+
+
+const state: IPostStore = {
   posts: [],
   filters: {
     search: "",
@@ -11,17 +19,17 @@ const state = {
 }
 
 const getters = {
-  getAllPost(state: any) {
+  getAllPost(state: IPostStore) {
     return state.posts
   },
 
-  getFilter(state: any) {
+  getFilter(state: IPostStore) {
     return state.filters
   }
 }
 
 const actions = {
-  async getAllPosts({ commit }: { commit: any }, data: IGetPosts | {} = {}) {
+  async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
 
     API.getPosts(data)
       .then(res => {
@@ -33,23 +41,18 @@ const actions = {
       })
   },
 
-  setFilters({ commit }: { commit: any }, data: {}) {
+  setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
     commit("setFilters", data)
   },
 }
 
 const mutations = {
-  setPosts(state: any, posts: any) {
+  setPosts(state: IPostStore, posts: IArticle[]) {
     state.posts = posts;
   },
 
-  setFilters(state: any, data: any) {
+  setFilters(state: IPostStore, data: IFiltersStore) {
     const { search, category } = data
-
-    // state.filters = {
-    //   ...state.filters.prev,
-    //   search: search ? search : state.filters.prev.search
-    // }
 
     if (search !== undefined) state.filters.search = search
     if (category !== undefined) state.filters.category = category

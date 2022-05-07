@@ -13,13 +13,23 @@
 </template>
 
 <script lang="ts">
+// Types
+import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.types";
+import { PropType } from "vue";
+
 export default {
   name: 'Aside',
 
   props: {
-    menus: Array,
+    menus: {
+      type: Object as PropType<IMenus>,
+      required: true
+    },
     switchBlock: Function,
-    block: String
+    block: {
+      type: String as PropType<IMenusType>,
+      required: true
+    }
   }
 }
 </script>
