@@ -43,7 +43,7 @@ export default {
 
     const category = computed(() => store.getters.getAllCategory)
 
-    const get = (category: any) => {
+    const get = (category: string) => {
       store.dispatch("setFilters", { category })
     }
 

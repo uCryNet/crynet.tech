@@ -3,12 +3,12 @@ import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from "fs";
 
-// Utils
-import { checkForPicture } from "../utils";
-
 // Vars
 import { IMAGE_FOLDER_NAME } from "../config/config";
 import { API_LINK, HOST, PORT } from "../config/setup";
+
+// Utils
+import { checkForPicture } from "../utils";
 
 
 const genName = (name: string) => `${ uuid.v4() }${ path.extname(name) }`

@@ -3,12 +3,12 @@ import * as fs from "fs";
 import path from "path";
 import jwt from "jsonwebtoken"
 
-// Utils
-import { checkForPicture } from "../utils";
-
 // Vars
 import { SECRET_KEY, STATIC_FOLDER_NAME } from "../config/config";
 import FileService from "../services/file";
+
+// Utils
+import { checkForPicture } from "../utils";
 
 
 class FileController {

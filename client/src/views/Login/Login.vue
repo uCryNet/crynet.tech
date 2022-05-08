@@ -34,12 +34,12 @@
 import { onMounted, ref, watch, } from "vue";
 import { useRouter } from "vue-router";
 
-// Utils
-import parseResponseError from "@/utils/parseResponseError";
-
 // Vars
 import { ROUTE_LINK } from "@/router";
 import API from "@/api/api"
+
+// Utils
+import parseResponseError from "@/utils/parseResponseError";
 
 
 export default {

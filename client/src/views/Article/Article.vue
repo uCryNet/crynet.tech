@@ -20,11 +20,11 @@ import { highlightAll } from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
-// Utils
-import parseResponseError from "../../utils/parseResponseError";
-
 // Vars
 import API from "@/api/api"
+
+// Utils
+import parseResponseError from "../../utils/parseResponseError";
 
 
 export default {

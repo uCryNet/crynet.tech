@@ -15,9 +15,6 @@ const genToken = (id, role) => {
   return jwt.sign(payload, SECRET_KEY, {expiresIn: "24h"})
 }
 
-const setCookie = (res, token) => {
-
-}
 
 class UserController {
   async login(req, res) {

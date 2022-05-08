@@ -51,13 +51,14 @@ import Editor from '@tinymce/tinymce-vue'
 
 // Types
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
-
-// Utils
-import parseResponseError from "@/utils/parseResponseError"
+import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
 // Vars
 import API from "@/api/api"
 import { TINYMCE_KEY } from "@/config/constant"
+
+// Utils
+import parseResponseError from "@/utils/parseResponseError"
 
 
 export default defineComponent({
@@ -84,13 +85,7 @@ export default defineComponent({
 
     const store = useStore()
 
-    const state = ref<{
-      _id: string,
-      title: string,
-      category: string,
-      image: string | File,
-      text: string,
-    }>({
+    const state = ref<IUpdatePost>({
       _id: "",
       title: "",
       category: "css",
@@ -155,7 +150,7 @@ export default defineComponent({
       }
 
       isUpdate
-        ? await API.updatePost({ ...data, id: state.value._id })
+        ? await API.updatePost(data)
           .then(() => alert(`Статья обновлена!`))
           .catch(error => console.error(parseResponseError(error)))
         : await API.createPost(data)

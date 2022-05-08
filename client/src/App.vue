@@ -26,6 +26,7 @@ import debounce from "@/utils/debounce";
 // Variables
 import { ROUTE_LINK } from "@/router";
 import { useRoute, } from "vue-router";
+import { IGetPosts } from "@/interfaces/interfaces";
 
 
 export default {
@@ -47,7 +48,9 @@ export default {
     })
 
     const routes = computed(() => route.fullPath)
-    const filters: any = computed(() => store.getters.getFilter)
+    const filters: any = computed<IGetPosts>(() => store.getters.getFilter)
+
+    console.log(filters)
 
     watch(
       () => routes,
