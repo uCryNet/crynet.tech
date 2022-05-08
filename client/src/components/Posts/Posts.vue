@@ -17,7 +17,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { computed } from "vue";
 import { useStore } from "vuex";
@@ -26,23 +26,9 @@ import { useStore } from "vuex";
 import Post from "./components/Post/Post.vue";
 
 
-export default {
-  name: 'Posts',
+const store = useStore()
 
-  components: {
-    Post
-  },
-
-  setup() {
-    const store = useStore()
-
-    const posts = computed(() => store.getters.getAllPost)
-
-    return {
-      posts
-    }
-  }
-}
+const posts = computed(() => store.getters.getAllPost)
 </script>
 
 <style scoped lang="scss">

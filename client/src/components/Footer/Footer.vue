@@ -5,23 +5,12 @@
   </footer>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vars
 import { ROUTE_LINK } from "@/router";
 
 
-export default {
-  name: 'Footer',
-
-  setup() {
-    const date = new Date().getUTCFullYear()
-
-    return {
-      date,
-      ROUTE_LINK
-    }
-  }
-}
+const date = new Date().getUTCFullYear()
 </script>
 
 <style scoped lang="scss">

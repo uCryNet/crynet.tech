@@ -26,7 +26,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { computed } from "vue";
 import { useStore } from "vuex";
@@ -35,24 +35,12 @@ import { useStore } from "vuex";
 import { ROUTE_LINK } from "@/router";
 
 
-export default {
-  name: 'Menu',
+const store = useStore()
 
-  setup() {
-    const store = useStore()
+const category = computed(() => store.getters.getAllCategory)
 
-    const category = computed(() => store.getters.getAllCategory)
-
-    const get = (category: string) => {
-      store.dispatch("setFilters", { category })
-    }
-
-    return {
-      ROUTE_LINK,
-      get,
-      category
-    }
-  }
+const get = (category: string) => {
+  store.dispatch("setFilters", { category })
 }
 </script>
 

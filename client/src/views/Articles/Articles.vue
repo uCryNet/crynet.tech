@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
@@ -25,27 +25,11 @@ import SearchPost from "@/components/SearchPost/SearchPost.vue";
 import { stringValidate } from "@/utils";
 
 
-export default {
-  name: 'Articles',
+const route = useRoute()
 
-  components: {
-    Posts,
-    SearchPost
-  },
-
-  setup() {
-    const route = useRoute()
-
-    onMounted(() => {
-      document.title = "CryNet blog"
-    })
-
-    return {
-      route,
-      stringValidate
-    }
-  }
-}
+onMounted(() => {
+  document.title = "CryNet blog"
+})
 </script>
 
 <style scoped lang="scss">

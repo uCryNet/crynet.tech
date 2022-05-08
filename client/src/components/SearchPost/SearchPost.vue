@@ -19,28 +19,17 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { useStore } from "vuex";
 import { computed } from "vue";
 
 
-export default {
-  name: 'SearchPost',
+const store = useStore()
 
-  setup() {
-    const store = useStore()
+const filters = computed(() => store.getters.getFilter)
 
-    const filters = computed(() => store.getters.getFilter)
-
-    const clear = () => store.dispatch("setFilters", { search: "" })
-
-    return {
-      filters,
-      clear
-    }
-  }
-}
+const clear = () => store.dispatch("setFilters", { search: "" })
 </script>
 
 <style scoped lang="scss">

@@ -11,7 +11,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { onMounted } from "vue";
 
@@ -20,18 +20,7 @@ import SearchPost from "@/components/SearchPost/SearchPost.vue";
 import Posts from "@/components/Posts/Posts.vue";
 
 
-export default {
-  name: "Home",
-
-  components: {
-    Posts,
-    SearchPost
-  },
-
-  setup() {
-    onMounted(() => {
-      document.title = "CryNet"
-    })
-  }
-}
+onMounted(() => {
+  document.title = "CryNet"
+})
 </script>

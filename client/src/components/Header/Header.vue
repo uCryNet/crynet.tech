@@ -14,18 +14,9 @@
   </header>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Components
 import Menu from "@/components/Menu/Menu.vue"
-
-
-export default {
-  name: 'Header',
-
-  components: {
-    Menu
-  }
-}
 </script>
 
 <style lang="scss" scoped>
