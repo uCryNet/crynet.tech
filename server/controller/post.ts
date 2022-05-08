@@ -1,6 +1,3 @@
-// Vendors
-import jwt from "jsonwebtoken"
-
 // Components
 import PostService from '../services/post'
 import FileService from '../services/file'
@@ -8,6 +5,9 @@ import FileService from '../services/file'
 // Vars
 import { SECRET_KEY } from "../config/config";
 import UserService from "../services/login";
+
+// Utils
+import { decryptedData } from "../utils";
 
 
 const checkLengthArticle = (res, title, text) => {
@@ -55,7 +55,7 @@ class PostController {
 
       const { title, text, category } = req.body
       const token = req.cookies.token
-      const { role, id: _id } = jwt.verify(token, SECRET_KEY)
+      const { role, id: _id } = decryptedData(token)
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
@@ -78,7 +78,7 @@ class PostController {
     try {
       const id = req?.params.id
       const token = req.cookies.token
-      const { role } = jwt.verify(token, SECRET_KEY)
+      const { role } = decryptedData(token)
 
       if (!id) return res.status(400).json({ message: "Post not found" })
       if (!token) return res.status(400).json({ message: "User is not authorized" })
@@ -99,7 +99,7 @@ class PostController {
       const { title, text, category, id: postId } = req.body
 
       const token = req.cookies.token
-      const { role, id: userId } = jwt.verify(token, SECRET_KEY)
+      const { role, id: userId } = decryptedData(token)
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin" || !userId) return res.status(400).json({ message: "No access" })

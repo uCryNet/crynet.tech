@@ -18,7 +18,8 @@ router.put("/post/update", PostController.update)
 router.delete("/post/delete/:id", PostController.delete)
 // user
 router.post("/user/login", UserController.login)
-router.post("/user/registration", UserController.registration)
+// Регистрация полностью рабочая. Оставлю до лучших времен
+// router.post("/user/registration", UserController.registration)
 router.get("/user/check-access", UserController.checkAccess)
 
 // file

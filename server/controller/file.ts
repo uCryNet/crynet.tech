@@ -1,14 +1,13 @@
 // Vendors
 import * as fs from "fs";
 import path from "path";
-import jwt from "jsonwebtoken"
 
 // Vars
 import { SECRET_KEY, STATIC_FOLDER_NAME } from "../config/config";
 import FileService from "../services/file";
 
 // Utils
-import { checkForPicture } from "../utils";
+import { checkForPicture, decryptedData } from "../utils";
 
 
 class FileController {
@@ -49,7 +48,7 @@ class FileController {
       const { file } = req.files
 
       const token = req.cookies.token
-      const { role } = jwt.verify(token, SECRET_KEY)
+      const { role } = decryptedData(token)
 
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
