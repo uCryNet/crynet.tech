@@ -4,6 +4,8 @@
 
     <div class="article__info">
       <div class="article__date">{{ state.post.date }}</div>
+
+      <div class="article__category">{{ state.post.category.toUpperCase() }}</div>
     </div>
 
 
@@ -38,12 +40,14 @@ export default {
         title: string
         date: string
         text: string
+        category: string
       }
     }>({
       post: {
-        title: '',
-        date: '',
-        text: ''
+        title: "",
+        date: "",
+        text: "",
+        category: ""
       }
     })
 

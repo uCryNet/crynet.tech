@@ -13,7 +13,7 @@
 
 <script lang="ts">
 // Vendors
-import { computed, onMounted, watch } from "vue";
+import { computed,  onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 // Components
@@ -26,7 +26,6 @@ import debounce from "@/utils/debounce";
 // Variables
 import { ROUTE_LINK } from "@/router";
 import { useRoute, } from "vue-router";
-import { IGetPosts } from "@/interfaces/interfaces";
 
 
 export default {
@@ -48,16 +47,12 @@ export default {
     })
 
     const routes = computed(() => route.fullPath)
-    const filters: any = computed<IGetPosts>(() => store.getters.getFilter)
-
-    console.log(filters)
+    const filters = computed(() => store.getters.getFilter)
 
     watch(
       () => routes,
       ({ value }) => {
-        if (value !== ROUTE_LINK.root) return
-
-        if (!filters.search || !filters.category)
+        if (value === ROUTE_LINK.root)
           store.dispatch("setFilters", { search: "", category: "" })
       },
       { deep: true }
