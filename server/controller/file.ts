@@ -8,6 +8,7 @@ import FileService from "../services/file";
 
 // Utils
 import { imageСheck, decryptedData } from "../utils";
+import { HOST, PORT } from "../config/setup";
 
 
 class FileController {
@@ -48,9 +49,14 @@ class FileController {
 
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
-      const imageName = file && await FileService.saveImage(file)
+      const imageName = file ? await FileService.saveImage(file) : ""
 
-      res.json({ link: imageName })
+      //TODO проверить нужно ли тут: "http://", HOST, PORT
+      const fullPath = typeof imageName === "string"
+        ? path.join("http://", HOST, PORT.toString(), imageName)
+        : ""
+
+      res.json({ link: fullPath })
     } catch (e) {
       return res.status(400).json({ message: "File upload error", e })
     }

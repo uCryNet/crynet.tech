@@ -26,6 +26,9 @@
 // Vendors
 import { defineComponent, toRefs } from "vue";
 
+// Vars
+import { SERVER_API } from "@/config/api";
+
 
 export default defineComponent({
   name: 'Post',
@@ -61,7 +64,7 @@ export default defineComponent({
 
     const getDate = date.value.split(".")
     const getDescription = text.value.substring(0, 200) + "..."
-    const getImageLink = image.value ? image.value : `/media/img/post/not-found-image.jpg`
+    const getImageLink = image.value ? `${SERVER_API}/${image.value}` : `/media/img/post/not-found-image.jpg`
 
     return {
       getDate,

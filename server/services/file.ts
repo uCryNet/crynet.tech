@@ -27,10 +27,8 @@ class FileService {
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
-
-      // TODO: поправить вид ссылки
-      return `http://${ HOST }:${ PORT }/${ API_LINK }/${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`
+      file.mv(path.join(IMAGE_FOLDER_NAME, currentYears, fileName))
+      return path.join(IMAGE_FOLDER_NAME, currentYears, fileName)
     } catch (e) {
       console.error(e)
     }
