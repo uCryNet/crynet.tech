@@ -15,8 +15,8 @@
           пробовать что-то новое из айтишечки.</p>
         <p>А ещё я заядлый линуксоид. На Linux я перешёл примерно в конце 2012 года. Моим первым дистрибутивом был Linux Mint c Cinnamon.</p>
         <br>
-        <p><b>Рабочее окружение:</b> KDE Plasma</p>
         <p><b>Используемая ОС:</b> openSUSE Leap</p>
+        <p><b>Используемое DE:</b> KDE Plasma</p>
 
         <div class="about__nav">
           <a class="btn btn--big btn--yellow" href="https://bit.ly/crynet-resume" target="_blank">
