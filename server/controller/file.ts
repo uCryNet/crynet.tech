@@ -3,11 +3,11 @@ import * as fs from "fs";
 import path from "path";
 
 // Vars
-import { SECRET_KEY, STATIC_FOLDER_NAME } from "../config/config";
+import { STATIC_FOLDER_NAME } from "../config/config";
 import FileService from "../services/file";
 
 // Utils
-import { checkForPicture, decryptedData } from "../utils";
+import { imageСheck, decryptedData } from "../utils";
 
 
 class FileController {
@@ -17,18 +17,14 @@ class FileController {
       const filePathSplit = fullPath.split("/", 3)
       filePathSplit.shift()
       const filePath = filePathSplit.join("/")
-      const baseName = path.basename(fullPath)
+      const fileName = path.basename(fullPath)
 
+      fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, fileName), (err, image) => {
+        if (err) return res.status(404).json({ message: err })
 
-      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
-      fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, baseName), (err, image) => {
-        if (checkForPicture(image)) {
+        if (imageСheck(image)) {
           const fileType = path.extname(req.url).substring(1)
 
-          // TODO: добавить либу для получения MIME-type файла или написать функционал самому
-
-          // TODO: тут точно нужен setHeader и set?
-          // TODO: заменить на res.sendFIle(createPath("ссылка на файл"))
           res
             .setHeader("Cross-Origin-Resource-Policy", "*")
             .set("Content-Type", `image/${ fileType }`)
@@ -39,7 +35,7 @@ class FileController {
       });
 
     } catch (e) {
-      return res.status(400).json({ message: "File found error", e })
+      return res.status(400).json({ message: "File found error" })
     }
   }
 
