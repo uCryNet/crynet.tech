@@ -1,8 +1,8 @@
-import imageСheck from "./imageСheck"
+import imageCheck from "./imageСheck"
 import decryptedData from "./decryptedData"
 
 
 export {
-  imageСheck,
+  imageCheck,
   decryptedData
 }

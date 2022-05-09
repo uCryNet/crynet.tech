@@ -8,7 +8,7 @@ import { IMAGE_FOLDER_NAME, API_LINK } from "../config/config";
 import { HOST, PORT } from "../config/setup";
 
 // Utils
-import { imageСheck } from "../utils";
+import { imageCheck } from "../utils";
 
 
 const genName = (name: string) => `${ uuid.v4() }${ path.extname(name) }`
@@ -17,8 +17,7 @@ const genName = (name: string) => `${ uuid.v4() }${ path.extname(name) }`
 class FileService {
   async saveImage(file) {
     try {
-      if (!file.name) return ""
-      if (!imageСheck(file.data)) return console.error("File is no valid")
+      if (!file.name && !imageCheck(file.data)) return ""
 
       const currentYears = new Date().getUTCFullYear().toString()
       const folderPath = path.join(IMAGE_FOLDER_NAME, currentYears)

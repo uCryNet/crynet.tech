@@ -1,6 +1,7 @@
 // Vendors
 import * as fs from "fs";
 import path from "path";
+import 'dotenv/config'
 
 // Vars
 import { STATIC_FOLDER_NAME } from "../config/config";
@@ -49,12 +50,7 @@ class FileController {
 
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
-      const imageName = file ? await FileService.saveImage(file) : ""
-
-      //TODO проверить нужно ли тут: "http://", HOST, PORT
-      const fullPath = typeof imageName === "string"
-        ? path.join("http://", HOST, PORT.toString(), imageName)
-        : ""
+      const fullPath = file ? await FileService.saveImage(file) : ""
 
       res.json({ link: fullPath })
     } catch (e) {
