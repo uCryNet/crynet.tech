@@ -29,7 +29,7 @@ router.post("/file/upload", FileController.upload)
 // category
 router.get("/category/get-all", CategoryController.getAll)
 
-// TODO: обработку или редирект для несуществующих страниц
+// TODO: добавить обработку или редирект для несуществующих страниц
 // router.all((req, res) => {
 //   res
 //     .status(404)

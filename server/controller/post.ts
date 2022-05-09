@@ -3,7 +3,6 @@ import PostService from '../services/post'
 import FileService from '../services/file'
 
 // Vars
-import { SECRET_KEY } from "../config/config";
 import UserService from "../services/login";
 
 // Utils
@@ -29,9 +28,9 @@ class PostController {
 
       const posts = await PostService.getOne(req.params.id)
 
-      res.json(posts)
+      return res.json(posts)
     } catch (e) {
-      res.status(400).json({ message: "Failed to get the post", e })
+      return res.status(400).json({ message: "Failed to get the post", e })
     }
   }
 
@@ -45,7 +44,7 @@ class PostController {
       const posts = await PostService.get(searchValid, categoryValid)
       return res.json(posts)
     } catch (e) {
-      res.status(400).json({ message: "Error in receiving the post", e })
+      return res.status(400).json({ message: "Error in receiving the post", e })
     }
   }
 
@@ -68,9 +67,10 @@ class PostController {
       const date = new Date().toLocaleDateString("ru-RU")
 
       await PostService.create({ title, text, author: name, image: imageName, date, category })
-      res.json({ message: "Post create" })
+
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post create failed", e })
+      return res.status(400).json({ message: "Post create failed", e })
     }
   }
 
@@ -87,9 +87,9 @@ class PostController {
       // TODO: добавить возможность удалить картинку. Для начала хотя бы только из шапки
       await PostService.delete(id)
 
-      res.json({ message: "Post deleted" })
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post delete failed", e })
+      return res.status(400).json({ message: "Post delete failed", e })
     }
   }
 
@@ -109,14 +109,15 @@ class PostController {
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost._id) return res.status(400).json({ message: "Post not found" })
 
+      // TODO: добавить обновление картинки
       // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
       const { name } = await UserService.getUser(userId, "id")
 
-      const updatedPost = await PostService.update({ title, text, category, author: name, id: postId })
+      await PostService.update({ title, text, category, author: name, id: postId })
 
-      res.json({ message: "Post updated", updatedPost })
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post update failed", e })
+      return res.status(400).json({ message: "Post update failed", e })
     }
   }
 }

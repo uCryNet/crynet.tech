@@ -6,7 +6,7 @@ class CategoryController {
       const category = await CategoryService.getAll()
       return res.json(category)
     } catch (e) {
-      res.status(400).json({message: "Failed to get categories", e})
+      return res.status(400).json({message: "Failed to get categories", e})
     }
   }
 }

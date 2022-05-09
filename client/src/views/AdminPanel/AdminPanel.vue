@@ -23,9 +23,7 @@
     </div>
   </div>
 
-  <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">
-    <div>Отказанно в доступе</div>
-  </div>
+  <NotFound v-else />
 </template>
 
 <script lang="ts">
@@ -41,6 +39,7 @@ import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.typ
 import Aside from "./components/Aside/Aside.vue"
 import AdminArticle from "./components/AdminArticle/AdminArticle.vue";
 import AdminArticles from "./components/AdminArticles/AdminArticles.vue";
+import NotFound from "@/views/NotFound/NotFound.vue";
 
 // Utils
 import parseResponseError from "../../utils/parseResponseError";
@@ -55,7 +54,8 @@ export default {
   components: {
     AdminArticles,
     AdminArticle,
-    Aside
+    Aside,
+    NotFound
   },
 
   setup() {

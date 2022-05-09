@@ -8,8 +8,7 @@ import { STATIC_FOLDER_NAME } from "../config/config";
 import FileService from "../services/file";
 
 // Utils
-import { imageСheck, decryptedData } from "../utils";
-import { HOST, PORT } from "../config/setup";
+import { imageCheck, decryptedData } from "../utils";
 
 
 class FileController {
@@ -24,7 +23,7 @@ class FileController {
       fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, fileName), (err, image) => {
         if (err) return res.status(404).json({ message: err })
 
-        if (imageСheck(image)) {
+        if (imageCheck(image)) {
           const fileType = path.extname(req.url).substring(1)
 
           res
@@ -34,8 +33,7 @@ class FileController {
         } else {
           return res.status(404).json({ message: "File not found" })
         }
-      });
-
+      })
     } catch (e) {
       return res.status(400).json({ message: "File found error" })
     }
@@ -52,7 +50,7 @@ class FileController {
 
       const fullPath = file ? await FileService.saveImage(file) : ""
 
-      res.json({ link: fullPath })
+      return res.json({ link: fullPath })
     } catch (e) {
       return res.status(400).json({ message: "File upload error", e })
     }

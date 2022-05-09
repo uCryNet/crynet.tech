@@ -1,4 +1,5 @@
 // Vendors
+import 'dotenv/config'
 import bcrypt from 'bcryptjs'
 import CryptoJS from "crypto-js"
 import AES from "crypto-js/aes"
@@ -7,14 +8,13 @@ import AES from "crypto-js/aes"
 import UserService from '../services/login'
 
 // Vars
-import { SECRET_KEY } from "../config/config";
 import { decryptedData } from "../utils";
 
 
 const genToken = (id: string, role: string) => {
   const payload = { id, role }
 
-  return CryptoJS.AES.encrypt(JSON.stringify(payload), SECRET_KEY).toString();
+  return CryptoJS.AES.encrypt(JSON.stringify(payload), process.env.SECRET_KEY).toString();
 }
 
 
@@ -33,14 +33,14 @@ class UserController {
 
       const token = genToken(user._id, user.role)
 
-      res
+      return res
         .cookie('token', token, {
           maxAge: 60 * 60 * 24 * 1000,
           httpOnly: true
         })
         .send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Login error", e })
+      return res.status(400).json({ message: "Login error", e })
     }
   }
 
@@ -76,12 +76,12 @@ class UserController {
       const { role } = decryptedData(token)
       if (role !== "admin") return res.status(403).json({ message: "Forbidden" })
 
-      res.json({
+      return res.json({
         message: "Welcome to the board",
         isAdmin: true,
       })
     } catch (e) {
-      res.status(403).json({ message: "Access failed", e })
+      return res.status(403).json({ message: "Access failed", e })
     }
   }
 }
