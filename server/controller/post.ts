@@ -45,7 +45,7 @@ class PostController {
       const posts = await PostService.get(searchValid, categoryValid)
       return res.json(posts)
     } catch (e) {
-      res.status(400).json(e)
+      res.status(400).json({ message: "Error in receiving the post", e })
     }
   }
 

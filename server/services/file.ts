@@ -4,8 +4,7 @@ import * as path from 'path';
 import * as fs from "fs";
 
 // Vars
-import { IMAGE_FOLDER_NAME, API_LINK } from "../config/config";
-import { HOST, PORT } from "../config/setup";
+import { IMAGE_FOLDER_NAME } from "../config/config";
 
 // Utils
 import { imageCheck } from "../utils";
