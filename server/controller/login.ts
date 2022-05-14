@@ -46,6 +46,24 @@ class UserController {
     }
   }
 
+  async checkAccess(req: Request, res: Response) {
+    try {
+      const { token } = req.cookies
+
+      if (!token) return res.status(403).json({ message: "Unregistred user" })
+
+      const { role } = decryptedData(token)
+      if (role !== "admin") return res.status(403).json({ message: "Forbidden" })
+
+      return res.json({
+        message: "Welcome to the board",
+        isAdmin: true,
+      })
+    } catch (e) {
+      return res.status(403).json({ message: "Access failed", e })
+    }
+  }
+
   // Registration is fully functional. I'll leave it for better times
   // async registration(req: Request, res: Response) {
   //   try {
@@ -68,24 +86,6 @@ class UserController {
   //     res.status(400).json({message: "Registration failed", e})
   //   }
   // }
-
-  async checkAccess(req: Request, res: Response) {
-    try {
-      const { token } = req.cookies
-
-      if (!token) return res.status(403).json({ message: "Unregistred user" })
-
-      const { role } = decryptedData(token)
-      if (role !== "admin") return res.status(403).json({ message: "Forbidden" })
-
-      return res.json({
-        message: "Welcome to the board",
-        isAdmin: true,
-      })
-    } catch (e) {
-      return res.status(403).json({ message: "Access failed", e })
-    }
-  }
 }
 
 export default new UserController();

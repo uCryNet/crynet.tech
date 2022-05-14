@@ -16,7 +16,6 @@ import 'dotenv/config'
 import { imageCheck, decryptedData } from "../utils";
 
 
-
 class FileController {
   async get(req: Request, res: Response) {
     try {
@@ -34,7 +33,7 @@ class FileController {
 
           res
             .setHeader("Cross-Origin-Resource-Policy", "*")
-            .set("Content-Type", `image/${ fileType }`)
+            .set("Content-Type", `image/${fileType}`)
             .end(image)
         } else {
           return res.status(404).json({ message: "File not found" })
@@ -51,7 +50,7 @@ class FileController {
       const token = req.cookies.token
       const { role } = decryptedData(token)
 
-      if (!file) return res.status(400).json({ message: "File not found"})
+      if (!file) return res.status(400).json({ message: "File not found" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
       const fullPath = file ? await FileService.saveImage(file) : ""

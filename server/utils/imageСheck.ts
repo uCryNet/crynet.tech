@@ -1,3 +1,4 @@
+// Variables
 import { MAGIC_IMAGE_NUMBERS } from "../config/magicNumbers";
 
 

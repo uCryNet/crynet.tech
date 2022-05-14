@@ -30,7 +30,7 @@ class FileService {
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      // file.mv(path.join(IMAGE_FOLDER_NAME, currentYears, fileName))
+      await file.mv(path.join(IMAGE_FOLDER_NAME, currentYears, fileName))
       return path.join(IMAGE_FOLDER_NAME, currentYears, fileName)
     } catch (e) {
       console.error(e)

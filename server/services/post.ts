@@ -29,22 +29,22 @@ class PostService {
     if (search && category) {
       posts = await Post.find({
         category: new RegExp(category, 'ig'),
-        $or:[
-          {title: new RegExp(search, 'ig')},
-          {text: new RegExp(search, 'ig')},
+        $or: [
+          { title: new RegExp(search, 'ig') },
+          { text: new RegExp(search, 'ig') },
         ]
       })
     } else if (search) {
       posts = await Post.find({
-        $or:[
-          {title: new RegExp(search, 'ig')},
-          {text: new RegExp(search, 'ig')}
+        $or: [
+          { title: new RegExp(search, 'ig') },
+          { text: new RegExp(search, 'ig') }
         ]
       })
     } else if (category) {
       posts = await Post.find({
-        $or:[
-          {category: new RegExp(category, 'ig')}
+        $or: [
+          { category: new RegExp(category, 'ig') }
         ]
       })
     } else {
@@ -61,17 +61,17 @@ class PostService {
   }
 
   async getOne(id: string) {
-    const post = await Post.findOne({_id: id})
+    const post = await Post.findOne({ _id: id })
     return post
   }
 
   async delete(id: string) {
-    const post = await Post.findByIdAndDelete({_id: id})
+    const post = await Post.findByIdAndDelete({ _id: id })
     return post
   }
 
   async update(data: IPostUpdate) {
-    const updatedPost = Post.findByIdAndUpdate({_id: data.id}, data, {new: true})
+    const updatedPost = Post.findByIdAndUpdate({ _id: data.id }, data, { new: true })
     return updatedPost
   }
 }
