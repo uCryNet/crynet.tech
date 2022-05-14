@@ -2,6 +2,24 @@
 import Post from '../models/post'
 
 
+interface IPostCreate {
+  title: string
+  text: string
+  author: string
+  image: string
+  date: string
+  category: string
+}
+
+interface IPostUpdate {
+  id: string
+  title: string
+  text: string
+  category: string
+  author: string
+}
+
+
 class PostService {
   async get(search = "", category = "") {
     let posts
@@ -36,23 +54,23 @@ class PostService {
     return posts
   }
 
-  async create(data) {
+  async create(data: IPostCreate) {
     const newArticles = new Post(data)
     await newArticles.save()
     return newArticles
   }
 
-  async getOne(id) {
+  async getOne(id: string) {
     const post = await Post.findOne({_id: id})
     return post
   }
 
-  async delete(id) {
+  async delete(id: string) {
     const post = await Post.findByIdAndDelete({_id: id})
     return post
   }
 
-  async update(data) {
+  async update(data: IPostUpdate) {
     const updatedPost = Post.findByIdAndUpdate({_id: data.id}, data, {new: true})
     return updatedPost
   }

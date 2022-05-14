@@ -21,7 +21,7 @@ router.delete("/post/delete/:id", PostController.delete)
 router.post("/user/login", UserController.login)
 router.get("/user/check-access", UserController.checkAccess)
 
-// Registration is fully functional. I'll leave it for better times.
+// Registration is fully functional. I'll leave it for better times
 // router.post("/user/registration", UserController.registration)
 
 // file

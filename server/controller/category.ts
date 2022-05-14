@@ -1,9 +1,12 @@
+// Types
+import { Request, Response } from "express";
+
 // Components
 import CategoryService from "../services/category";
 
 
 class CategoryController {
-  async getAll(req, res) {
+  async getAll(req: Request, res: Response) {
     try {
       const category = await CategoryService.getAll()
       return res.json(category)

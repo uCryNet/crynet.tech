@@ -2,6 +2,9 @@
 import * as fs from "fs";
 import path from "path";
 
+// Types
+import { Request, Response } from "express";
+
 // Components
 import FileService from "../services/file";
 
@@ -13,8 +16,9 @@ import 'dotenv/config'
 import { imageCheck, decryptedData } from "../utils";
 
 
+
 class FileController {
-  async get(req, res) {
+  async get(req: Request, res: Response) {
     try {
       const fullPath = req.url.substring(1)
       const filePathSplit = fullPath.split("/", 3)
@@ -41,17 +45,16 @@ class FileController {
     }
   }
 
-  async upload(req, res) {
+  async upload(req: Request, res: Response) {
     try {
-      const { file } = req.files
-
+      const file = req.files?.file
       const token = req.cookies.token
       const { role } = decryptedData(token)
 
+      if (!file) return res.status(400).json({ message: "File not found"})
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
       const fullPath = file ? await FileService.saveImage(file) : ""
-
       return res.json({ link: fullPath })
     } catch (e) {
       return res.status(400).json({ message: "File upload error", e })

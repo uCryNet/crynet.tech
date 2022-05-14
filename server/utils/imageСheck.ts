@@ -1,7 +1,7 @@
 import { MAGIC_IMAGE_NUMBERS } from "../config/magicNumbers";
 
 
-export default (fileBuffer) => {
+export default (fileBuffer: Buffer) => {
   if (!fileBuffer) return false
 
   const image = fileBuffer.toString('hex', 0, 4)

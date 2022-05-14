@@ -3,6 +3,9 @@ import 'dotenv/config'
 import bcrypt from 'bcryptjs'
 import CryptoJS from "crypto-js"
 
+// Types
+import { Request, Response } from "express";
+
 // Components
 import UserService from '../services/login'
 
@@ -13,12 +16,12 @@ import { decryptedData } from "../utils";
 const genToken = (id: string, role: string) => {
   const payload = { id, role }
 
-  return CryptoJS.AES.encrypt(JSON.stringify(payload), process.env.SECRET_KEY).toString();
+  return CryptoJS.AES.encrypt(JSON.stringify(payload), process.env.SECRET_KEY as string).toString();
 }
 
 
 class UserController {
-  async login(req, res) {
+  async login(req: Request, res: Response) {
     try {
       const { login, password } = req.body
 
@@ -43,8 +46,8 @@ class UserController {
     }
   }
 
-  // Registration is fully functional. I'll leave it for better times.
-  // async registration(req, res) {
+  // Registration is fully functional. I'll leave it for better times
+  // async registration(req: Request, res: Response) {
   //   try {
   //     if (!req.body) return res.status(400).json({message: "Registration error"})
   //
@@ -66,7 +69,7 @@ class UserController {
   //   }
   // }
 
-  async checkAccess(req, res) {
+  async checkAccess(req: Request, res: Response) {
     try {
       const { token } = req.cookies
 

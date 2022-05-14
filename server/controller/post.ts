@@ -1,3 +1,6 @@
+// Types
+import { Request, Response } from "express";
+
 // Components
 import PostService from '../services/post'
 import FileService from '../services/file'
@@ -6,10 +9,10 @@ import FileService from '../services/file'
 import UserService from "../services/login";
 
 // Utils
-import { decryptedData } from "../utils";
+import { decryptedData } from "../utils"
 
 
-const checkLengthArticle = (res, title, text) => {
+const checkLengthArticle = (res: Response, title: string, text: string) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({ message: "Check the length title" })
   if (text.length < 10 || text.length > 5000) return res.status(400).json({ message: "Check the length text" })
 }
@@ -22,7 +25,7 @@ const stringValidate = (string: string) => {
 }
 
 class PostController {
-  async getOne(req, res) {
+  async getOne(req: Request, res: Response) {
     try {
       if (!req.params.id) return res.status(400).json({ message: "Post not found" })
 
@@ -33,7 +36,7 @@ class PostController {
     }
   }
 
-  async get(req, res) {
+  async get(req: Request, res: Response) {
     try {
       const { search, category } = req.body
 
@@ -47,7 +50,7 @@ class PostController {
     }
   }
 
-  async create(req, res) {
+  async create(req: Request, res: Response) {
     try {
       if (!req.body) return res.status(400).json({ message: "Post create error" })
 
@@ -73,7 +76,7 @@ class PostController {
     }
   }
 
-  async delete(req, res) {
+  async delete(req: Request, res: Response) {
     try {
       const id = req?.params.id
       const token = req.cookies.token
@@ -92,7 +95,7 @@ class PostController {
     }
   }
 
-  async update(req, res) {
+  async update(req: Request, res: Response) {
     try {
       if (!req.body) return res.status(400).json({ message: "Post update error" })
       const { title, text, category, id: postId } = req.body

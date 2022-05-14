@@ -18,6 +18,8 @@ app.use(
   cors({
     origin: process.env.ENV,
     credentials: true, //access-control-allow-credentials: true
+    // TODO: fix this
+    // @ts-ignore
     optionSuccessStatus: 200,
   }),
 )
@@ -31,7 +33,11 @@ app.use(API_LINK, router) // http://localhost:5000/api/
 
 async function startApp() {
   try {
-    await mongoose.connect(process.env.DB, { useFindAndModify: false, useNewUrlParser: true, useUnifiedTopology: true })
+    await mongoose.connect(process.env.DB as string, {
+      useFindAndModify: false,
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    })
     app.listen(process.env.PORT, () => console.log('SERVER STARTED ON PORT ' + process.env.PORT))
   } catch (e) {
     console.log(e)
