@@ -26,7 +26,7 @@
 // Vendors
 import { defineComponent, toRefs } from "vue";
 
-// Vars
+// Variables
 import { SERVER_API } from "@/config/api";
 
 

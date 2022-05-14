@@ -3,7 +3,7 @@ import { IArticle, IGetPosts } from "@/interfaces/interfaces";
 import { IFiltersStore, IPostStore } from "@/store/store.types";
 import { Commit } from "vuex";
 
-// Vars
+// Variables
 import API from "../api/api";
 
 // Utils

@@ -6,7 +6,7 @@ import 'dotenv/config'
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
-// Vars
+// Variables
 const router = require("./routes/index.routes.ts")
 import { STATIC_FOLDER_NAME, API_LINK } from "./config/config"
 

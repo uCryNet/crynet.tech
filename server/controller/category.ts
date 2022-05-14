@@ -1,4 +1,6 @@
+// Components
 import CategoryService from "../services/category";
+
 
 class CategoryController {
   async getAll(req, res) {

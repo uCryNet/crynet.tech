@@ -6,7 +6,7 @@
 </template>
 
 <script setup lang="ts">
-// Vars
+// Variables
 import { ROUTE_LINK } from "@/router";
 
 

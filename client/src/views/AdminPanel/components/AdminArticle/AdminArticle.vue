@@ -53,7 +53,7 @@ import Editor from '@tinymce/tinymce-vue'
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
 import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
-// Vars
+// Variables
 import API from "@/api/api"
 import { TINYMCE_KEY } from "@/config/constant"
 

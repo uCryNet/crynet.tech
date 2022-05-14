@@ -1,4 +1,4 @@
-import { MAGIC_IMAGE_NUMBERS } from "../config/constant";
+import { MAGIC_IMAGE_NUMBERS } from "../config/magicNumbers";
 
 
 export default (fileBuffer) => {

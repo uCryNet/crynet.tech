@@ -1,7 +1,6 @@
 // Vendors
 import 'dotenv/config'
 import CryptoJS from "crypto-js"
-import AES from "crypto-js/aes"
 
 
 export default (hash: string) => {

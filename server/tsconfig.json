@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
-    "esModuleInterop": true,
+    "esModuleInterop": true, // Allows us to compile ES6 modules to CommonJS modules
     "module": "commonjs",
-    "target": "es5",
-    "sourceMap": true,
-    "lib": ["es6"],
+    "target": "ES6",
+    "strict": true, // An option that enables strict type-checking options
+    "outDir": "/dist"
   },
   "exclude": [
     "node_modules"

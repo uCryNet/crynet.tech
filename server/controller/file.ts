@@ -1,11 +1,13 @@
 // Vendors
 import * as fs from "fs";
 import path from "path";
-import 'dotenv/config'
 
-// Vars
-import { STATIC_FOLDER_NAME } from "../config/config";
+// Components
 import FileService from "../services/file";
+
+// Variables
+import { STATIC_FOLDER_NAME } from "../config/config";
+import 'dotenv/config'
 
 // Utils
 import { imageCheck, decryptedData } from "../utils";

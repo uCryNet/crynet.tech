@@ -2,7 +2,7 @@
 import PostService from '../services/post'
 import FileService from '../services/file'
 
-// Vars
+// Variables
 import UserService from "../services/login";
 
 // Utils
@@ -27,7 +27,6 @@ class PostController {
       if (!req.params.id) return res.status(400).json({ message: "Post not found" })
 
       const posts = await PostService.getOne(req.params.id)
-
       return res.json(posts)
     } catch (e) {
       return res.status(400).json({ message: "Failed to get the post", e })

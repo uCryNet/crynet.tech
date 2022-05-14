@@ -2,12 +2,11 @@
 import 'dotenv/config'
 import bcrypt from 'bcryptjs'
 import CryptoJS from "crypto-js"
-import AES from "crypto-js/aes"
 
 // Components
 import UserService from '../services/login'
 
-// Vars
+// Variables
 import { decryptedData } from "../utils";
 
 
@@ -35,7 +34,7 @@ class UserController {
 
       return res
         .cookie('token', token, {
-          maxAge: 60 * 60 * 24 * 1000,
+          maxAge: 86400000, // 1 day
           httpOnly: true
         })
         .send('OK')
@@ -44,7 +43,7 @@ class UserController {
     }
   }
 
-  // Регистрация полностью рабочая. Оставлю до лучших времен
+  // Registration is fully functional. I'll leave it for better times.
   // async registration(req, res) {
   //   try {
   //     if (!req.body) return res.status(400).json({message: "Registration error"})
