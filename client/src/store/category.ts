@@ -3,7 +3,7 @@ import { ICategoryStore } from "@/store/store.types";
 import { Commit } from "vuex";
 import { ICategory } from "@/interfaces/interfaces";
 
-// Vars
+// Variables
 import API from "../api/api";
 
 // Utils

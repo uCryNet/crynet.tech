@@ -22,7 +22,7 @@ import { highlightAll } from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
-// Vars
+// Variables
 import API from "@/api/api"
 
 // Utils

@@ -1,16 +1,18 @@
-// Vendors
-import jwt from "jsonwebtoken"
+// Types
+import { Request, Response } from "express";
 
 // Components
 import PostService from '../services/post'
 import FileService from '../services/file'
 
-// Vars
-import { SECRET_KEY } from "../config/config";
+// Variables
 import UserService from "../services/login";
 
+// Utils
+import { decryptedData } from "../utils"
 
-const checkLengthArticle = (res, title, text) => {
+
+const checkLengthArticle = (res: Response, title: string, text: string) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({ message: "Check the length title" })
   if (text.length < 10 || text.length > 5000) return res.status(400).json({ message: "Check the length text" })
 }
@@ -23,19 +25,18 @@ const stringValidate = (string: string) => {
 }
 
 class PostController {
-  async getOne(req, res) {
+  async getOne(req: Request, res: Response) {
     try {
       if (!req.params.id) return res.status(400).json({ message: "Post not found" })
 
       const posts = await PostService.getOne(req.params.id)
-
-      res.json(posts)
+      return res.json(posts)
     } catch (e) {
-      res.status(400).json({ message: "Failed to get the post", e })
+      return res.status(400).json({ message: "Failed to get the post", e })
     }
   }
 
-  async get(req, res) {
+  async get(req: Request, res: Response) {
     try {
       const { search, category } = req.body
 
@@ -45,17 +46,17 @@ class PostController {
       const posts = await PostService.get(searchValid, categoryValid)
       return res.json(posts)
     } catch (e) {
-      res.status(400).json(e)
+      return res.status(400).json({ message: "Error in receiving the post", e })
     }
   }
 
-  async create(req, res) {
+  async create(req: Request, res: Response) {
     try {
       if (!req.body) return res.status(400).json({ message: "Post create error" })
 
       const { title, text, category } = req.body
       const token = req.cookies.token
-      const { role, id: _id } = jwt.verify(token, SECRET_KEY)
+      const { role, id: _id } = decryptedData(token)
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
@@ -68,17 +69,18 @@ class PostController {
       const date = new Date().toLocaleDateString("ru-RU")
 
       await PostService.create({ title, text, author: name, image: imageName, date, category })
-      res.json({ message: "Post create" })
+
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post create failed", e })
+      return res.status(400).json({ message: "Post create failed", e })
     }
   }
 
-  async delete(req, res) {
+  async delete(req: Request, res: Response) {
     try {
       const id = req?.params.id
       const token = req.cookies.token
-      const { role } = jwt.verify(token, SECRET_KEY)
+      const { role } = decryptedData(token)
 
       if (!id) return res.status(400).json({ message: "Post not found" })
       if (!token) return res.status(400).json({ message: "User is not authorized" })
@@ -87,19 +89,19 @@ class PostController {
       // TODO: добавить возможность удалить картинку. Для начала хотя бы только из шапки
       await PostService.delete(id)
 
-      res.json({ message: "Post deleted" })
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post delete failed", e })
+      return res.status(400).json({ message: "Post delete failed", e })
     }
   }
 
-  async update(req, res) {
+  async update(req: Request, res: Response) {
     try {
       if (!req.body) return res.status(400).json({ message: "Post update error" })
       const { title, text, category, id: postId } = req.body
 
       const token = req.cookies.token
-      const { role, id: userId } = jwt.verify(token, SECRET_KEY)
+      const { role, id: userId } = decryptedData(token)
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin" || !userId) return res.status(400).json({ message: "No access" })
@@ -109,14 +111,15 @@ class PostController {
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost._id) return res.status(400).json({ message: "Post not found" })
 
+      // TODO: добавить обновление картинки
       // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
       const { name } = await UserService.getUser(userId, "id")
 
-      const updatedPost = await PostService.update({ title, text, category, author: name, id: postId })
+      await PostService.update({ title, text, category, author: name, id: postId })
 
-      res.json({ message: "Post updated", updatedPost })
+      return res.send('OK')
     } catch (e) {
-      res.status(400).json({ message: "Post update failed", e })
+      return res.status(400).json({ message: "Post update failed", e })
     }
   }
 }

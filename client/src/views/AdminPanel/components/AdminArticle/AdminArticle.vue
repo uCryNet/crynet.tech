@@ -53,12 +53,13 @@ import Editor from '@tinymce/tinymce-vue'
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
 import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
-// Vars
+// Variables
 import API from "@/api/api"
 import { TINYMCE_KEY } from "@/config/constant"
 
 // Utils
 import parseResponseError from "@/utils/parseResponseError"
+import { SERVER_API } from "@/config/api";
 
 
 export default defineComponent({
@@ -99,13 +100,10 @@ export default defineComponent({
         const formData = new FormData()
         formData.append("file", blobInfo.blob(), blobInfo.filename())
 
+        // TODO: сломал отправку файла
         API.uploadImage(formData)
-          .then(res => {
-            success(res.data.link);
-          })
-          .catch(error => {
-            console.error(parseResponseError(error))
-          })
+          .then(res => success(SERVER_API + res.data.link))
+          .catch(error => console.error(parseResponseError(error)))
       },
       codesample_global_prismjs: true,
       menubar: true,

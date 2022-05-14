@@ -3,39 +3,38 @@ import * as uuid from 'uuid';
 import * as path from 'path';
 import * as fs from "fs";
 
-// Vars
+// Types
+import { UploadedFile } from 'express-fileupload';
+
+// Variables
 import { IMAGE_FOLDER_NAME } from "../config/config";
-import { API_LINK, HOST, PORT } from "../config/setup";
 
 // Utils
-import { checkForPicture } from "../utils";
+import { imageCheck } from "../utils";
 
 
-const genName = (name: string) => `${ uuid.v4() }${ path.extname(name) }`
+const genName = (name: string) => `${uuid.v4()}${path.extname(name)}`
 
 
 class FileService {
-  saveImage(file) {
+  async saveImage(file: UploadedFile | UploadedFile[]) {
     try {
-      const name = file.name
-      if (!name) return ""
+      if (Array.isArray(file)) return ""
+      if (!file.name && !imageCheck(file.data)) return ""
 
-      if (!checkForPicture(file.data)) return console.error("File is no valid")
+      const currentYears = new Date().getUTCFullYear().toString()
+      const folderPath = path.join(IMAGE_FOLDER_NAME, currentYears)
 
-      const currentYears = new Date().getUTCFullYear()
-      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
-      const folderPath = `${ IMAGE_FOLDER_NAME }/${ currentYears }`
-      const fileName = genName(name)
+      const fileName = genName(file.name)
 
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
-      file.mv(`${IMAGE_FOLDER_NAME}/${currentYears}/${fileName}`);
-
-      return `http://${ HOST }:${ PORT }/${ API_LINK }/${ IMAGE_FOLDER_NAME }/${ currentYears }/${ fileName }`
+      await file.mv(path.join(IMAGE_FOLDER_NAME, currentYears, fileName))
+      return path.join(IMAGE_FOLDER_NAME, currentYears, fileName)
     } catch (e) {
-      console.log(e)
+      console.error(e)
+      return ""
     }
   }
 }

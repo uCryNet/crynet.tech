@@ -34,7 +34,7 @@
 import { onMounted, ref, watch, } from "vue";
 import { useRouter } from "vue-router";
 
-// Vars
+// Variables
 import { ROUTE_LINK } from "@/router";
 import API from "@/api/api"
 

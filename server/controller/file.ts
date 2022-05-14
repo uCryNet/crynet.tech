@@ -1,61 +1,60 @@
 // Vendors
 import * as fs from "fs";
 import path from "path";
-import jwt from "jsonwebtoken"
 
-// Vars
-import { SECRET_KEY, STATIC_FOLDER_NAME } from "../config/config";
+// Types
+import { Request, Response } from "express";
+
+// Components
 import FileService from "../services/file";
 
+// Variables
+import { STATIC_FOLDER_NAME } from "../config/config";
+import 'dotenv/config'
+
 // Utils
-import { checkForPicture } from "../utils";
+import { imageCheck, decryptedData } from "../utils";
 
 
 class FileController {
-  async get(req, res) {
+  async get(req: Request, res: Response) {
     try {
       const fullPath = req.url.substring(1)
       const filePathSplit = fullPath.split("/", 3)
       filePathSplit.shift()
       const filePath = filePathSplit.join("/")
-      const baseName = path.basename(fullPath)
+      const fileName = path.basename(fullPath)
 
+      fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, fileName), (err, image) => {
+        if (err) return res.status(404).json({ message: err })
 
-      // TODO: заменить строку на эту path.resolve(__dirname, 'view', fileName)
-      fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, baseName), (err, image) => {
-        if (checkForPicture(image)) {
+        if (imageCheck(image)) {
           const fileType = path.extname(req.url).substring(1)
 
-          // TODO: добавить либу для получения MIME-type файла или написать функционал самому
-
-          // TODO: тут точно нужен setHeader и set?
-          // TODO: заменить на res.sendFIle(createPath("ссылка на файл"))
           res
             .setHeader("Cross-Origin-Resource-Policy", "*")
-            .set("Content-Type", `image/${ fileType }`)
+            .set("Content-Type", `image/${fileType}`)
             .end(image)
         } else {
           return res.status(404).json({ message: "File not found" })
         }
-      });
-
+      })
     } catch (e) {
-      return res.status(400).json({ message: "File found error", e })
+      return res.status(400).json({ message: "File found error" })
     }
   }
 
-  async upload(req, res) {
+  async upload(req: Request, res: Response) {
     try {
-      const { file } = req.files
-
+      const file = req.files?.file
       const token = req.cookies.token
-      const { role } = jwt.verify(token, SECRET_KEY)
+      const { role } = decryptedData(token)
 
+      if (!file) return res.status(400).json({ message: "File not found" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
-      const imageName = file && await FileService.saveImage(file)
-
-      res.json({ link: imageName })
+      const fullPath = file ? await FileService.saveImage(file) : ""
+      return res.json({ link: fullPath })
     } catch (e) {
       return res.status(400).json({ message: "File upload error", e })
     }
