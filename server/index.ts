@@ -7,8 +7,8 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 // Variables
-const router = require("./routes/index.routes.ts")
-import { STATIC_FOLDER_NAME, API_LINK } from "./config/config"
+const router = require("./src/routes/index.routes.ts")
+import { STATIC_FOLDER_NAME, API_LINK } from "./src/config/config"
 
 const app = express()
 
