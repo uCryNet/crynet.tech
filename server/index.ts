@@ -16,6 +16,7 @@ mongoose.set('useCreateIndex', true)
 
 app.use(
   cors({
+    // origin needed because front and back works on different ports 
     origin: process.env.ENV,
     credentials: true, //access-control-allow-credentials: true
     // TODO: fix this
