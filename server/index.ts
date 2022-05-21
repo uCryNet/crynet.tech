@@ -45,3 +45,8 @@ async function startApp() {
 }
 
 startApp()
+
+
+// TODO: убрать api из ссылок картинок
+// TODO: папка static должна лежать рядом с папкой server, а не внутри
+// TODO: убрать логику отдачи статики
