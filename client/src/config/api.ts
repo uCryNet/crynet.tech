@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const PROD_HOST = '64.225.65.243'
+const PROD_HOST = 'crynet.tech'
 export const { hostname: HOST_NAME } = window.location
 export const SERVER = PROD_HOST.includes(HOST_NAME)
   ? `http://${PROD_HOST}/`

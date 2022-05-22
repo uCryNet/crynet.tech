@@ -3,7 +3,8 @@
 ### Info to back-end:
 **Start BE:** 
 * `cd server`
-* `npm run dev`
+* `npm i`
+* `npm run start`
 
 **Starting in:** localhost:5000
 
@@ -14,6 +15,9 @@ ___
 ### Info to front-end:
 **Start FE:** 
 * `cd client`
+* `npm i`
 * `npm run serve`
 
 **Starting in:** localhost:8080
+
+Prod version use Nginx for 

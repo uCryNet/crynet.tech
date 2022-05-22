@@ -11,9 +11,6 @@ const router = require("./src/routes/index.routes.ts")
 import { STATIC_FOLDER_NAME } from "./src/config/config"
 
 
-/** Change ENV var in .env file on you host! **/
-
-
 const app = express()
 app.use(
   cors({
