@@ -10,7 +10,6 @@ import FileService from "../services/file";
 
 // Variables
 import { STATIC_FOLDER_NAME } from "../config/config";
-import 'dotenv/config'
 
 // Utils
 import { imageCheck, decryptedData } from "../utils";
@@ -18,14 +17,14 @@ import { imageCheck, decryptedData } from "../utils";
 
 class FileController {
   async get(req: Request, res: Response) {
-    try {
-      const fullPath = req.url.substring(1)
-      const filePathSplit = fullPath.split("/", 3)
-      filePathSplit.shift()
-      const filePath = filePathSplit.join("/")
-      const fileName = path.basename(fullPath)
+    /** only for local develop. Prod works for Nginx **/
 
-      fs.readFile(path.join(STATIC_FOLDER_NAME, filePath, fileName), (err, image) => {
+    try {
+      const { base, dir } = path.parse(req.url)
+      const splitUrl = dir.split("/", 4)
+      const fullPath = path.join(STATIC_FOLDER_NAME, splitUrl[2], splitUrl[3], base)
+
+      fs.readFile(path.join(__dirname, "../../../", fullPath), (err, image) => {
         if (err) return res.status(404).json({ message: err })
 
         if (imageCheck(image)) {

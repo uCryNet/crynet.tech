@@ -8,15 +8,16 @@ import cookieParser from "cookie-parser"
 
 // Variables
 const router = require("./src/routes/index.routes.ts")
-import { STATIC_FOLDER_NAME, API_LINK } from "./src/config/config"
+import { STATIC_FOLDER_NAME } from "./src/config/config"
+
+
+/** Change ENV var in .env file on you host! **/
+
 
 const app = express()
-
-mongoose.set('useCreateIndex', true)
-
 app.use(
   cors({
-    // origin needed because front and back works on different ports 
+    // origin needed because front and back works on different ports (only local develop)
     origin: process.env.ENV,
     credentials: true, //access-control-allow-credentials: true
     // TODO: fix this
@@ -29,7 +30,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
 app.use(express.static(STATIC_FOLDER_NAME))
 app.use(fileUpload({}))
-app.use(API_LINK, router) // http://localhost:5000/api/
+app.use(router) // http://localhost:5000/api/
+mongoose.set('useCreateIndex', true)
 
 
 async function startApp() {
@@ -39,15 +41,10 @@ async function startApp() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    app.listen(process.env.PORT, () => console.log('SERVER STARTED ON PORT ' + process.env.PORT))
+    app.listen(process.env.PORT, () => console.log('SERVER WORKS ON PORT ' + process.env.PORT))
   } catch (e) {
     console.log(e)
   }
 }
 
 startApp()
-
-
-// TODO: убрать api из ссылок картинок
-// TODO: папка static должна лежать рядом с папкой server, а не внутри
-// TODO: убрать логику отдачи статики

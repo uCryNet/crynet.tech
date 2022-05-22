@@ -23,15 +23,17 @@ class FileService {
       if (!file.name && !imageCheck(file.data)) return ""
 
       const currentYears = new Date().getUTCFullYear().toString()
-      const folderPath = path.join(IMAGE_FOLDER_NAME, currentYears)
+      const folderPath = path.join(__dirname, "../../../", IMAGE_FOLDER_NAME, currentYears)
 
       const fileName = genName(file.name)
 
       const isExistsFolder = fs.existsSync(folderPath)
       if (!isExistsFolder) fs.mkdirSync(folderPath)
 
-      await file.mv(path.join(IMAGE_FOLDER_NAME, currentYears, fileName))
-      return path.join(IMAGE_FOLDER_NAME, currentYears, fileName)
+      const fileLink = path.join(IMAGE_FOLDER_NAME, currentYears, fileName)
+
+      await file.mv(path.join(__dirname, "../../../", fileLink))
+      return path.join(fileLink)
     } catch (e) {
       console.error(e)
       return ""

@@ -1,5 +1,4 @@
 // Vendors
-import 'dotenv/config'
 import CryptoJS from "crypto-js"
 
 

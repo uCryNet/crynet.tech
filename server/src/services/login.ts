@@ -14,7 +14,7 @@ class UserService {
     }
   }
 
-  // Registration is fully functional. I'll leave it for better times
+  /** Registration is fully functional. I'll leave it for better times **/
   // async registration(data) {
   //   const newUser = new User(data);
   //   await newUser.save()

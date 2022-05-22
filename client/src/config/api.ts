@@ -1,26 +1,22 @@
 import axios from 'axios';
 
-const PROD_HOST = [ 'localhost' ];
+
+const PROD_HOST = '64.225.65.243'
 export const { hostname: HOST_NAME } = window.location
-export const SERVER_API = PROD_HOST.includes(HOST_NAME) ? `http://localhost:5000/api/` : `http://localhost:5000/api/`
+export const SERVER = PROD_HOST.includes(HOST_NAME)
+  ? `http://${PROD_HOST}/`
+  : `http://localhost:5000/`
+export const SERVER_API = SERVER + "api"
 
-if (PROD_HOST.includes(HOST_NAME)) { // PROD
-  axios.defaults.baseURL = '//localhost:5000/api/';
-} else { // DEV
-  axios.defaults.baseURL = '//localhost:5000/api/';
-}
-
+axios.defaults.baseURL = SERVER_API
 axios.defaults.headers.common[ 'X-Requested-With' ] = 'XMLHttpRequest';
 axios.defaults.withCredentials = true
-
 axios.interceptors.response.use(
   response => {
     // Do something with response data
-
     return Promise.resolve(response);
   },
   error => {
     // Do something with response error
-
     return Promise.reject(error);
   });

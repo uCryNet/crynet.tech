@@ -1,5 +1,4 @@
 // Vendors
-import 'dotenv/config'
 import bcrypt from 'bcryptjs'
 import CryptoJS from "crypto-js"
 
@@ -50,7 +49,7 @@ class UserController {
     try {
       const { token } = req.cookies
 
-      if (!token) return res.status(403).json({ message: "Unregistred user" })
+      if (!token) return res.status(403).json({ message: "Unregistered user" })
 
       const { role } = decryptedData(token)
       if (role !== "admin") return res.status(403).json({ message: "Forbidden" })
@@ -64,7 +63,7 @@ class UserController {
     }
   }
 
-  // Registration is fully functional. I'll leave it for better times
+  /** Registration is fully functional. I'll leave it for better times **/
   // async registration(req: Request, res: Response) {
   //   try {
   //     if (!req.body) return res.status(400).json({message: "Registration error"})

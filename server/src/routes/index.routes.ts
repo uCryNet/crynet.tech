@@ -12,30 +12,25 @@ const router = Router()
 
 
 // post
-router.post("/post/get-all", PostController.get)
-router.get("/post/get-one/:id", PostController.getOne)
-router.post("/post/create", PostController.create)
-router.put("/post/update", PostController.update)
-router.delete("/post/delete/:id", PostController.delete)
+router.post("/api/post/get-all", PostController.get)
+router.get("/api/post/get-one/:id", PostController.getOne)
+router.post("/api/post/create", PostController.create)
+router.put("/api/post/update", PostController.update)
+router.delete("/api/post/delete/:id", PostController.delete)
 // user
-router.post("/user/login", UserController.login)
-router.get("/user/check-access", UserController.checkAccess)
+router.post("/api/user/login", UserController.login)
+router.get("/api/user/check-access", UserController.checkAccess)
 
-// Registration is fully functional. I'll leave it for better times
-// router.post("/user/registration", UserController.registration)
+/**
+ * Registration is fully functional. I'll leave it for better times
+ * router.post("/api/user/registration", UserController.registration)
+ */
 
 // file
-router.get("/static/*", FileController.get)
-router.post("/file/upload", FileController.upload)
+router.get("/static/*", FileController.get) // only for local develop. Prod works for Nginx
+router.post("/api/file/upload", FileController.upload)
 
 // category
-router.get("/category/get-all", CategoryController.getAll)
-
-// TODO: добавить обработку или редирект для несуществующих страниц
-// router.all((req, res) => {
-//   res
-//     .status(404)
-//     .end("Нет такой страницы")
-// })
+router.get("/api/category/get-all", CategoryController.getAll)
 
 module.exports = router;
