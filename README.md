@@ -20,4 +20,4 @@ ___
 
 **Starting in:** localhost:8080
 
-Prod version use Nginx for 
+Prod version use Nginx for static
