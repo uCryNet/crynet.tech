@@ -80,10 +80,14 @@
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s ease;
-    padding: 8px 0;
 
     &:hover {
       color: #ddc051;
     }
+  }
+
+  &__subcategory-unit-link {
+    padding: 8px 0;
+    display: block;
   }
 }
