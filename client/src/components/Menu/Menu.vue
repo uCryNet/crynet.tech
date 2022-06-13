@@ -14,8 +14,12 @@
           class="menu__subcategory-unit"
           @click="get(subCategoriesUnit.name)"
         >
-          <!-- TODO: fix this -->
-          <router-link class="menu__subcategory-unit-link" :to="`/blog/${subCategoriesUnit.name}`">{{ subCategoriesUnit.name }}</router-link>
+          <router-link
+            class="menu__subcategory-unit-link"
+            :to="{name: 'Articles', params: {category: subCategoriesUnit.name}}"
+          >
+            {{ subCategoriesUnit.name }}
+          </router-link>
         </div>
       </div>
     </div>

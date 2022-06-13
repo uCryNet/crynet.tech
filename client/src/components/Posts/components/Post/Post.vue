@@ -1,6 +1,5 @@
 <template>
-  <!-- TODO: fix this -->
-  <router-link class="post" :to="'/blog/' + category + '/' + id">
+  <router-link class="post" :to="{name: 'Article', params: {id, category}}">
     <img class="post__image" :src="getImageLink"/>
 
     <div class="post__time">
