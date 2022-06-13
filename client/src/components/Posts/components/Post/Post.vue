@@ -1,6 +1,6 @@
 <template>
   <router-link class="post" :to="{name: 'Article', params: {id, category}}">
-    <img class="post__image" :src="getImageLink"/>
+    <img @error="onError" class="post__image" :src="isError ? `/media/img/post/not-found-image.jpg` : poster"/>
 
     <div class="post__time">
       <div class="post__date">
@@ -23,7 +23,7 @@
 
 <script lang="ts">
 // Vendors
-import { defineComponent, toRefs } from "vue";
+import { defineComponent, ref, toRefs } from "vue";
 
 // Variables
 import { SERVER } from "@/config/api";
@@ -61,14 +61,19 @@ export default defineComponent({
   setup(props) {
     const { text, image, date } = toRefs(props)
 
+    const isError = ref<boolean>(false)
+
     const getDate = date.value.split(".")
     const getDescription = text.value.substring(0, 200) + "..."
-    const getImageLink = image.value ? `${SERVER}${image.value}` : `/media/img/post/not-found-image.jpg`
+    const poster = SERVER + image.value
+    const onError = () => isError.value = true
 
     return {
       getDate,
       getDescription,
-      getImageLink
+      onError,
+      isError,
+      poster
     }
   }
 })
