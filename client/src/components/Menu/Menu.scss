@@ -17,7 +17,7 @@
   .router-link {
     text-transform: uppercase;
     font-weight: bold;
-    cursor: pointer;
+
   }
 
   &__category {
@@ -25,6 +25,10 @@
     display: flex;
     justify-content: flex-start;
     padding: 3px 8px;
+
+    div.router-link {
+      cursor: default;
+    }
 
     @media (max-width: 576px) {
       margin-bottom: 15px;
