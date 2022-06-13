@@ -16,15 +16,6 @@ ul li {
   }
 }
 
-a {
-  transition: .3s ease;
-
-  &.router-link-exact-active {
-    color: #fcdb5a;
-    pointer-events: none;
-  }
-}
-
 p {
   line-height: (14 / 10);
 }
@@ -138,8 +129,13 @@ p {
 
 .router-link {
   &:hover {
-    color: #fcdb5a;
+    color: #ddc051;
   }
+}
+
+.router-link-active {
+  color: #fcdb5a;
+  pointer-events: none;
 }
 
 @for $i from 1 through 20 {

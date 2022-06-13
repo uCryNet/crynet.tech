@@ -17,12 +17,7 @@
   .router-link {
     text-transform: uppercase;
     font-weight: bold;
-    color: #fff;
     cursor: pointer;
-
-    &.router-link-exact-active {
-      color: #fcdb5a;
-    }
   }
 
   &__category {
@@ -78,8 +73,6 @@
 
   &__subcategory-unit {
     text-transform: uppercase;
-    cursor: pointer;
-    transition: 0.3s ease;
 
     &:hover {
       color: #ddc051;
@@ -89,5 +82,9 @@
   &__subcategory-unit-link {
     padding: 8px 0;
     display: block;
+  }
+
+  .router-link {
+    transition: .3s ease;
   }
 }

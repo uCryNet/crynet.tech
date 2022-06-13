@@ -13,7 +13,10 @@
       />
     </div>
 
-    <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">Упс! Записей не обнаруженно</div>
+    <h3 v-else class="posts__empty">
+      <span>OOPS!</span>
+      No records found
+    </h3>
   </div>
 
   <Loader v-else/>
