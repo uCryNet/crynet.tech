@@ -1,6 +1,12 @@
 <template>
   <router-link class="post" :to="{name: 'Article', params: {id, category}}">
-    <img @error="onError" class="post__image" :src="isError ? `/media/img/post/not-found-image.jpg` : poster"/>
+    <img
+      @error="onError"
+      class="post__image"
+      :src="isError
+        ? `/media/img/post/not-found-image.jpg`
+        : poster"
+    />
 
     <div class="post__time">
       <div class="post__date">
