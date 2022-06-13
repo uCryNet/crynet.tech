@@ -3,7 +3,7 @@
     <Header/>
 
     <div class="container">
-      <router-view></router-view>
+      <router-view/>
     </div>
 
     <Footer/>
@@ -48,6 +48,7 @@ export default {
 
     const routes = computed(() => route.fullPath)
     const filters = computed(() => store.getters.getFilter)
+    const isPending = computed(() => store.getters.getIsPending)
 
     watch(
       () => routes,
@@ -60,9 +61,19 @@ export default {
 
     watch(
       () => filters,
-      ({ value }) => debounce(() => store.dispatch("getAllPosts", value), 600),
+      ({ value }) => {
+        store.dispatch("setPending", true)
+
+        debounce(() => {
+          store.dispatch("getAllPosts", value)
+        }, 600)
+      },
       { deep: true }
     )
+
+    return {
+      isPending
+    }
   }
 }
 </script>

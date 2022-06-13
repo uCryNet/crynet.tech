@@ -9,8 +9,9 @@ export interface IFiltersStore {
 }
 
 export interface IPostStore {
-  posts: IArticle[],
+  posts: IArticle[]
   filters: IFiltersStore
+  isPending: boolean
 }
 // post END
 

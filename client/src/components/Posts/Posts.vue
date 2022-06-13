@@ -1,5 +1,5 @@
 <template>
-  <div class="posts">
+  <div class="posts" v-if="!isPending">
     <div class="posts__lists" v-if="posts.length">
       <Post
         :title="article.title"
@@ -15,6 +15,8 @@
 
     <div v-else class="text--100 text--40 text--center text--raleway mb--10 mt--10">Упс! Записей не обнаруженно</div>
   </div>
+
+  <Loader v-else/>
 </template>
 
 <script setup lang="ts">
@@ -24,11 +26,13 @@ import { useStore } from "vuex";
 
 // Components
 import Post from "./components/Post/Post.vue";
+import Loader from "@/components/Loader/Loader.vue";
 
 
 const store = useStore()
 
 const posts = computed(() => store.getters.getAllPost)
+const isPending = computed(() => store.getters.getIsPending)
 </script>
 
 <style scoped lang="scss">

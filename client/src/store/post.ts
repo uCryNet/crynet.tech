@@ -15,7 +15,8 @@ const state: IPostStore = {
   filters: {
     search: "",
     category: ""
-  }
+  },
+  isPending: false
 }
 
 const getters = {
@@ -25,6 +26,10 @@ const getters = {
 
   getFilter(state: IPostStore) {
     return state.filters
+  },
+
+  getIsPending(state: IPostStore) {
+    return state.isPending
   }
 }
 
@@ -34,15 +39,21 @@ const actions = {
     API.getPosts(data)
       .then(res => {
         commit("setPosts", res.data)
+        commit("setPending", false)
       })
       .catch(error => {
         console.error(parseResponseError(error))
         commit("setPosts", [])
+        commit("setPending", false)
       })
   },
 
   setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
     commit("setFilters", data)
+  },
+
+  setPending({ commit }: { commit: Commit }, data: boolean) {
+    commit("setPending", data)
   },
 }
 
@@ -56,7 +67,11 @@ const mutations = {
 
     if (search !== undefined) state.filters.search = search
     if (category !== undefined) state.filters.category = category
-  }
+  },
+
+  setPending(state: IPostStore, data: boolean) {
+    state.isPending = data;
+  },
 }
 
 export default {
