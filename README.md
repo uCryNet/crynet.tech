@@ -6,7 +6,7 @@ Dev version of my blog: [crynet-dev.pp.ua](https://crynet-dev.pp.ua/). Аdmin pa
 ___
 You can download my blog and see how it works. Download [dev](https://github.com/uCryNet/blog/archive/refs/heads/dev.zip) branch and install. It is assumed that you already have Node and NPM installed.
 
-### How to install:
+### How to start:
 **Back-end:**
 * `cd server`
 * `npm i`
