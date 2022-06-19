@@ -9,6 +9,7 @@ export const SERVER = PROD_HOST.includes(HOST_NAME)
   : DEV_HOST.includes(HOST_NAME)
     ? `https://${DEV_HOST}/`
     : `http://localhost:5000/`
+
 export const SERVER_API = SERVER + "api"
 
 axios.defaults.baseURL = SERVER_API
