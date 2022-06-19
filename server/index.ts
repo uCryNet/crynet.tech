@@ -15,7 +15,7 @@ const app = express()
 app.use(
   cors({
     // origin needed because front and back works on different ports (only local develop)
-    origin: process.env.ENV,
+    origin: `http://localhost:8080`,
     credentials: true, //access-control-allow-credentials: true
     // TODO: fix this
     // @ts-ignore

@@ -2,10 +2,13 @@ import axios from 'axios';
 
 
 const PROD_HOST = 'crynet.tech'
+const DEV_HOST = 'crynet-dev.pp.ua'
 export const { hostname: HOST_NAME } = window.location
 export const SERVER = PROD_HOST.includes(HOST_NAME)
-  ? `http://${PROD_HOST}/`
-  : `http://localhost:5000/`
+  ? `https://${PROD_HOST}/`
+  : DEV_HOST.includes(HOST_NAME)
+    ? `https://${DEV_HOST}/`
+    : `http://localhost:5000/`
 export const SERVER_API = SERVER + "api"
 
 axios.defaults.baseURL = SERVER_API
