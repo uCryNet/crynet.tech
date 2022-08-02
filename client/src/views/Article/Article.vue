@@ -17,7 +17,7 @@
 // Vendor
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-// @ts-ignore
+
 import { highlightAll } from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'

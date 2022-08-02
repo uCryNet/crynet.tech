@@ -10,10 +10,9 @@ body {
   margin: unset;
 }
 
+ol li,
 ul li {
-  &:not(:last-of-type) {
-    margin-bottom: 10px;
-  }
+  margin-bottom: 10px;
 }
 
 p {
