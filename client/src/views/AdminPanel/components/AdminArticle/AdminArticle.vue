@@ -100,7 +100,6 @@ export default defineComponent({
         const formData = new FormData()
         formData.append("file", blobInfo.blob(), blobInfo.filename())
 
-        // TODO: сломал отправку файла
         API.uploadImage(formData)
           .then(res => success(SERVER + res.data.link))
           .catch(error => console.error(parseResponseError(error)))
@@ -108,14 +107,14 @@ export default defineComponent({
       codesample_global_prismjs: true,
       menubar: true,
       plugins: [
-        'advlist autolink lists link image charmap print preview anchor',
-        'searchreplace visualblocks code fullscreen',
-        'insertdatetime media table paste code help wordcount codesample'
+        'advlist autolink lists link image',
+        'code',
+        'media table code codesample'
       ],
       toolbar:
         'undo redo | formatselect | bold italic backcolor | \
         alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | removeformat | help | codesample'
+        bullist numlist outdent indent | removeformat | codesample'
     }
 
     const clearPostData = () => {
