@@ -5,6 +5,8 @@ import fileUpload from "express-fileupload"
 import 'dotenv/config'
 import cors from "cors"
 import cookieParser from "cookie-parser"
+import * as https from "https"
+import * as fs from "fs"
 
 // Variables
 const router = require("./src/routes/index.routes.ts")
@@ -30,6 +32,10 @@ app.use(fileUpload({}))
 app.use(router) // http://localhost:5000/api/
 mongoose.set('useCreateIndex', true)
 
+const options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/crynet.tech/privkey.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/crynet.tech/cert.pem'),
+};
 
 async function startApp() {
   try {
@@ -38,7 +44,7 @@ async function startApp() {
       useNewUrlParser: true,
       useUnifiedTopology: true
     })
-    app.listen(process.env.PORT, () => console.log('SERVER WORKS ON PORT ' + process.env.PORT))
+    https.createServer(options, app).listen(process.env.PORT);
   } catch (e) {
     console.log(e)
   }

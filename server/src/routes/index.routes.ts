@@ -28,7 +28,7 @@ router.get("/api/user/check-access", UserController.checkAccess)
 
 // file
 /** Only for local develop. Prod and dev work for Nginx */
-router.get("/static/*", FileController.get)
+// router.get("/static/*", FileController.get)
 router.post("/api/file/upload", FileController.upload)
 
 // category
