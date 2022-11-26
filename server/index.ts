@@ -28,16 +28,11 @@ app.use(express.json())
 app.use(express.static(STATIC_FOLDER_NAME))
 app.use(fileUpload({}))
 app.use(router) // http://localhost:5000/api/
-mongoose.set('useCreateIndex', true)
 
 
 async function startApp() {
   try {
-    await mongoose.connect(process.env.DB as string, {
-      useFindAndModify: false,
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    })
+    await mongoose.connect(process.env.DB as string)
     app.listen(process.env.PORT, () => console.log('SERVER WORKS ON PORT ' + process.env.PORT))
   } catch (e) {
     console.log(e)
