@@ -4,6 +4,7 @@ import CryptoJS from "crypto-js"
 
 // Types
 import { Request, Response } from "express";
+import { Types } from "mongoose"
 
 // Components
 import UserService from '../services/login'
@@ -12,7 +13,7 @@ import UserService from '../services/login'
 import { decryptedData } from "../utils";
 
 
-const genToken = (id: string, role: string) => {
+const genToken = (id: Types.ObjectId, role: string) => {
   const payload = { id, role }
 
   return CryptoJS.AES.encrypt(JSON.stringify(payload), process.env.SECRET_KEY as string).toString();

@@ -1,8 +1,11 @@
 // Vendors
 import mongoose from "mongoose";
 
+// Types
+import { IUserSchema } from "../interfaces/interfaces";
 
-const userSchema = new mongoose.Schema({
+
+const userSchema = new mongoose.Schema<IUserSchema>({
   login: { type: String, required: true, unique: true, minlength: 3, maxLength: 20 },
   password: { type: String, required: true },
   mail: { type: String, required: true, minlength: 3, maxLength: 100 },
@@ -11,4 +14,4 @@ const userSchema = new mongoose.Schema({
   role: { type: String }
 })
 
-export default mongoose.model("User", userSchema)
+export default mongoose.model<IUserSchema>("User", userSchema)

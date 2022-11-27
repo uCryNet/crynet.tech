@@ -1,5 +1,7 @@
 // Types
 import { Request, Response } from "express";
+import { IUserSchema } from "../interfaces/interfaces";
+
 
 // Components
 import PostService from '../services/post'
@@ -64,7 +66,7 @@ class PostController {
 
       await checkLengthArticle(res, title, text)
 
-      const { name } = await UserService.getUser(_id, "id")
+      const { name } = await UserService.getUser(_id, "id") as IUserSchema
       const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
       const date = new Date().toLocaleDateString("ru-RU")
 
@@ -109,11 +111,11 @@ class PostController {
       await checkLengthArticle(res, title, text)
 
       const getCurrentPost = await PostService.getOne(postId)
-      if (!getCurrentPost._id) return res.status(400).json({ message: "Post not found" })
+      if (!getCurrentPost?._id) return res.status(400).json({ message: "Post not found" })
 
       // TODO: добавить обновление картинки
       // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
-      const { name } = await UserService.getUser(userId, "id")
+      const { name } = await UserService.getUser(userId, "id") as IUserSchema
 
       await PostService.update({ title, text, category, author: name, id: postId })
 
