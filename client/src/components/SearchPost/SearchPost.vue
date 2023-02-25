@@ -5,7 +5,7 @@
         <input
           v-model.trim="filters.search"
           class="input search-post__search-input"
-          placeholder="Поиск по статьям"
+          placeholder="Search"
         />
 
         <button @click="clear" class="search-post__search-clear" v-if="filters.search">

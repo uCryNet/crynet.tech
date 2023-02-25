@@ -8,7 +8,6 @@
       <div class="article__category">{{ state.post.category.toUpperCase() }}</div>
     </div>
 
-
     <div class="article__text" v-html="state.post.text"/>
   </div>
 </template>
@@ -61,14 +60,12 @@ export default {
       await highlightAll()
 
       const description = state.value.post.text
-        .substring(0, 200)
-        .replace(/<\/?[a-zA-Z]+>/gi, '');
-
-      const location = window.location.href
+        .replace(/(<([^>]+)>)/ig,'')
+        .substring(0, 150)
+        .trim()
 
       document.title = state.value.post.title
       document.querySelector('meta[property="og:description"]')?.setAttribute("content", description)
-      document.querySelector('meta[property="og:url"]')?.setAttribute("content", location)
     })
 
     return {
