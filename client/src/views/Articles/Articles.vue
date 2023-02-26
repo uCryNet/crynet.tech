@@ -1,7 +1,7 @@
 <template>
   <div class="articles">
     <div class="title text--center mb--20">
-      <template v-if="!route.params.category">БЛОГ</template>
+      <template v-if="!route.params.category">BLOG</template>
 
       <template v-else>{{ stringValidate(route.params.category) }}</template>
     </div>
