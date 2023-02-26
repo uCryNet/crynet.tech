@@ -1,22 +1,18 @@
 <template>
   <div class="about">
-    <div class="title text--left">Про <span>автора</span></div>
+    <div class="title text--left">About <span>me</span></div>
 
     <div class="about__wrap">
       <div class="about__text">
-        <p>Привет! Меня зовут Денис и я front-end разработчик, а это мой блог.</p>
-        <p>Мой уютный бложик полностью самописный. Фронт написан на Vue, TypeScript и SCSS, а бэк на Node.JS, Express и
-          TypeScript, база данных - Mongo. Исходных код доступен на github.</p>
-        <p>Я безумно обожаю всё, что касается IT. Я долго не мог определится чем конкретно хочу заниматься. А поэтому
-          постигал администрирование Linux, вёл собственные сайты, увлекался компьютерной безопасностью и Android
-          разработкой, учил PHP и SQL, а также С++.</p>
-        <p>Придя на фриланс я понял, что по вебу очень много заказов. И только поэтому принял решение развиваться именно
-          в этом направлении. А со временем определился, что конкретно front-end нравится больше. Я безумно люблю
-          пробовать что-то новое из айтишечки.</p>
-        <p>А ещё я заядлый линуксоид. На Linux я перешёл примерно в конце 2012 года. Моим первым дистрибутивом был Linux Mint c Cinnamon.</p>
+        <p>Hello! My name is Denis and I am a front-end developer and this is my blog.</p>
+        <p>My cozy little blog is completely self-written. The front-end is built with Vue, TypeScript, and SCSS, while the back-end is built with Node.JS, Express, and TypeScript, and the database is Mongo. The source code is available on Github.</p>
+        <p>I am incredibly passionate about everything related to IT. For a long time, I couldn't decide what I wanted to do specifically. As a result, I learned Linux administration, created my own websites, dabbled in computer security and Android development, studied PHP and SQL, as well as C++.</p>
+        <p>When I started freelancing, I realized that there were many web development opportunities available. That's why I decided to pursue this field. Over time, I discovered that I specifically enjoyed front-end development more. I love trying out new things in the IT world.</p>
+        <p>And, I'm also a die-hard Linux user. I switched to Linux around the end of 2012. My first distribution was Linux Mint with Cinnamon.</p>
         <br>
-        <p><b>Используемая ОС:</b> openSUSE Leap</p>
-        <p><b>Используемое DE:</b> KDE Plasma</p>
+        <p><b>OS:</b> openSUSE Tumbleweed</p>
+        <p><b>DE:</b> KDE Plasma</p>
+        <p><b>IDE:</b> Web Storm</p>
 
         <div class="about__nav">
           <a class="btn btn--big btn--yellow" href="https://bit.ly/crynet-resume" target="_blank">
@@ -54,7 +50,7 @@
       </div>
 
       <div>
-        <div class="sub-title">НАВЫКИ</div>
+        <div class="title-small">Skills</div>
         <div
           class="btn--small"
           v-for="skill in SKILLS"

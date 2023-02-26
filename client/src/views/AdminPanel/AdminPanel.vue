@@ -80,8 +80,8 @@ export default {
     })
 
     const MENUS: IMenus = {
-      article: { text: "Добавить статью", value: "article" },
-      articles: { text: "Все статьи", value: "articles" },
+      article: { text: "Add article", value: "article" },
+      articles: { text: "All articles", value: "articles" },
     }
 
     onMounted(() => {

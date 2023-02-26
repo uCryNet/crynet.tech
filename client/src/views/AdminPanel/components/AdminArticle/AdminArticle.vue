@@ -32,13 +32,13 @@
       />
 
       <button type="submit" class="btn btn--yellow btn--big">
-        <template v-if="state?._id">ОБНОВИТЬ СТАТЬЮ</template>
-        <template v-else>ДОБАВИТЬ СТАТЬЮ</template>
+        <template v-if="state?._id">UPDATE</template>
+        <template v-else>ADD</template>
       </button>
     </form>
 
     <button class="btn btn--red btn--big mt--20" v-if="state?._id" @click="cancel">
-      ОТМЕНИТЬ РЕДАКТИРОВАНИЕ
+      CANCEL
     </button>
   </div>
 </template>
