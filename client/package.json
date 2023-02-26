@@ -41,12 +41,16 @@
       "node": true
     },
     "extends": [
-      "plugin:vue/essential",
+      "plugin:vue/strongly-recommended",
       "eslint:recommended",
       "@vue/typescript"
     ],
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
+    },
+    "rules": {
+      "vue/multi-word-component-names": "warn",
+      "vue/no-reserved-component-names": "warn"
     }
   },
   "browserslist": [

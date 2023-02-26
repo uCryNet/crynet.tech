@@ -4,7 +4,7 @@
       @error="onError"
       class="post__image"
       :src="isError
-        ? `/media/img/post/not-found-image.jpg`
+        ? NotFoundImage
         : poster"
     />
 
@@ -32,6 +32,7 @@
 import { defineComponent, ref, toRefs } from "vue";
 
 // Variables
+import NotFoundImage from "@/assets/img/post/404.webp";
 import { SERVER } from "@/config/api";
 
 
@@ -79,7 +80,8 @@ export default defineComponent({
       getDescription,
       onError,
       isError,
-      poster
+      poster,
+      NotFoundImage
     }
   }
 })
