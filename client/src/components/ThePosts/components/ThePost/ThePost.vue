@@ -33,7 +33,9 @@ import { defineComponent, ref, toRefs } from "vue";
 
 // Variables
 import NotFoundImage from "@/assets/img/post/404.webp";
-import { SERVER } from "@/config/api";
+import { SERVER } from "@/config/constant";
+
+console.log(SERVER)
 
 
 export default defineComponent({

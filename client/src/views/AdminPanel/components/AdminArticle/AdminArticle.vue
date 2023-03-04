@@ -55,8 +55,7 @@ import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
 // Variables
 import API from "@/api/api"
-import { TINYMCE_KEY } from "@/config/constant"
-import { SERVER } from "@/config/api";
+import { TINYMCE_KEY, SERVER } from "@/config/constant";
 
 // Utils
 import parseResponseError from "@/utils/parseResponseError"
