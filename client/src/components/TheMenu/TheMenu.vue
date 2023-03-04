@@ -16,7 +16,7 @@
         >
           <router-link
             class="menu__subcategory-unit-link"
-            :to="{name: 'Articles', params: {category: subCategoriesUnit.name}}"
+            :to="{name: 'TheArticles', params: {category: subCategoriesUnit.name}}"
           >
             {{ subCategoriesUnit.name }}
           </router-link>
@@ -49,5 +49,5 @@ const get = (category: string) => {
 </script>
 
 <style lang="scss" scoped>
-@import "Menu";
+@import "TheMenu";
 </style>

@@ -13,8 +13,8 @@ export const ROUTE_LINK = {
 const routes = [
   {
     path: ROUTE_LINK.root,
-    name: 'Home',
-    component: () => import(/* webpackChunkName: "Home" */ '../views/Home/Home.vue')
+    name: 'TheHome',
+    component: () => import(/* webpackChunkName: "TheHome" */ '../views/TheHome/TheHome.vue')
   },
 
   // Admin START
@@ -30,24 +30,24 @@ const routes = [
   },
   // Admin END
 
-  // Post START
+  // ThePost START
   {
     path: ROUTE_LINK.blogArticle,
-    name: 'Article',
-    component: () => import(/* webpackChunkName: "Article" */ '../views/Article/Article.vue')
+    name: 'TheArticle',
+    component: () => import(/* webpackChunkName: "TheArticle" */ '../views/TheArticle/TheArticle.vue')
   },
   {
     path: ROUTE_LINK.blogArticles,
-    name: 'Articles',
-    component: () => import(/* webpackChunkName: "Articles" */ '../views/Articles/Articles.vue')
+    name: 'TheArticles',
+    component: () => import(/* webpackChunkName: "TheArticles" */ '../views/TheArticles/TheArticles.vue')
   },
-  // Post END
+  // ThePost END
 
   // Other START
   {
     path: ROUTE_LINK.about,
-    name: 'About',
-    component: () => import(/* webpackChunkName: "About" */ '../views/About/About.vue')
+    name: 'TheAbout',
+    component: () => import(/* webpackChunkName: "TheAbout" */ '../views/TheAbout/TheAbout.vue')
   },
   // Other END
 

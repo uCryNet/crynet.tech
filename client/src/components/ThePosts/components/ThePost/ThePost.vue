@@ -1,5 +1,5 @@
 <template>
-  <router-link class="post" :to="{name: 'Article', params: {id, category}}">
+  <router-link class="post" :to="{name: 'TheArticle', params: {id, category}}">
     <img
       @error="onError"
       class="post__image"
@@ -24,7 +24,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "Post";
+@import "ThePost";
 </style>
 
 <script lang="ts">
@@ -37,7 +37,7 @@ import { SERVER } from "@/config/api";
 
 
 export default defineComponent({
-  name: 'Post',
+  name: 'ThePost',
 
   props: {
     title: {

@@ -1,7 +1,7 @@
 $loader--width: 250px;
 $loader-dot--size: 20px;
 
-.loader {
+.preloader {
   position: relative;
   display: flex;
   height: 50px;
@@ -19,7 +19,7 @@ $loader-dot--size: 20px;
 
   &--dot {
     animation: {
-      name: loader;
+      name: preloader;
       timing-function: ease-in-out;
       duration: 3s;
       iteration-count: infinite;
@@ -75,7 +75,7 @@ $loader-dot--size: 20px;
     }
   }
 }
-@keyframes loader {
+@keyframes preloader {
   15% {
     transform: translateX(0);
   }

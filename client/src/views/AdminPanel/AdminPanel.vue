@@ -1,6 +1,6 @@
 <template>
   <div v-if="state.isAdmin" class="admin-panel">
-    <Aside
+    <TheAside
       :menus="MENUS"
       :switchBlock="switchBlock"
       :block="state.block"
@@ -36,7 +36,7 @@ import { IArticle } from "@/interfaces/interfaces";
 import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.types";
 
 // Components
-import Aside from "./components/Aside/Aside.vue"
+import TheAside from "./components/TheAside/TheAside.vue"
 import AdminArticle from "./components/AdminArticle/AdminArticle.vue";
 import AdminArticles from "./components/AdminArticles/AdminArticles.vue";
 import NotFound from "@/views/NotFound/NotFound.vue";
@@ -54,7 +54,7 @@ export default {
   components: {
     AdminArticles,
     AdminArticle,
-    Aside,
+    TheAside,
     NotFound
   },
 

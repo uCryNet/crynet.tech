@@ -18,7 +18,7 @@ import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.typ
 import { PropType } from "vue";
 
 export default {
-  name: 'Aside',
+  name: 'TheAside',
 
   props: {
     menus: {
@@ -35,5 +35,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import "Aside";
+@import "TheAside";
 </style>

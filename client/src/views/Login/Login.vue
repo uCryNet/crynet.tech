@@ -43,7 +43,7 @@ import parseResponseError from "@/utils/parseResponseError";
 
 
 export default {
-  name: 'Login',
+  name: 'TheLogin',
 
   setup() {
     const router = useRouter()

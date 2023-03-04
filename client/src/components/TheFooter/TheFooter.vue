@@ -14,5 +14,5 @@ const date = new Date().getUTCFullYear()
 </script>
 
 <style scoped lang="scss">
-@import "Footer";
+@import "TheFooter";
 </style>
