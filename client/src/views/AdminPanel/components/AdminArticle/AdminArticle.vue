@@ -71,7 +71,7 @@ export default defineComponent({
   props: {
     clearEditPostData: Function,
     category: {
-      type: Object as PropType<ICategory>,
+      type: Object as PropType<ICategory[]>,
       required: true
     },
     edit: {
@@ -136,7 +136,7 @@ export default defineComponent({
     }
 
     const getContent = async () => {
-      if (!state.value.text) return alert("Заполните все поля!")
+      if (!state.value.text) return alert("Fill all fields!")
 
       const isUpdate = edit.value?._id
       const data = { ...state.value }
@@ -147,10 +147,10 @@ export default defineComponent({
 
       isUpdate
         ? await API.updatePost(data)
-          .then(() => alert(`Статья обновлена!`))
+          .then(() => alert(`Article updated!`))
           .catch(error => console.error(parseResponseError(error)))
         : await API.createPost(data)
-          .then(() => alert(`Статья добавленна!`))
+          .then(() => alert(`Article added!`))
           .catch(error => console.error(parseResponseError(error)))
 
       getPosts()

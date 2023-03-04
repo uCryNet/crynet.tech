@@ -12,26 +12,19 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Types
 import { IMenus, IMenusType } from "@/views/AdminPanel/components/AdminPanel.types";
-import { PropType } from "vue";
 
-export default {
-  name: 'TheAside',
 
-  props: {
-    menus: {
-      type: Object as PropType<IMenus>,
-      required: true
-    },
-    switchBlock: Function,
-    block: {
-      type: String as PropType<IMenusType>,
-      required: true
-    }
-  }
+interface IAsideProps {
+  menus: IMenus
+  switchBlock: (value: IMenusType) => void
+  block: IMenusType
 }
+
+
+defineProps<IAsideProps>()
 </script>
 
 <style scoped lang="scss">

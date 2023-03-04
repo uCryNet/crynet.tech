@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 // Components
-import TheMenu from "@/components/TheMenu/TheMenu.vue"
+import TheMenu from "@/components/TheHeader/components/HeaderMenu/HeaderMenu.vue"
 </script>
 
 <style lang="scss" scoped>

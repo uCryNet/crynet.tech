@@ -2,14 +2,9 @@
   <div class="posts" v-if="!isPending">
     <div class="posts__lists" v-if="posts.length">
       <ThePost
-        :title="article.title"
-        :text="article.text"
-        :id="article._id"
-        :image="article.image"
-        :date="article.date"
-        :category="article.category"
-        v-for="article in posts"
+        :post="article"
         :key="article._id"
+        v-for="article in posts"
       />
     </div>
 

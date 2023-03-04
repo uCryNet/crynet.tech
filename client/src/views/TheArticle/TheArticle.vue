@@ -53,7 +53,7 @@ export default {
     onMounted(async () => {
       const { id } = route.params
 
-      await API.getOnePost(id)
+      await API.getOnePost(id as string)
         .then(res => state.value.post = res.data)
         .catch(error => console.error(parseResponseError(error)))
 

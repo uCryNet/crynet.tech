@@ -1,6 +1,5 @@
 // Vendors
 import axios from 'axios';
-import { RouteParamValue } from "vue-router";
 
 // Types
 import { IGetPosts } from "@/interfaces/interfaces";
@@ -11,7 +10,7 @@ const getPosts = (data: IGetPosts | {} = {}) => {
   return axios.post(`post/get-all`, data);
 }
 
-const getOnePost = (uri: string | RouteParamValue[]) => {
+const getOnePost = (uri: string) => {
   return axios.get(`post/get-one/${ uri }`,);
 }
 

@@ -1,21 +1,21 @@
 <template>
-  <div class="menu">
-    <div class="menu__category" @click="clear">
+  <div class="header-menu">
+    <div class="header-menu__category" @click="clear">
       <router-link class="router-link" :to="ROUTE_LINK.root">Home</router-link>
     </div>
 
-    <div v-for="categoryUnit in category" :key="categoryUnit.title" class="menu__category">
+    <div v-for="categoryUnit in category" :key="categoryUnit.title" class="header-menu__category">
       <div class="router-link">{{ categoryUnit.title }}</div>
 
-      <div class="menu__subcategory-lists">
+      <div class="header-menu__subcategory-lists">
         <div
           v-for="subCategoriesUnit in categoryUnit.subCategories"
           :key="subCategoriesUnit.name"
-          class="menu__subcategory-unit"
+          class="header-menu__subcategory-unit"
           @click="get(subCategoriesUnit.name)"
         >
           <router-link
-            class="menu__subcategory-unit-link"
+            class="header-menu__subcategory-unit-link"
             :to="{name: 'TheArticles', params: {category: subCategoriesUnit.name}}"
           >
             {{ subCategoriesUnit.name }}
@@ -24,7 +24,7 @@
       </div>
     </div>
 
-    <div class="menu__category">
+    <div class="header-menu__category">
       <router-link class="router-link" :to="ROUTE_LINK.about">About</router-link>
     </div>
   </div>
@@ -49,5 +49,5 @@ const get = (category: string) => {
 </script>
 
 <style lang="scss" scoped>
-@import "TheMenu";
+@import "HeaderMenu";
 </style>

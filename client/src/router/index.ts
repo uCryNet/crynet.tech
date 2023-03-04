@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+
 export const ROUTE_LINK = {
   root: '/',
   about: '/about',
@@ -16,8 +17,6 @@ const routes = [
     name: 'TheHome',
     component: () => import(/* webpackChunkName: "TheHome" */ '../views/TheHome/TheHome.vue')
   },
-
-  // Admin START
   {
     path: ROUTE_LINK.login,
     name: 'Login',
@@ -28,9 +27,6 @@ const routes = [
     name: 'AdminPanel',
     component: () => import(/* webpackChunkName: "AdminPanel" */ '../views/AdminPanel/AdminPanel.vue')
   },
-  // Admin END
-
-  // ThePost START
   {
     path: ROUTE_LINK.blogArticle,
     name: 'TheArticle',
@@ -41,16 +37,11 @@ const routes = [
     name: 'TheArticles',
     component: () => import(/* webpackChunkName: "TheArticles" */ '../views/TheArticles/TheArticles.vue')
   },
-  // ThePost END
-
-  // Other START
   {
     path: ROUTE_LINK.about,
     name: 'TheAbout',
     component: () => import(/* webpackChunkName: "TheAbout" */ '../views/TheAbout/TheAbout.vue')
   },
-  // Other END
-
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',
