@@ -1,7 +1,7 @@
 <template>
   <div class="posts" v-if="!isPending">
     <div class="posts__lists" v-if="posts.length">
-      <Post
+      <ThePost
         :title="article.title"
         :text="article.text"
         :id="article._id"
@@ -19,7 +19,7 @@
     </h3>
   </div>
 
-  <Loader v-else/>
+  <ThePreloader v-else/>
 </template>
 
 <script setup lang="ts">
@@ -28,8 +28,8 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 // Components
-import Post from "./components/Post/Post.vue";
-import Loader from "@/components/Loader/Loader.vue";
+import ThePost from "./components/ThePost/ThePost.vue";
+import ThePreloader from "@/components/ThePreloader/ThePreloader.vue";
 
 
 const store = useStore()
@@ -39,5 +39,5 @@ const isPending = computed(() => store.getters.getIsPending)
 </script>
 
 <style scoped lang="scss">
-@import "Posts";
+@import "ThePosts";
 </style>

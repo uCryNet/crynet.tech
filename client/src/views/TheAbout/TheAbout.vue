@@ -89,10 +89,10 @@ const SKILLS = [
 
 
 onMounted(() => {
-  document.title = "About of CryNet"
+  document.title = "TheAbout of CryNet"
 })
 </script>
 
 <style lang="scss" scoped>
-@import "About";
+@import "TheAbout";
 </style>

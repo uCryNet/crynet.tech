@@ -29,7 +29,7 @@ import parseResponseError from "../../utils/parseResponseError";
 
 
 export default {
-  name: 'Article',
+  name: 'TheArticle',
 
   setup() {
     const route = useRoute()
@@ -76,5 +76,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "Article";
+@import "TheArticle";
 </style>

@@ -1,6 +1,6 @@
 <template>
   <header class="header">
-    <Menu />
+    <TheMenu />
 
     <div class="header__info container">
       <div class="title-think">YET ANOTHER</div>
@@ -14,9 +14,9 @@
 
 <script setup lang="ts">
 // Components
-import Menu from "@/components/Menu/Menu.vue"
+import TheMenu from "@/components/TheMenu/TheMenu.vue"
 </script>
 
 <style lang="scss" scoped>
-@import "Header";
+@import "TheHeader";
 </style>

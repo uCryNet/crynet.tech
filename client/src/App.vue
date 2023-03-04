@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Header/>
+    <TheHeader/>
 
     <div class="container">
       <router-view/>
     </div>
 
-    <Footer/>
+    <TheFooter/>
   </div>
 </template>
 
@@ -17,8 +17,8 @@ import { computed,  onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 // Components
-import Header from "@/components/Header/Header.vue";
-import Footer from "@/components/Footer/Footer.vue";
+import TheHeader from "@/components/TheHeader/TheHeader.vue";
+import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
 // Utils
 import debounce from "@/utils/debounce";
@@ -32,8 +32,8 @@ export default {
   name: 'App',
 
   components: {
-    Header,
-    Footer
+    TheHeader,
+    TheFooter
   },
 
   setup() {

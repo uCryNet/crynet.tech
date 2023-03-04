@@ -8,7 +8,7 @@
 
     <SearchPost/>
 
-    <Posts/>
+    <ThePosts/>
   </div>
 </template>
 
@@ -18,7 +18,7 @@ import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 
 // Components
-import Posts from "@/components/Posts/Posts.vue";
+import ThePosts from "@/components/ThePosts/ThePosts.vue";
 import SearchPost from "@/components/SearchPost/SearchPost.vue";
 
 // Utils
@@ -33,5 +33,5 @@ onMounted(() => {
 </script>
 
 <style scoped lang="scss">
-@import "Articles";
+@import "TheArticles";
 </style>

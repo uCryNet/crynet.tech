@@ -1,1 +1,6 @@
-export const TINYMCE_KEY = "2by8mtybmxl5k80mkmf28mbcgz3rnz24b6nw9xqbavp8am76"
+export const TINYMCE_KEY = process.env.VUE_APP_TINYMCE_KEY
+export const SERVER = process.env.VUE_APP_API_HOST
+
+// console.log(
+//   SERVER
+// )

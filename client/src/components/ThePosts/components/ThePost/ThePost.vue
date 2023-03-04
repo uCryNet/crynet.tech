@@ -1,5 +1,5 @@
 <template>
-  <router-link class="post" :to="{name: 'Article', params: {id, category}}">
+  <router-link class="post" :to="{name: 'TheArticle', params: {id, category}}">
     <img
       @error="onError"
       class="post__image"
@@ -24,7 +24,7 @@
 </template>
 
 <style lang="scss" scoped>
-@import "Post";
+@import "ThePost";
 </style>
 
 <script lang="ts">
@@ -33,11 +33,13 @@ import { defineComponent, ref, toRefs } from "vue";
 
 // Variables
 import NotFoundImage from "@/assets/img/post/404.webp";
-import { SERVER } from "@/config/api";
+import { SERVER } from "@/config/constant";
+
+console.log(SERVER)
 
 
 export default defineComponent({
-  name: 'Post',
+  name: 'ThePost',
 
   props: {
     title: {
