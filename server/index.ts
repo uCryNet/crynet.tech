@@ -32,8 +32,8 @@ app.use(fileUpload({}))
 app.use(router) // http://localhost:5000/api/
 
 const options = {
-  key: fs.readFileSync('/etc/letsencrypt/live/crynet.tech/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/crynet.tech/cert.pem'),
+  key: fs.readFileSync('privkey.pem'),
+  cert: fs.readFileSync('cert.pem'),
 };
 
 async function startApp() {
