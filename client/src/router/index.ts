@@ -1,59 +1,72 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-export const ROUTE_LINK = {
-  root: '/',
-  about: '/about',
-  blogArticle: '/blog/:category/:id',
-  blogArticles: '/blog/:category?',
-  login: '/login',
-  adminPanel: '/admin-panel',
-  notFound: '404'
+
+export const ROUTES_CONFIG = {
+  root: {
+    path: '/',
+    name: 'Home',
+  },
+  about: {
+    path: '/about',
+    name: 'About',
+  },
+  article: {
+    path: '/blog/:category/:id',
+    name: 'Article',
+  },
+  articles: {
+    path: '/blog/:category?',
+    name: 'Articles',
+  },
+  login: {
+    path: '/login',
+    name: 'Login',
+  },
+  adminPanel: {
+    path: '/admin-panel',
+    name: 'AdminPanel',
+  },
+  notFound: {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+  },
 }
+
 
 const routes = [
   {
-    path: ROUTE_LINK.root,
-    name: 'TheHome',
+    path: ROUTES_CONFIG.root.path,
+    name: ROUTES_CONFIG.root.name,
     component: () => import(/* webpackChunkName: "TheHome" */ '../views/TheHome/TheHome.vue')
   },
-
-  // Admin START
   {
-    path: ROUTE_LINK.login,
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue')
+    path: ROUTES_CONFIG.login.path,
+    name: ROUTES_CONFIG.login.name,
+    component: () => import(/* webpackChunkName: "AdminLogin" */ '../views/AdminLogin/AdminLogin.vue')
   },
   {
-    path: ROUTE_LINK.adminPanel,
-    name: 'AdminPanel',
+    path: ROUTES_CONFIG.adminPanel.path,
+    name: ROUTES_CONFIG.adminPanel.name,
     component: () => import(/* webpackChunkName: "AdminPanel" */ '../views/AdminPanel/AdminPanel.vue')
   },
-  // Admin END
-
-  // ThePost START
   {
-    path: ROUTE_LINK.blogArticle,
-    name: 'TheArticle',
+    path: ROUTES_CONFIG.article.path,
+    name: ROUTES_CONFIG.article.name,
     component: () => import(/* webpackChunkName: "TheArticle" */ '../views/TheArticle/TheArticle.vue')
   },
   {
-    path: ROUTE_LINK.blogArticles,
-    name: 'TheArticles',
+    path: ROUTES_CONFIG.articles.path,
+    name: ROUTES_CONFIG.articles.name,
     component: () => import(/* webpackChunkName: "TheArticles" */ '../views/TheArticles/TheArticles.vue')
   },
-  // ThePost END
-
-  // Other START
   {
-    path: ROUTE_LINK.about,
-    name: 'TheAbout',
+    path: ROUTES_CONFIG.about.path,
+    name: ROUTES_CONFIG.about.name,
     component: () => import(/* webpackChunkName: "TheAbout" */ '../views/TheAbout/TheAbout.vue')
   },
-  // Other END
-
   {
-    path: '/:pathMatch(.*)*',
-    name: 'NotFound',
+    path: ROUTES_CONFIG.notFound.path,
+    name: ROUTES_CONFIG.notFound.name,
     component: () => import(/* webpackChunkName: "NotFound" */ '../views/NotFound/NotFound.vue')
   }
 ]

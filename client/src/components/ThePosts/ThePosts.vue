@@ -1,25 +1,30 @@
 <template>
-  <div class="posts" v-if="!isPending">
-    <div class="posts__lists" v-if="posts.length">
+  <div
+    class="posts"
+    v-if="!isPending"
+  >
+    <div
+      class="posts__lists"
+      v-if="posts.length"
+    >
       <ThePost
-        :title="article.title"
-        :text="article.text"
-        :id="article._id"
-        :image="article.image"
-        :date="article.date"
-        :category="article.category"
-        v-for="article in posts"
+        :post="article"
         :key="article._id"
+        v-for="article in posts"
       />
     </div>
 
-    <h3 v-else class="posts__empty">
+    <h3
+      class="posts__empty"
+      v-else
+    >
       <span>OOPS!</span>
+
       No records found
     </h3>
   </div>
 
-  <ThePreloader v-else/>
+  <ThePreloader v-else />
 </template>
 
 <script setup lang="ts">

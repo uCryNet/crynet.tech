@@ -3,9 +3,13 @@
     <TheMenu />
 
     <div class="header__info container">
-      <div class="title-think">YET ANOTHER</div>
+      <div class="title-think">
+        YET ANOTHER
+      </div>
 
-      <h2 class="title-big-bold">BLOG</h2>
+      <h2 class="title-big-bold">
+        BLOG
+      </h2>
 
       <span>🇺🇦</span>
     </div>
@@ -14,7 +18,7 @@
 
 <script setup lang="ts">
 // Components
-import TheMenu from "@/components/TheMenu/TheMenu.vue"
+import TheMenu from "@/components/TheHeader/components/HeaderMenu/HeaderMenu.vue"
 </script>
 
 <style lang="scss" scoped>

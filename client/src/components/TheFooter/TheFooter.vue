@@ -1,13 +1,24 @@
 <template>
   <footer class="footer">
-    <div>© {{ date }} </div>
-    <div> Created by <router-link class="router-link text--sandybrown" :to="ROUTE_LINK.about">CryNet</router-link></div>
+    <div>
+      © {{ date }}
+    </div>
+    <div>
+      Created by
+
+      <router-link
+        class="router-link text--sandybrown"
+        :to="ROUTES_CONFIG.about.path"
+      >
+        CryNet
+      </router-link>
+    </div>
   </footer>
 </template>
 
 <script setup lang="ts">
 // Variables
-import { ROUTE_LINK } from "@/router";
+import { ROUTES_CONFIG } from "@/router";
 
 
 const date = new Date().getUTCFullYear()

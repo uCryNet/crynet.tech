@@ -1,10 +1,24 @@
 <template>
   <div class="admin-article">
     <form @submit.prevent="getContent">
-      <input required v-model.lazy.trim="state.title" placeholder="Title" class="input admin-article__title"/>
+      <input
+        required
+        v-model.lazy.trim="state.title"
+        placeholder="Title"
+        class="input admin-article__title"
+      />
 
-      <select v-model="state.category" name="category" required class="select admin-article__select">
-        <optgroup :label="categoryUnit.title" v-for="categoryUnit in allCategory" :key="categoryUnit.title">
+      <select
+        v-model="state.category"
+        name="category"
+        required
+        class="select admin-article__select"
+      >
+        <optgroup
+          :label="categoryUnit.title"
+          v-for="categoryUnit in allCategory"
+          :key="categoryUnit.title"
+        >
           <option
             :value="subCategoriesUnit.name"
             v-for="subCategoriesUnit in categoryUnit.subCategories"
@@ -31,21 +45,33 @@
         type="file"
       />
 
-      <button type="submit" class="btn btn--yellow btn--big">
-        <template v-if="state?._id">UPDATE</template>
-        <template v-else>ADD</template>
+      <button
+        type="submit"
+        class="btn btn--yellow btn--big"
+      >
+        <template v-if="state?._id">
+          UPDATE
+        </template>
+
+        <template v-else>
+          ADD
+        </template>
       </button>
     </form>
 
-    <button class="btn btn--red btn--big mt--20" v-if="state?._id" @click="cancel">
+    <button
+      class="btn btn--red btn--big mt--20"
+      v-if="state?._id"
+      @click="cancel"
+    >
       CANCEL
     </button>
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
-import { computed, defineComponent, onMounted, PropType, ref, toRefs } from "vue";
+import { computed, onMounted, ref, toRefs } from "vue";
 import { useStore } from "vuex";
 import Editor from '@tinymce/tinymce-vue'
 
@@ -61,128 +87,104 @@ import { TINYMCE_KEY, SERVER } from "@/config/constant";
 import parseResponseError from "@/utils/parseResponseError"
 
 
-export default defineComponent({
-  name: 'AdminArticle',
+interface IAdminArticle {
+  clearEditPostData: () => void
+  category: ICategory[]
+  edit: IArticle
+}
 
-  components: {
-    Editor
+
+const props = defineProps<IAdminArticle>()
+const { clearEditPostData, edit } = toRefs(props)
+
+const store = useStore()
+
+const state = ref<IUpdatePost>({
+  _id: "",
+  title: "",
+  category: "css",
+  image: "",
+  text: "",
+})
+
+const CONFIG = {
+  height: 500,
+  images_upload_handler: (blobInfo: any, success: any) => {
+    const formData = new FormData()
+    formData.append("file", blobInfo.blob(), blobInfo.filename())
+
+    API.uploadImage(formData)
+      .then(res => success(SERVER + res.data.link))
+      .catch(error => console.error(parseResponseError(error)))
   },
+  codesample_global_prismjs: true,
+  menubar: true,
+  plugins: [
+    'advlist autolink lists link image',
+    'code',
+    'media table code codesample'
+  ],
+  toolbar:
+    'undo redo | formatselect | bold italic backcolor | \
+    alignleft aligncenter alignright alignjustify | \
+    bullist numlist outdent indent | removeformat | codesample'
+}
 
-  props: {
-    clearEditPostData: Function,
-    category: {
-      type: Object as PropType<ICategory>,
-      required: true
-    },
-    edit: {
-      type: Object as PropType<IArticle>,
-      required: true
-    }
-  },
+const clearPostData = () => {
+  state.value = {
+    _id: "",
+    title: "",
+    category: "css",
+    image: "",
+    text: "",
+  }
+}
 
-  setup(props) {
-    const { clearEditPostData, edit } = toRefs(props)
+const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
+  state.value.image = $event.target.files ? $event.target.files[ 0 ] : ""
+}
 
-    const store = useStore()
+const cancel = () => {
+  clearEditPostData
+  clearPostData()
+}
 
-    const state = ref<IUpdatePost>({
-      _id: "",
-      title: "",
-      category: "css",
-      image: "",
-      text: "",
-    })
+const getContent = async () => {
+  if (!state.value.text) return alert("Fill all fields!")
 
-    const CONFIG = {
-      height: 500,
-      images_upload_handler: (blobInfo: any, success: any) => {
-        const formData = new FormData()
-        formData.append("file", blobInfo.blob(), blobInfo.filename())
+  const isUpdate = edit.value?._id
+  const data = { ...state.value }
 
-        API.uploadImage(formData)
-          .then(res => success(SERVER + res.data.link))
-          .catch(error => console.error(parseResponseError(error)))
-      },
-      codesample_global_prismjs: true,
-      menubar: true,
-      plugins: [
-        'advlist autolink lists link image',
-        'code',
-        'media table code codesample'
-      ],
-      toolbar:
-        'undo redo | formatselect | bold italic backcolor | \
-        alignleft aligncenter alignright alignjustify | \
-        bullist numlist outdent indent | removeformat | codesample'
-    }
+  const getPosts = () => {
+    store.dispatch("getAllPosts")
+  }
 
-    const clearPostData = () => {
-      state.value = {
-        _id: "",
-        title: "",
-        category: "css",
-        image: "",
-        text: "",
-      }
-    }
+  isUpdate
+    ? await API.updatePost(data)
+      .then(() => alert(`Article updated!`))
+      .catch(error => console.error(parseResponseError(error)))
+    : await API.createPost(data)
+      .then(() => alert(`Article added!`))
+      .catch(error => console.error(parseResponseError(error)))
 
-    const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
-      state.value.image = $event.target.files ? $event.target.files[0] : ""
-    }
+  getPosts()
+  clearEditPostData
+  clearPostData()
+}
 
-    const cancel = () => {
-      clearEditPostData
-      clearPostData()
-    }
-
-    const getContent = async () => {
-      if (!state.value.text) return alert("Заполните все поля!")
-
-      const isUpdate = edit.value?._id
-      const data = { ...state.value }
-
-      const getPosts = () => {
-        store.dispatch("getAllPosts")
-      }
-
-      isUpdate
-        ? await API.updatePost(data)
-          .then(() => alert(`Статья обновлена!`))
-          .catch(error => console.error(parseResponseError(error)))
-        : await API.createPost(data)
-          .then(() => alert(`Статья добавленна!`))
-          .catch(error => console.error(parseResponseError(error)))
-
-      getPosts()
-      clearEditPostData
-      clearPostData()
-    }
-
-    onMounted(() => {
-      if (edit.value?._id) {
-        state.value = {
-          _id: edit.value._id,
-          title: edit.value.title,
-          category: edit.value.category,
-          image: edit.value.image,
-          text: edit.value.text,
-        }
-      }
-    })
-
-    const allCategory = computed(() => store.getters.getAllCategory)
-
-    return {
-      allCategory,
-      cancel,
-      onFileChanged,
-      getContent,
-      CONFIG,
-      TINYMCE_KEY,
-      state
+onMounted(() => {
+  if (edit.value?._id) {
+    state.value = {
+      _id: edit.value._id,
+      title: edit.value.title,
+      category: edit.value.category,
+      image: edit.value.image,
+      text: edit.value.text,
     }
   }
 })
+
+const allCategory = computed(() => store.getters.getAllCategory)
 </script>
 
 <style scoped lang="scss">

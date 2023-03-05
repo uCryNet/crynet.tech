@@ -1,12 +1,12 @@
 <template>
   <div>
-    <TheHeader/>
+    <TheHeader />
 
     <div class="container">
-      <router-view/>
+      <router-view />
     </div>
 
-    <TheFooter/>
+    <TheFooter />
   </div>
 </template>
 
@@ -24,7 +24,7 @@ import TheFooter from "@/components/TheFooter/TheFooter.vue";
 import debounce from "@/utils/debounce";
 
 // Variables
-import { ROUTE_LINK } from "@/router";
+import { ROUTES_CONFIG } from "@/router";
 import { useRoute, } from "vue-router";
 
 
@@ -53,7 +53,7 @@ export default {
     watch(
       () => routes,
       ({ value }) => {
-        if (value === ROUTE_LINK.root)
+        if (value === ROUTES_CONFIG.root.path)
           store.dispatch("setFilters", { search: "", category: "" })
       },
       { deep: true }

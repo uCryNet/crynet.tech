@@ -1,4 +1,4 @@
-.menu {
+.header-menu {
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -35,7 +35,7 @@
     }
 
     &:hover {
-      .menu__subcategory-lists {
+      .header-menu__subcategory-lists {
         opacity: 1;
         visibility: visible;
       }
