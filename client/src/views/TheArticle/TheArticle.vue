@@ -21,7 +21,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendor
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
@@ -37,51 +37,41 @@ import API from "@/api/api"
 import parseResponseError from "../../utils/parseResponseError";
 
 
-export default {
-  name: 'TheArticle',
+const route = useRoute()
 
-  setup() {
-    const route = useRoute()
-
-    const state = ref<{
-      post: {
-        title: string
-        date: string
-        text: string
-        category: string
-      }
-    }>({
-      post: {
-        title: "",
-        date: "",
-        text: "",
-        category: ""
-      }
-    })
-
-    onMounted(async () => {
-      const { id } = route.params
-
-      await API.getOnePost(id as string)
-        .then(res => state.value.post = res.data)
-        .catch(error => console.error(parseResponseError(error)))
-
-      await highlightAll()
-
-      const description = state.value.post.text
-        .replace(/(<([^>]+)>)/ig,'')
-        .substring(0, 150)
-        .trim()
-
-      document.title = state.value.post.title
-      document.querySelector('meta[property="og:description"]')?.setAttribute("content", description)
-    })
-
-    return {
-      state
-    }
+const state = ref<{
+  post: {
+    title: string
+    date: string
+    text: string
+    category: string
   }
-}
+}>({
+  post: {
+    title: "",
+    date: "",
+    text: "",
+    category: ""
+  }
+})
+
+onMounted(async () => {
+  const { id } = route.params
+
+  await API.getOnePost(id as string)
+    .then(res => state.value.post = res.data)
+    .catch(error => console.error(parseResponseError(error)))
+
+  await highlightAll()
+
+  const description = state.value.post.text
+    .replace(/(<([^>]+)>)/ig,'')
+    .substring(0, 150)
+    .trim()
+
+  document.title = state.value.post.title
+  document.querySelector('meta[property="og:description"]')?.setAttribute("content", description)
+})
 </script>
 
 <style lang="scss" scoped>

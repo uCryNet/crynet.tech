@@ -103,6 +103,7 @@
 // Vendors
 import { onMounted } from "vue"
 
+
 const SKILLS = [
   "HTML",
   "CSS",

@@ -20,7 +20,7 @@ const routes = [
   {
     path: ROUTE_LINK.login,
     name: 'Login',
-    component: () => import(/* webpackChunkName: "Login" */ '../views/Login/Login.vue')
+    component: () => import(/* webpackChunkName: "AdminLogin" */ '../views/AdminLogin/AdminLogin.vue')
   },
   {
     path: ROUTE_LINK.adminPanel,

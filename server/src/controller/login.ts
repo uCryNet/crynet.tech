@@ -42,7 +42,7 @@ class UserController {
         })
         .send('OK')
     } catch (e) {
-      return res.status(400).json({ message: "Login error", e })
+      return res.status(400).json({ message: "AdminLogin error", e })
     }
   }
 

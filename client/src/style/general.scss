@@ -146,15 +146,3 @@ p {
     margin-top: #{$i}px;
   }
 }
-
-@for $i from 1 through 20 {
-  .ml--#{$i} {
-    margin-left: #{$i}px;
-  }
-}
-
-@for $i from 1 through 20 {
-  .mr--#{$i} {
-    margin-right: #{$i}px;
-  }
-}

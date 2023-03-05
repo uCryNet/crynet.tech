@@ -29,7 +29,7 @@
   <NotFound v-else />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { useStore } from "vuex";
 import { computed, onMounted, ref, watch } from "vue";
@@ -51,108 +51,84 @@ import parseResponseError from "../../utils/parseResponseError";
 import API from "@/api/api"
 
 
-export default {
-  name: 'AdminPanel',
+const store = useStore()
 
-  components: {
-    AdminArticles,
-    AdminArticle,
-    TheAside,
-    NotFound
+const state = ref<{
+  isAdmin: boolean,
+  block: IMenusType,
+  edit: IArticle
+}>({
+  isAdmin: false,
+  block: "article",
+  edit: {
+    author: "",
+    category: "",
+    date: "",
+    image: "",
+    text: "",
+    title: "",
+    _id: "",
   },
+})
 
-  setup() {
-    const store = useStore()
+const MENUS: IMenus = {
+  article: { text: "Add article", value: "article" },
+  articles: { text: "All articles", value: "articles" },
+}
 
-    const state = ref<{
-      isAdmin: boolean,
-      block: IMenusType,
-      edit: IArticle
-    }>({
-      isAdmin: false,
-      block: "article",
-      edit: {
-        author: "",
-        category: "",
-        date: "",
-        image: "",
-        text: "",
-        title: "",
-        _id: "",
-      },
-    })
+onMounted(() => {
+  API.checkAccess()
+    .then(() => state.value.isAdmin = true)
+    .catch(error => console.error(parseResponseError(error)))
+})
 
-    const MENUS: IMenus = {
-      article: { text: "Add article", value: "article" },
-      articles: { text: "All articles", value: "articles" },
-    }
+const category = computed(() => store.getters.getAllCategory)
+const posts = computed(() => store.getters.getAllPost)
 
-    onMounted(() => {
-      API.checkAccess()
-        .then(() => state.value.isAdmin = true)
-        .catch(error => console.error(parseResponseError(error)))
-    })
+const switchBlock = (block: IMenusType) => {
+  if (state.value.block !== block) state.value.block = block
+}
 
-    const category = computed(() => store.getters.getAllCategory)
-    const posts = computed(() => store.getters.getAllPost)
+const editArticle = (article: IArticle) => {
+  state.value.block = "article"
+  state.value.edit = { ...article }
+}
 
-    const switchBlock = (block: IMenusType) => {
-      if (state.value.block !== block) state.value.block = block
-    }
+const getPosts = () => {
+  store.dispatch("getAllPosts")
+}
 
-    const editArticle = (article: IArticle) => {
-      state.value.block = "article"
-      state.value.edit = { ...article }
-    }
+const deleteArticle = async (id: string, title: string) => {
+  const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
 
-    const getPosts = () => {
-      store.dispatch("getAllPosts")
-    }
+  if (isDelete) {
+    await API.deletePost(id)
+      .catch(error => console.error(parseResponseError(error)))
 
-    const deleteArticle = async (id: string, title: string) => {
-      const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
-
-      if (isDelete) {
-        await API.deletePost(id)
-          .catch(error => console.error(parseResponseError(error)))
-
-        await getPosts()
-      }
-    }
-
-    const clearEditPostData = () => {
-      state.value.edit = {
-        author: "",
-        category: "",
-        date: "",
-        image: "",
-        text: "",
-        title: "",
-        _id: "",
-      }
-    }
-
-    watch(
-      () => state.value.block,
-      () => {
-        if (state.value.block === MENUS.articles.value && state.value.edit._id) {
-          clearEditPostData()
-        }
-      }
-    )
-
-    return {
-      clearEditPostData,
-      deleteArticle,
-      editArticle,
-      switchBlock,
-      posts,
-      category,
-      state,
-      MENUS
-    }
+    await getPosts()
   }
 }
+
+const clearEditPostData = () => {
+  state.value.edit = {
+    author: "",
+    category: "",
+    date: "",
+    image: "",
+    text: "",
+    title: "",
+    _id: "",
+  }
+}
+
+watch(
+  () => state.value.block,
+  () => {
+    if (state.value.block === MENUS.articles.value && state.value.edit._id) {
+      clearEditPostData()
+    }
+  }
+)
 </script>
 
 <style scoped lang="scss">
