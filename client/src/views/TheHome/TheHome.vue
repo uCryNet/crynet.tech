@@ -1,13 +1,18 @@
 <template>
   <div>
     <div class="mb--20">
-      <h2 class="title text--center mb--20">ARTICLES <span>& NOTES</span></h2>
-      <div class="text text--center">Sharing my experiences</div>
+      <h2 class="title text--center mb--20">
+        ARTICLES
+        <span> & NOTES</span>
+      </h2>
+      <div class="text text--center">
+        Sharing my experiences
+      </div>
     </div>
 
-    <SearchPost/>
+    <SearchPost />
 
-    <Posts/>
+    <Posts />
   </div>
 </template>
 

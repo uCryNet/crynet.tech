@@ -1,11 +1,25 @@
 <template>
   <div class="header-menu">
-    <div class="header-menu__category" @click="clear">
-      <router-link class="router-link" :to="ROUTE_LINK.root">Home</router-link>
+    <div
+      class="header-menu__category"
+      @click="clear"
+    >
+      <router-link
+        class="router-link"
+        :to="ROUTE_LINK.root"
+      >
+        Home
+      </router-link>
     </div>
 
-    <div v-for="categoryUnit in category" :key="categoryUnit.title" class="header-menu__category">
-      <div class="router-link">{{ categoryUnit.title }}</div>
+    <div
+      v-for="categoryUnit in category"
+      :key="categoryUnit.title"
+      class="header-menu__category"
+    >
+      <div class="router-link">
+        {{ categoryUnit.title }}
+      </div>
 
       <div class="header-menu__subcategory-lists">
         <div
@@ -25,7 +39,12 @@
     </div>
 
     <div class="header-menu__category">
-      <router-link class="router-link" :to="ROUTE_LINK.about">About</router-link>
+      <router-link
+        class="router-link"
+        :to="ROUTE_LINK.about"
+      >
+        About
+      </router-link>
     </div>
   </div>
 </template>

@@ -47,6 +47,10 @@
     ],
     "parserOptions": {
       "parser": "@typescript-eslint/parser"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "vue/html-self-closing": "off"
     }
   },
   "browserslist": [

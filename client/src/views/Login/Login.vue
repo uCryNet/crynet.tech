@@ -1,5 +1,8 @@
 <template>
-  <form class="login" @submit.prevent="send">
+  <form
+    class="login"
+    @submit.prevent="send"
+  >
     <label class="login__field">
       <input
         required
@@ -21,11 +24,19 @@
       />
     </label>
 
-    <div class="login__error" v-if="state.error.isError">
+    <div
+      class="login__error"
+      v-if="state.error.isError"
+    >
       {{ state.error.message }}
     </div>
 
-    <button type="submit" class="btn btn--big login__btn">LOGIN</button>
+    <button
+      type="submit"
+      class="btn btn--big login__btn"
+    >
+      LOGIN
+    </button>
   </form>
 </template>
 

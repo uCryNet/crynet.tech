@@ -3,9 +3,13 @@
     <TheMenu />
 
     <div class="header__info container">
-      <div class="title-think">YET ANOTHER</div>
+      <div class="title-think">
+        YET ANOTHER
+      </div>
 
-      <h2 class="title-big-bold">BLOG</h2>
+      <h2 class="title-big-bold">
+        BLOG
+      </h2>
 
       <span>🇺🇦</span>
     </div>

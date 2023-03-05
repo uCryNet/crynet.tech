@@ -1,10 +1,18 @@
 <template>
   <div class="aside">
-    <h6 class="title-block">MENU</h6>
+    <h6 class="title-block">
+      MENU
+    </h6>
 
     <ul class="aside__lists">
-      <li v-for="menu in Object.values(menus)" :key="menu.value">
-        <div :class="[block === menu.value && 'aside__active']" @click="switchBlock(menu.value)">
+      <li
+        v-for="menu in Object.values(menus)"
+        :key="menu.value"
+      >
+        <div
+          :class="[block === menu.value && 'aside__active']"
+          @click="switchBlock(menu.value)"
+        >
           {{ menu.text }}
         </div>
       </li>

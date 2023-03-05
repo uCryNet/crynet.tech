@@ -1,14 +1,23 @@
 <template>
   <div class="article">
-    <h1 class="article__title title">{{ state.post.title }}</h1>
+    <h1 class="article__title title">
+      {{ state.post.title }}
+    </h1>
 
     <div class="article__info">
-      <div class="article__date">{{ state.post.date }}</div>
+      <div class="article__date">
+        {{ state.post.date }}
+      </div>
 
-      <div class="article__category">{{ state.post.category.toUpperCase() }}</div>
+      <div class="article__category">
+        {{ state.post.category.toUpperCase() }}
+      </div>
     </div>
 
-    <div class="article__text" v-html="state.post.text"/>
+    <div
+      class="article__text"
+      v-html="state.post.text"
+    />
   </div>
 </template>
 

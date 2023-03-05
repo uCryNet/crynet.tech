@@ -1,8 +1,11 @@
 <template>
-  <div v-if="state.isAdmin" class="admin-panel">
+  <div
+    v-if="state.isAdmin"
+    class="admin-panel"
+  >
     <TheAside
       :menus="MENUS"
-      :switchBlock="switchBlock"
+      :switch-block="switchBlock"
       :block="state.block"
     />
 
@@ -11,13 +14,13 @@
         v-if="state.block === 'article'"
         :edit="state.edit"
         :category="category"
-        :clearEditPostData="clearEditPostData"
+        :clear-edit-post-data="clearEditPostData"
       />
 
       <AdminArticles
         v-else-if="state.block === 'articles'"
-        :editArticle="editArticle"
-        :deleteArticle="deleteArticle"
+        :edit-article="editArticle"
+        :delete-article="deleteArticle"
         :lists="posts"
       />
     </div>

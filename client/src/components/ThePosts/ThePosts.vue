@@ -1,6 +1,12 @@
 <template>
-  <div class="posts" v-if="!isPending">
-    <div class="posts__lists" v-if="posts.length">
+  <div
+    class="posts"
+    v-if="!isPending"
+  >
+    <div
+      class="posts__lists"
+      v-if="posts.length"
+    >
       <ThePost
         :post="article"
         :key="article._id"
@@ -8,13 +14,17 @@
       />
     </div>
 
-    <h3 v-else class="posts__empty">
+    <h3
+      class="posts__empty"
+      v-else
+    >
       <span>OOPS!</span>
+
       No records found
     </h3>
   </div>
 
-  <ThePreloader v-else/>
+  <ThePreloader v-else />
 </template>
 
 <script setup lang="ts">
