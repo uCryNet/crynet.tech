@@ -6,7 +6,7 @@
     >
       <router-link
         class="router-link"
-        :to="ROUTE_LINK.root"
+        :to="ROUTES_CONFIG.root.path"
       >
         Home
       </router-link>
@@ -30,7 +30,7 @@
         >
           <router-link
             class="header-menu__subcategory-unit-link"
-            :to="{name: 'TheArticles', params: {category: subCategoriesUnit.name}}"
+            :to="{ name: ROUTES_CONFIG.articles.name, params: { category: subCategoriesUnit.name } }"
           >
             {{ subCategoriesUnit.name }}
           </router-link>
@@ -41,7 +41,7 @@
     <div class="header-menu__category">
       <router-link
         class="router-link"
-        :to="ROUTE_LINK.about"
+        :to="ROUTES_CONFIG.about.path"
       >
         About
       </router-link>
@@ -55,7 +55,7 @@ import { computed } from "vue";
 import { useStore } from "vuex";
 
 // Variables
-import { ROUTE_LINK } from "@/router";
+import { ROUTES_CONFIG } from "@/router";
 
 
 const store = useStore()

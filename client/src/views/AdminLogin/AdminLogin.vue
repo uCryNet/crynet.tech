@@ -46,7 +46,7 @@ import { onMounted, ref, watch, } from "vue";
 import { useRouter } from "vue-router";
 
 // Variables
-import { ROUTE_LINK } from "@/router";
+import { ROUTES_CONFIG } from "@/router";
 import API from "@/api/api"
 
 // Utils
@@ -78,7 +78,7 @@ onMounted(() => {
     .then(res => {
       const { isAdmin } = res.data
 
-      isAdmin && router.push(ROUTE_LINK.adminPanel)
+      isAdmin && router.push(ROUTES_CONFIG.adminPanel.path)
     })
 })
 
@@ -92,11 +92,11 @@ watch(
         const { isAdmin } = res.data
 
         isAdmin
-          ? router.push(ROUTE_LINK.adminPanel)
-          : router.push(ROUTE_LINK.root)
+          ? router.push(ROUTES_CONFIG.adminPanel.path)
+          : router.push(ROUTES_CONFIG.root.path)
       })
       .catch(error => {
-        router.push(ROUTE_LINK.root)
+        router.push(ROUTES_CONFIG.root.path)
         console.error(parseResponseError(error))
       })
   }

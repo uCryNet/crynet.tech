@@ -8,7 +8,7 @@
 
       <router-link
         class="router-link text--sandybrown"
-        :to="ROUTE_LINK.about"
+        :to="ROUTES_CONFIG.about.path"
       >
         CryNet
       </router-link>
@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 // Variables
-import { ROUTE_LINK } from "@/router";
+import { ROUTES_CONFIG } from "@/router";
 
 
 const date = new Date().getUTCFullYear()

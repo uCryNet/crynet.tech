@@ -1,7 +1,7 @@
 <template>
   <router-link
     class="post"
-    :to="{ name: 'TheArticle', params: { id, category } }"
+    :to="{ name: ROUTES_CONFIG.article.name, params: { id, category } }"
   >
     <img
       @error="onError"
@@ -52,6 +52,7 @@ import { IArticle } from "@/interfaces/interfaces";
 // Variables
 import NotFoundImage from "@/assets/img/post/404.webp";
 import { SERVER } from "@/config/constant";
+import { ROUTES_CONFIG } from "@/router";
 
 
 interface IPostProps {
