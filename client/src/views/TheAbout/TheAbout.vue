@@ -126,7 +126,7 @@ const SKILLS = [
 
 
 onMounted(() => {
-  document.title = "TheAbout of CryNet"
+  document.title = "About CryNet"
 })
 </script>
 
