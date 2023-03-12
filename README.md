@@ -31,9 +31,10 @@ ___
 * **Nginx config:** [crynet.tech.conf](https://github.com/uCryNet/blog/blob/master/crynet.tech.conf)
 
 ### Todos:
-* Update back-end. Rewrite onto functions [BE]
-* Add features to update image when you update article (old picture need remove) [BE/FE]
-* Add multiple select [FE]
-* Add feature chose several article category [BE/FE]
-* Add multilang [BE/FE]
-* Сover tests [BE/FE]
+- [ ] Update back-end. Rewrite onto functions [BE]
+- [x] Add features to update image when you update article (old picture need remove) [BE/FE]
+- [ ] Add multiple select [FE]
+- [ ] Add feature chose several article category [BE/FE]
+- [ ] Add multilang [BE/FE]
+- [ ] Tests coverage  [BE/FE]
+- [ ] Add paginator [FE]

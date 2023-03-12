@@ -1,6 +1,6 @@
 // Types
 import { Request, Response } from "express";
-import { IUserSchema } from "../interfaces/interfaces";
+import { IPostUpdate, IUserSchema } from "../interfaces/interfaces";
 
 
 // Components
@@ -107,17 +107,32 @@ class PostController {
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin" || !userId) return res.status(400).json({ message: "No access" })
+
       if (!postId && !category) return res.status(400).json({ message: "Fill in the required fields" })
       await checkLengthArticle(res, title, text)
 
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost?._id) return res.status(400).json({ message: "Post not found" })
 
-      // TODO: добавить обновление картинки
-      // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
+      const newImage = req.files ? await FileService.saveImage(req.files.image) : ""
+
       const { name } = await UserService.getUser(userId, "id") as IUserSchema
 
-      await PostService.update({ title, text, category, author: name, id: postId })
+      await FileService.deleteImage(getCurrentPost.image);
+
+      const data: IPostUpdate = {
+        title,
+        text,
+        category,
+        author: name,
+        id: postId
+      }
+
+      if (newImage) {
+        data.image = newImage
+      }
+
+      await PostService.update(data)
 
       return res.send('OK')
     } catch (e) {

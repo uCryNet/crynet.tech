@@ -33,7 +33,7 @@ app.use(router) // http://localhost:5000/api/
 async function startApp() {
   try {
     await mongoose.connect(process.env.DB as string)
-    app.listen(process.env.PORT, () => console.log('SERVER WORKS ON PORT ' + process.env.PORT))
+    app.listen(process.env.PORT, () => console.log('===== SERVER WORKS ====='))
   } catch (e) {
     console.log(e)
   }

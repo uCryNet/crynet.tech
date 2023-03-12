@@ -1,23 +1,8 @@
+// Types
+import { IPostCreate, IPostUpdate } from "../interfaces/interfaces";
+
 // Components
 import Post from '../models/post'
-
-
-interface IPostCreate {
-  title: string
-  text: string
-  author: string
-  image: string
-  date: string
-  category: string
-}
-
-interface IPostUpdate {
-  id: string
-  title: string
-  text: string
-  category: string
-  author: string
-}
 
 
 class PostService {
