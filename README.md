@@ -49,4 +49,5 @@ This is my personal blog you can download it and see how it works. Download [mas
 :x: Add feature chose several article category [BE/FE] \
 :x: Add multilang [BE/FE] \
 :x: Tests coverage  [BE/FE] \
+:x: Add "2FA for admin login [BE/FE] \
 :x: Add paginator [FE]
