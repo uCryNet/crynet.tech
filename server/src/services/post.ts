@@ -7,36 +7,19 @@ import Post from '../models/post'
 
 class PostService {
   async get(search = "", category = "") {
-    let posts
+    const conditions: Record<string, Object> = {};
 
-    // TODO: переписать нормально
-
-    if (search && category) {
-      posts = await Post.find({
-        category: new RegExp(category, 'ig'),
-        $or: [
-          { title: new RegExp(search, 'ig') },
-          { text: new RegExp(search, 'ig') },
-        ]
-      })
-    } else if (search) {
-      posts = await Post.find({
-        $or: [
-          { title: new RegExp(search, 'ig') },
-          { text: new RegExp(search, 'ig') }
-        ]
-      })
-    } else if (category) {
-      posts = await Post.find({
-        $or: [
-          { category: new RegExp(category, 'ig') }
-        ]
-      })
-    } else {
-      posts = await Post.find()
+    if (category) {
+      conditions.category = new RegExp(category, 'i');
     }
-
-    return posts
+    if (search) {
+      const regex = new RegExp(search, 'i');
+      conditions.$or = [
+        { title: regex },
+        { text: regex },
+      ];
+    }
+    return await Post.find(conditions);
   }
 
   async create(data: IPostCreate) {

@@ -11,20 +11,15 @@ import FileService from '../services/file'
 import UserService from "../services/login";
 
 // Utils
-import { decryptedData } from "../utils"
+import { decryptedData, stringValidate } from "../utils"
 
 
+// TODO: This shit need update. Add global logic
 const checkLengthArticle = (res: Response, title: string, text: string) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({ message: "Check the length title" })
   if (text.length < 10 || text.length > 5000) return res.status(400).json({ message: "Check the length text" })
 }
 
-
-const stringValidate = (string: string) => {
-  return string
-    ? string.replace(/[.*+?^$<>{}()|[\]\\]/g, "\\$&")
-    : ''
-}
 
 class PostController {
   async getOne(req: Request, res: Response) {
