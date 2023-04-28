@@ -19,7 +19,7 @@ class PostService {
         { text: regex },
       ];
     }
-    return await Post.find(conditions);
+    return await Post.find(conditions).sort({ date: 'asc' });
   }
 
   async create(data: IPostCreate) {
