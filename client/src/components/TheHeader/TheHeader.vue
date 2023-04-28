@@ -8,7 +8,7 @@
       </div>
 
       <h2 class="title-big-bold">
-        BLOG
+        DEVELOPER
       </h2>
 
       <span>🇺🇦</span>

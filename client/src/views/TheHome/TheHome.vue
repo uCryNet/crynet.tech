@@ -6,7 +6,7 @@
         <span> & NOTES</span>
       </h2>
       <div class="text text--center">
-        Sharing my experiences
+        Let's try
       </div>
     </div>
 

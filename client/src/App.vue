@@ -13,7 +13,7 @@
 
 <script lang="ts">
 // Vendors
-import { computed,  onMounted, watch } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 // Components
@@ -21,7 +21,7 @@ import TheHeader from "@/components/TheHeader/TheHeader.vue";
 import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
 // Utils
-import debounce from "@/utils/debounce";
+import { debounce } from "@/utils";
 
 // Variables
 import { ROUTES_CONFIG } from "@/router";
@@ -38,37 +38,39 @@ export default {
 
   setup() {
     const store = useStore()
-
     const route = useRoute()
 
     onMounted(() => {
       store.dispatch("getCategory")
-      store.dispatch("getAllPosts")
     })
 
     const routes = computed(() => route.fullPath)
     const filters = computed(() => store.getters.getFilter)
-    const isPending = computed(() => store.getters.getIsPending)
+    const isPending = store.getters.getIsPending
 
     watch(
       () => routes,
       ({ value }) => {
-        if (value === ROUTES_CONFIG.root.path)
-          store.dispatch("setFilters", { search: "", category: "" })
-      },
-      { deep: true }
+        const payload = value === ROUTES_CONFIG.root.path
+          ? { search: "", category: "" }
+          : { category: route.params.category }
+
+        store.dispatch("setFilters", payload)
+      }, {
+        deep: true
+      }
     )
 
     watch(
       () => filters,
       ({ value }) => {
-        store.dispatch("setPending", true)
-
         debounce(() => {
           store.dispatch("getAllPosts", value)
         }, 600)
-      },
-      { deep: true }
+      }, {
+        deep: true,
+        immediate: true
+      }
     )
 
     return {

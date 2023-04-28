@@ -35,6 +35,7 @@ const getters = {
 
 const actions = {
   async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
+    commit("setPending", true)
 
     API.getPosts(data)
       .then(res => {
