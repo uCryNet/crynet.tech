@@ -9,6 +9,6 @@ export interface IUpdatePost {
 export interface ICreatePost {
   title: string
   category: string
-  image: null | File
+  image: File
   text: string
 }

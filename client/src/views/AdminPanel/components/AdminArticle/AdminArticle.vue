@@ -77,7 +77,7 @@ import Editor from '@tinymce/tinymce-vue'
 
 // Types
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
-import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
+import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
 // Variables
 import API from "@/api/api"
@@ -163,7 +163,7 @@ const getContent = async () => {
     ? await API.updatePost(data)
       .then(() => alert(`Article updated!`))
       .catch(error => console.error(parseResponseError(error)))
-    : await API.createPost(data)
+    : await API.createPost(data as ICreatePost)
       .then(() => alert(`Article added!`))
       .catch(error => console.error(parseResponseError(error)))
 
