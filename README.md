@@ -43,7 +43,7 @@ This is my personal blog you can download it and see how it works. Download [mas
 
 
 ## :white_check_mark: Todos
-:x: Update back-end. Rewrite onto functions [BE] \
+:x: Back-end refactoring [BE] \
 :heavy_check_mark: Add features to update image when you update article (old picture need remove) [BE/FE] \
 :x: Add multiple select [FE] \
 :x: Add feature chose several article category [BE/FE] \
@@ -51,3 +51,4 @@ This is my personal blog you can download it and see how it works. Download [mas
 :x: Tests coverage  [BE/FE] \
 :x: Add "2FA for admin login [BE/FE] \
 :x: Add paginator [FE]
+:x: Update isAdmin solution [FE]
