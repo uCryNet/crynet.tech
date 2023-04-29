@@ -8,11 +8,6 @@ export interface IArticle {
   category: string
 }
 
-export interface IGetPosts {
-  text: string
-  category: string
-}
-
 export interface IEvent<T = EventTarget> {
   target: T;
 }

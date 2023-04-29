@@ -2,7 +2,7 @@
 import { Commit } from "vuex";
 
 // Types
-import { IArticle, IGetPosts } from "@/interfaces/interfaces";
+import { IArticle } from "@/interfaces/interfaces";
 import { IFiltersStore, IPostStore } from "@/store/store.types";
 
 // Variables
@@ -33,7 +33,7 @@ const getters = {
 }
 
 const actions = {
-  async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
+  async getAllPosts({ commit }: { commit: Commit }, data: IFiltersStore | {} = {}) {
     commit("setPending", true)
 
     API.getPosts(data)

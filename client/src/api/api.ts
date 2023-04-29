@@ -2,11 +2,11 @@
 import axios from 'axios';
 
 // Types
-import { IGetPosts } from "@/interfaces/interfaces";
 import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
+import { IFiltersStore } from "@/store/store.types";
 
 
-const getPosts = (data: IGetPosts | {} = {}) => {
+const getPosts = (data: IFiltersStore) => {
   return axios.post(`post/get-all`, data);
 }
 
@@ -22,7 +22,7 @@ const updatePost = (form: IUpdatePost) => {
   formData.append('category', form.category);
   formData.append('id', form._id);
   // TODO: обновлять картинку при редактировании
-  // formData.append('image', form.image);
+  formData.append('image', form.image);
 
   return axios.put(`post/update/`, formData);
 }
