@@ -79,6 +79,7 @@ const poster = SERVER + image
 const onError = () => isError.value = true
 const getDescription = text
   .replace(/(<([^>]+)>)/ig,'')
-  .substring(0, 150)
+  .substring(0, 100)
   .trim()
+  + '...'
 </script>
