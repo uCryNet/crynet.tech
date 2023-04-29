@@ -11,69 +11,47 @@
 </template>
 
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
-import { computed,  onMounted, watch } from "vue";
+import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 // Components
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
 import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
-// Utils
-import debounce from "@/utils/debounce";
-
 // Variables
 import { ROUTES_CONFIG } from "@/router";
-import { useRoute, } from "vue-router";
 
 
-export default {
-  name: 'App',
+const store = useStore()
+const route = useRoute()
 
-  components: {
-    TheHeader,
-    TheFooter
-  },
+onMounted(() => {
+  store.dispatch("getCategory")
+})
 
-  setup() {
-    const store = useStore()
+const routes = computed(() => route.fullPath)
+const filters = computed(() => store.getters.getFilter)
 
-    const route = useRoute()
+watch(
+  () => routes,
+  ({ value }) => {
+    const payload = value === ROUTES_CONFIG.root.path
+      ? { search: "", category: "" }
+      : { category: route.params.category }
 
-    onMounted(() => {
-      store.dispatch("getCategory")
-      store.dispatch("getAllPosts")
-    })
+    store.dispatch("setFilters", payload)
+  }, { deep: true }
+)
 
-    const routes = computed(() => route.fullPath)
-    const filters = computed(() => store.getters.getFilter)
-    const isPending = computed(() => store.getters.getIsPending)
-
-    watch(
-      () => routes,
-      ({ value }) => {
-        if (value === ROUTES_CONFIG.root.path)
-          store.dispatch("setFilters", { search: "", category: "" })
-      },
-      { deep: true }
-    )
-
-    watch(
-      () => filters,
-      ({ value }) => {
-        store.dispatch("setPending", true)
-
-        debounce(() => {
-          store.dispatch("getAllPosts", value)
-        }, 600)
-      },
-      { deep: true }
-    )
-
-    return {
-      isPending
-    }
+watch(
+  () => filters,
+  ({ value }) => {
+    store.dispatch("getAllPosts", value)
+  }, {
+    deep: true,
   }
-}
+)
 </script>

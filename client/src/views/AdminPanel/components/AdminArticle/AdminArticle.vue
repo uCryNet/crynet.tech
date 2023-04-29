@@ -62,7 +62,7 @@
     <button
       class="btn btn--red btn--big mt--20"
       v-if="state?._id"
-      @click="cancel"
+      @click="onCancel"
     >
       CANCEL
     </button>
@@ -77,7 +77,7 @@ import Editor from '@tinymce/tinymce-vue'
 
 // Types
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
-import { IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
+import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
 // Variables
 import API from "@/api/api"
@@ -103,7 +103,7 @@ const state = ref<IUpdatePost>({
   _id: "",
   title: "",
   category: "css",
-  image: "",
+  image: null,
   text: "",
 })
 
@@ -135,16 +135,16 @@ const clearPostData = () => {
     _id: "",
     title: "",
     category: "css",
-    image: "",
+    image: null,
     text: "",
   }
 }
 
 const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
-  state.value.image = $event.target.files ? $event.target.files[ 0 ] : ""
+  state.value.image = $event.target.files ? $event.target.files[ 0 ] : null
 }
 
-const cancel = () => {
+const onCancel = () => {
   clearEditPostData
   clearPostData()
 }
@@ -163,7 +163,7 @@ const getContent = async () => {
     ? await API.updatePost(data)
       .then(() => alert(`Article updated!`))
       .catch(error => console.error(parseResponseError(error)))
-    : await API.createPost(data)
+    : await API.createPost(data as ICreatePost)
       .then(() => alert(`Article added!`))
       .catch(error => console.error(parseResponseError(error)))
 
@@ -178,7 +178,7 @@ onMounted(() => {
       _id: edit.value._id,
       title: edit.value.title,
       category: edit.value.category,
-      image: edit.value.image,
+      image: null,
       text: edit.value.text,
     }
   }

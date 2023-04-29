@@ -21,7 +21,7 @@
         v-else-if="state.block === 'articles'"
         :edit-article="editArticle"
         :delete-article="deleteArticle"
-        :lists="posts"
+        :lists="state.allArticles"
       />
     </div>
   </div>
@@ -32,7 +32,7 @@
 <script setup lang="ts">
 // Vendors
 import { useStore } from "vuex";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, reactive, watch } from "vue";
 
 // Types
 import { IArticle } from "@/interfaces/interfaces";
@@ -53,10 +53,11 @@ import API from "@/api/api"
 
 const store = useStore()
 
-const state = ref<{
+const state = reactive<{
   isAdmin: boolean,
   block: IMenusType,
   edit: IArticle
+  allArticles: IArticle[]
 }>({
   isAdmin: false,
   block: "article",
@@ -69,6 +70,7 @@ const state = ref<{
     title: "",
     _id: "",
   },
+  allArticles: []
 })
 
 const MENUS: IMenus = {
@@ -76,30 +78,27 @@ const MENUS: IMenus = {
   articles: { text: "All articles", value: "articles" },
 }
 
-onMounted(() => {
-  API.checkAccess()
-    .then(() => state.value.isAdmin = true)
-    .catch(error => console.error(parseResponseError(error)))
-})
-
 const category = computed(() => store.getters.getAllCategory)
-const posts = computed(() => store.getters.getAllPost)
 
 const switchBlock = (block: IMenusType) => {
-  if (state.value.block !== block) state.value.block = block
+  if (state.block !== block) state.block = block
 }
 
 const editArticle = (article: IArticle) => {
-  state.value.block = "article"
-  state.value.edit = { ...article }
+  state.block = "article"
+  state.edit = { ...article }
 }
 
 const getPosts = () => {
-  store.dispatch("getAllPosts")
+  API.getPosts({})
+    .then(res => state.allArticles = res.data)
+    .catch(error => {
+      console.error(parseResponseError(error))
+    })
 }
 
 const deleteArticle = async (id: string, title: string) => {
-  const isDelete = confirm(`Вы точно хотите удалить пост: "${title}"`)
+  const isDelete = confirm(`Are you sure you want to delete this post: "${title}"`)
 
   if (isDelete) {
     await API.deletePost(id)
@@ -110,7 +109,7 @@ const deleteArticle = async (id: string, title: string) => {
 }
 
 const clearEditPostData = () => {
-  state.value.edit = {
+  state.edit = {
     author: "",
     category: "",
     date: "",
@@ -121,10 +120,18 @@ const clearEditPostData = () => {
   }
 }
 
+onMounted(() => {
+  API.checkAccess()
+    .then(() => state.isAdmin = true)
+    .catch(error => console.error(parseResponseError(error)))
+
+  getPosts()
+})
+
 watch(
-  () => state.value.block,
+  () => state.block,
   () => {
-    if (state.value.block === MENUS.articles.value && state.value.edit._id) {
+    if (state.block === MENUS.articles.value && state.edit._id) {
       clearEditPostData()
     }
   }

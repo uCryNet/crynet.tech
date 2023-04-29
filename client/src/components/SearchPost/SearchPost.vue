@@ -3,15 +3,15 @@
     <div class="search-post__wrap">
       <div class="search-post__search-inner">
         <input
-          v-model.trim="filters.search"
+          v-model.trim="state.search"
           class="input search-post__search-input"
           placeholder="Search"
         />
 
         <button
-          @click="clear"
+          @click="onClearSearch"
           class="search-post__search-clear"
-          v-if="filters.search"
+          v-if="state.search"
         >
           <svg
             width="12"
@@ -33,14 +33,34 @@
 <script setup lang="ts">
 // Vendors
 import { useStore } from "vuex";
-import { computed } from "vue";
+import { computed, reactive, watch } from "vue";
+
+// Utils
+import { debounce } from "@/utils";
 
 
 const store = useStore()
 
 const filters = computed(() => store.getters.getFilter)
+const state = reactive({
+  search: ''
+})
 
-const clear = () => store.dispatch("setFilters", { search: "" })
+const onClearSearch = () => state.search = ''
+
+watch(
+  filters,
+  ({ search }) => state.search = search,
+  { immediate: true }
+)
+watch(
+  () => state.search,
+  (search) => {
+    debounce(() => {
+      store.dispatch("setFilters", { search })
+    }, 500)
+  }
+)
 </script>
 
 <style scoped lang="scss">

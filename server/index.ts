@@ -10,18 +10,17 @@ import * as fs from "fs"
 
 // Variables
 const router = require("./src/routes/index.routes.ts")
+
 import { STATIC_FOLDER_NAME } from "./src/config/config"
 
+// origin needed because front and back works on different ports (only local develop)
+const originConf = !!process.env.ORIGIN && { origin: process.env.ORIGIN }
 
 const app = express()
 app.use(
   cors({
-    // origin needed because front and back works on different ports (only local develop)
-    origin: `http://localhost:8080`,
-    credentials: true, //access-control-allow-credentials: true
-    // TODO: fix this
-    // @ts-ignore
-    optionSuccessStatus: 200,
+    ...originConf,
+    credentials: true, // access-control-allow-credentials: true
   }),
 )
 app.use(cookieParser())
@@ -38,6 +37,7 @@ const options = {
 
 async function startApp() {
   try {
+    mongoose.set('strictQuery', true)
     await mongoose.connect(process.env.DB as string)
     https.createServer(options, app).listen(process.env.PORT);
   } catch (e) {

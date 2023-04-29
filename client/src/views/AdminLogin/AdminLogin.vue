@@ -1,7 +1,7 @@
 <template>
   <form
     class="admin-login"
-    @submit.prevent="send"
+    @submit.prevent="onSubmit"
   >
     <label class="admin-login__field">
       <input
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 // Vendors
-import { onMounted, ref, watch, } from "vue";
+import { onMounted, reactive, watch, } from "vue";
 import { useRouter } from "vue-router";
 
 // Variables
@@ -55,7 +55,7 @@ import parseResponseError from "@/utils/parseResponseError";
 
 const router = useRouter()
 
-const state = ref<{
+const state = reactive<{
   isAuthorized: boolean
   login: string
   password: string
@@ -83,7 +83,7 @@ onMounted(() => {
 })
 
 watch(
-  () => state.value.isAuthorized,
+  () => state.isAuthorized,
   (isAuthorized) => {
     if (!isAuthorized) return
 
@@ -102,18 +102,18 @@ watch(
   }
 )
 
-const send = () => {
-  const { login, password } = state.value
+const onSubmit = () => {
+  const { login, password } = state
 
   API.login({ login, password })
     .then(() => {
-      state.value.isAuthorized = true
+      state.isAuthorized = true
     })
     .catch(error => {
       const message = parseResponseError(error)
 
-      state.value.error.isError = true
-      state.value.error.message = message
+      state.error.isError = true
+      state.error.message = message
     })
 }
 </script>

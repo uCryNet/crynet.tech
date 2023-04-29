@@ -1,6 +1,6 @@
 // Types
 import { Request, Response } from "express";
-import { IUserSchema } from "../interfaces/interfaces";
+import { IPostUpdate, IUserSchema } from "../interfaces/interfaces";
 
 
 // Components
@@ -11,20 +11,15 @@ import FileService from '../services/file'
 import UserService from "../services/login";
 
 // Utils
-import { decryptedData } from "../utils"
+import { decryptedData, stringValidate } from "../utils"
 
 
+// TODO: This shit need update. Add global logic
 const checkLengthArticle = (res: Response, title: string, text: string) => {
   if (title.length < 3 || title.length > 100) return res.status(400).json({ message: "Check the length title" })
   if (text.length < 10 || text.length > 5000) return res.status(400).json({ message: "Check the length text" })
 }
 
-
-const stringValidate = (string: string) => {
-  return string
-    ? string.replace(/[.*+?^$<>{}()|[\]\\]/g, "\\$&")
-    : ''
-}
 
 class PostController {
   async getOne(req: Request, res: Response) {
@@ -67,7 +62,8 @@ class PostController {
       await checkLengthArticle(res, title, text)
 
       const { name } = await UserService.getUser(_id, "id") as IUserSchema
-      const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
+
+      const imageName = !!req.files ? await FileService.saveImage(req.files.image) : ""
       const date = new Date().toLocaleDateString("ru-RU")
 
       await PostService.create({ title, text, author: name, image: imageName, date, category })
@@ -88,7 +84,7 @@ class PostController {
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
-      // TODO: добавить возможность удалить картинку. Для начала хотя бы только из шапки
+      // TODO: del images inside articles
       await PostService.delete(id)
 
       return res.send('OK')
@@ -107,17 +103,31 @@ class PostController {
 
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin" || !userId) return res.status(400).json({ message: "No access" })
+
       if (!postId && !category) return res.status(400).json({ message: "Fill in the required fields" })
       await checkLengthArticle(res, title, text)
 
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost?._id) return res.status(400).json({ message: "Post not found" })
 
-      // TODO: добавить обновление картинки
-      // const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
+      const newImage = !!req.files ? await FileService.saveImage(req.files.image) : null
+
       const { name } = await UserService.getUser(userId, "id") as IUserSchema
 
-      await PostService.update({ title, text, category, author: name, id: postId })
+      const data: IPostUpdate = {
+        title,
+        text,
+        category,
+        author: name,
+        id: postId
+      }
+
+      if (!!newImage) {
+        data.image = newImage
+        await FileService.deleteImage(getCurrentPost.image)
+      }
+
+      await PostService.update(data)
 
       return res.send('OK')
     } catch (e) {

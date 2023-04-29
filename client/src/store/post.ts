@@ -1,7 +1,9 @@
-// Types
-import { IArticle, IGetPosts } from "@/interfaces/interfaces";
-import { IFiltersStore, IPostStore } from "@/store/store.types";
+// Vendors
 import { Commit } from "vuex";
+
+// Types
+import { IArticle } from "@/interfaces/interfaces";
+import { IFiltersStore, IPostStore } from "@/store/store.types";
 
 // Variables
 import API from "../api/api";
@@ -12,10 +14,7 @@ import parseResponseError from "@/utils/parseResponseError";
 
 const state: IPostStore = {
   posts: [],
-  filters: {
-    search: "",
-    category: ""
-  },
+  filters: {},
   isPending: false
 }
 
@@ -34,7 +33,8 @@ const getters = {
 }
 
 const actions = {
-  async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
+  async getAllPosts({ commit }: { commit: Commit }, data: IFiltersStore | {} = {}) {
+    commit("setPending", true)
 
     API.getPosts(data)
       .then(res => {
@@ -50,10 +50,6 @@ const actions = {
 
   setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
     commit("setFilters", data)
-  },
-
-  setPending({ commit }: { commit: Commit }, data: boolean) {
-    commit("setPending", data)
   },
 }
 

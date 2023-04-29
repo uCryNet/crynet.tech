@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 // Vendor
-import { onMounted, ref } from "vue";
+import { onMounted, reactive } from "vue";
 import { useRoute } from "vue-router";
 
 import { highlightAll } from "prismjs"
@@ -39,7 +39,7 @@ import parseResponseError from "../../utils/parseResponseError";
 
 const route = useRoute()
 
-const state = ref<{
+const state = reactive<{
   post: {
     title: string
     date: string
@@ -59,17 +59,17 @@ onMounted(async () => {
   const { id } = route.params
 
   await API.getOnePost(id as string)
-    .then(res => state.value.post = res.data)
+    .then(res => state.post = res.data)
     .catch(error => console.error(parseResponseError(error)))
 
   await highlightAll()
 
-  const description = state.value.post.text
+  const description = state.post.text
     .replace(/(<([^>]+)>)/ig,'')
     .substring(0, 150)
     .trim()
 
-  document.title = state.value.post.title
+  document.title = state.post.title
   document.querySelector('meta[property="og:description"]')?.setAttribute("content", description)
 })
 </script>

@@ -15,3 +15,21 @@ export interface IUserSchema {
   avatar: string
   role: string
 }
+
+export interface IPostCreate {
+  title: string
+  text: string
+  author: string
+  image: string
+  date: string
+  category: string
+}
+
+export interface IPostUpdate {
+  id: string
+  title: string
+  text: string
+  category: string
+  author: string
+  image?: string
+}
