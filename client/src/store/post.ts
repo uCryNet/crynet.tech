@@ -14,10 +14,7 @@ import parseResponseError from "@/utils/parseResponseError";
 
 const state: IPostStore = {
   posts: [],
-  filters: {
-    search: "",
-    category: ""
-  },
+  filters: {},
   isPending: false
 }
 
@@ -38,8 +35,6 @@ const getters = {
 const actions = {
   async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
     commit("setPending", true)
-
-    console.log(data)
 
     API.getPosts(data)
       .then(res => {

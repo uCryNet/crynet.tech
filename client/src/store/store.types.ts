@@ -3,8 +3,8 @@ import { IArticle, ICategory } from "@/interfaces/interfaces";
 
 
 export interface IFiltersStore {
-  search: string,
-  category: string
+  search?: string,
+  category?: string
 }
 
 export interface IPostStore {

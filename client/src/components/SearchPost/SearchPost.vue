@@ -9,7 +9,7 @@
         />
 
         <button
-          @click="onClear"
+          @click="onClearSearch"
           class="search-post__search-clear"
           v-if="state.search"
         >
@@ -46,7 +46,7 @@ const state = reactive({
   search: ''
 })
 
-const onClear = () => state.search = ''
+const onClearSearch = () => state.search = ''
 
 watch(
   filters,

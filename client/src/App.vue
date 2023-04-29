@@ -62,7 +62,6 @@ export default {
         store.dispatch("getAllPosts", value)
       }, {
         deep: true,
-        immediate: true
       }
     )
 
