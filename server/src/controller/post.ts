@@ -62,7 +62,8 @@ class PostController {
       await checkLengthArticle(res, title, text)
 
       const { name } = await UserService.getUser(_id, "id") as IUserSchema
-      const imageName = req.files ? await FileService.saveImage(req.files.image) : ""
+
+      const imageName = !!req.files ? await FileService.saveImage(req.files.image) : ""
       const date = new Date().toLocaleDateString("ru-RU")
 
       await PostService.create({ title, text, author: name, image: imageName, date, category })
@@ -83,7 +84,7 @@ class PostController {
       if (!token) return res.status(400).json({ message: "User is not authorized" })
       if (role !== "admin") return res.status(400).json({ message: "No access" })
 
-      // TODO: добавить возможность удалить картинку. Для начала хотя бы только из шапки
+      // TODO: del images inside articles
       await PostService.delete(id)
 
       return res.send('OK')
@@ -109,11 +110,9 @@ class PostController {
       const getCurrentPost = await PostService.getOne(postId)
       if (!getCurrentPost?._id) return res.status(400).json({ message: "Post not found" })
 
-      const newImage = req.files ? await FileService.saveImage(req.files.image) : ""
+      const newImage = !!req.files ? await FileService.saveImage(req.files.image) : null
 
       const { name } = await UserService.getUser(userId, "id") as IUserSchema
-
-      await FileService.deleteImage(getCurrentPost.image);
 
       const data: IPostUpdate = {
         title,
@@ -123,8 +122,9 @@ class PostController {
         id: postId
       }
 
-      if (newImage) {
+      if (!!newImage) {
         data.image = newImage
+        await FileService.deleteImage(getCurrentPost.image)
       }
 
       await PostService.update(data)

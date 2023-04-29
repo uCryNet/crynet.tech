@@ -21,8 +21,7 @@ const updatePost = (form: IUpdatePost) => {
   formData.append('text', form.text);
   formData.append('category', form.category);
   formData.append('id', form._id);
-  // TODO: обновлять картинку при редактировании
-  formData.append('image', form.image);
+  !!form.image && formData.append('image', form.image);
 
   return axios.put(`post/update/`, formData);
 }
@@ -33,7 +32,7 @@ const createPost = (form: ICreatePost) => {
   formData.append('title', form.title);
   formData.append('text', form.text);
   formData.append('category', form.category);
-  formData.append('image', form.image);
+  !!form.image && formData.append('image', form.image);
 
   return axios.post(`post/create`, formData);
 }

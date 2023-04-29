@@ -103,7 +103,7 @@ const state = ref<IUpdatePost>({
   _id: "",
   title: "",
   category: "css",
-  image: "",
+  image: null,
   text: "",
 })
 
@@ -135,13 +135,13 @@ const clearPostData = () => {
     _id: "",
     title: "",
     category: "css",
-    image: "",
+    image: null,
     text: "",
   }
 }
 
 const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
-  state.value.image = $event.target.files ? $event.target.files[ 0 ] : ""
+  state.value.image = $event.target.files ? $event.target.files[ 0 ] : null
 }
 
 const cancel = () => {
@@ -178,7 +178,7 @@ onMounted(() => {
       _id: edit.value._id,
       title: edit.value.title,
       category: edit.value.category,
-      image: edit.value.image,
+      image: null,
       text: edit.value.text,
     }
   }
