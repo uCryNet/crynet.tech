@@ -20,9 +20,6 @@ import { useStore } from "vuex";
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
 import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
-// Utils
-import { debounce } from "@/utils";
-
 // Variables
 import { ROUTES_CONFIG } from "@/router";
 import { useRoute, } from "vue-router";
@@ -56,17 +53,13 @@ export default {
           : { category: route.params.category }
 
         store.dispatch("setFilters", payload)
-      }, {
-        deep: true
-      }
+      }, { deep: true }
     )
 
     watch(
       () => filters,
       ({ value }) => {
-        debounce(() => {
-          store.dispatch("getAllPosts", value)
-        }, 600)
+        store.dispatch("getAllPosts", value)
       }, {
         deep: true,
         immediate: true

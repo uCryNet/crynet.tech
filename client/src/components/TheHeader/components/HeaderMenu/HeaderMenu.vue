@@ -26,7 +26,7 @@
           v-for="subCategoriesUnit in categoryUnit.subCategories"
           :key="subCategoriesUnit.name"
           class="header-menu__subcategory-unit"
-          @click="get(subCategoriesUnit.name)"
+          @click="onChangeCategory(subCategoriesUnit.name)"
         >
           <router-link
             class="header-menu__subcategory-unit-link"
@@ -62,7 +62,7 @@ const store = useStore()
 
 const category = computed(() => store.getters.getAllCategory)
 
-const get = (category: string) => {
+const onChangeCategory = (category: string) => {
   store.dispatch("setFilters", { category })
 }
 </script>

@@ -1,7 +1,9 @@
+// Vendors
+import { Commit } from "vuex";
+
 // Types
 import { IArticle, IGetPosts } from "@/interfaces/interfaces";
 import { IFiltersStore, IPostStore } from "@/store/store.types";
-import { Commit } from "vuex";
 
 // Variables
 import API from "../api/api";
@@ -37,6 +39,8 @@ const actions = {
   async getAllPosts({ commit }: { commit: Commit }, data: IGetPosts | {} = {}) {
     commit("setPending", true)
 
+    console.log(data)
+
     API.getPosts(data)
       .then(res => {
         commit("setPosts", res.data)
@@ -51,10 +55,6 @@ const actions = {
 
   setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
     commit("setFilters", data)
-  },
-
-  setPending({ commit }: { commit: Commit }, data: boolean) {
-    commit("setPending", data)
   },
 }
 
