@@ -9,7 +9,7 @@ export interface IArticle {
 }
 
 export interface IEvent<T = EventTarget> {
-  target: T;
+  target: T
 }
 
 export interface ICategory {

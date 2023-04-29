@@ -62,7 +62,7 @@
     <button
       class="btn btn--red btn--big mt--20"
       v-if="state?._id"
-      @click="cancel"
+      @click="onCancel"
     >
       CANCEL
     </button>
@@ -144,7 +144,7 @@ const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
   state.value.image = $event.target.files ? $event.target.files[ 0 ] : null
 }
 
-const cancel = () => {
+const onCancel = () => {
   clearEditPostData
   clearPostData()
 }

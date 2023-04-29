@@ -1,7 +1,7 @@
 <template>
   <form
     class="admin-login"
-    @submit.prevent="send"
+    @submit.prevent="onSubmit"
   >
     <label class="admin-login__field">
       <input
@@ -102,7 +102,7 @@ watch(
   }
 )
 
-const send = () => {
+const onSubmit = () => {
   const { login, password } = state
 
   API.login({ login, password })

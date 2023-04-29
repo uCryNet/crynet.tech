@@ -14,10 +14,10 @@
     <div class="post__time">
       <div class="post__date">
         <strong>
-          {{ getDate[0] }}
+          {{ articleDate[0] }}
         </strong>
 
-        {{ getDate[1] }}.{{ getDate[2] }}
+        {{ articleDate[1] }}.{{ articleDate[2] }}
       </div>
     </div>
 
@@ -73,8 +73,12 @@ const {
 
 const isError = ref<boolean>(false)
 
-const getDate = date.split(".")
-const getDescription = text.substring(0, 200) + "..."
+const articleDate = date.split(".")
 const poster = SERVER + image
+
 const onError = () => isError.value = true
+const getDescription = text
+  .replace(/(<([^>]+)>)/ig,'')
+  .substring(0, 150)
+  .trim()
 </script>

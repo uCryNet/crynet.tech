@@ -11,7 +11,7 @@
 </template>
 
 
-<script lang="ts">
+<script setup lang="ts">
 // Vendors
 import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
@@ -22,52 +22,37 @@ import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
 // Variables
 import { ROUTES_CONFIG } from "@/router";
-import { useRoute, } from "vue-router";
+import { useRoute } from "vue-router";
 
 
-export default {
-  name: 'App',
+const store = useStore()
+const route = useRoute()
 
-  components: {
-    TheHeader,
-    TheFooter
-  },
+onMounted(() => {
+  store.dispatch("getCategory")
+})
 
-  setup() {
-    const store = useStore()
-    const route = useRoute()
+const routes = computed(() => route.fullPath)
+const filters = computed(() => store.getters.getFilter)
+const isPending = store.getters.getIsPending
 
-    onMounted(() => {
-      store.dispatch("getCategory")
-    })
+watch(
+  () => routes,
+  ({ value }) => {
+    const payload = value === ROUTES_CONFIG.root.path
+      ? { search: "", category: "" }
+      : { category: route.params.category }
 
-    const routes = computed(() => route.fullPath)
-    const filters = computed(() => store.getters.getFilter)
-    const isPending = store.getters.getIsPending
+    store.dispatch("setFilters", payload)
+  }, { deep: true }
+)
 
-    watch(
-      () => routes,
-      ({ value }) => {
-        const payload = value === ROUTES_CONFIG.root.path
-          ? { search: "", category: "" }
-          : { category: route.params.category }
-
-        store.dispatch("setFilters", payload)
-      }, { deep: true }
-    )
-
-    watch(
-      () => filters,
-      ({ value }) => {
-        store.dispatch("getAllPosts", value)
-      }, {
-        deep: true,
-      }
-    )
-
-    return {
-      isPending
-    }
+watch(
+  () => filters,
+  ({ value }) => {
+    store.dispatch("getAllPosts", value)
+  }, {
+    deep: true,
   }
-}
+)
 </script>
