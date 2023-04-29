@@ -2,23 +2,29 @@
   <header class="header">
     <TheMenu />
 
-    <div class="header__info container">
-      <div class="title-think">
+    <router-link
+      class="header__info container router-link text--sandybrown"
+      :to="ROUTES_CONFIG.root.path"
+    >
+      <span class="title-think">
         YET ANOTHER
-      </div>
+      </span>
 
-      <h2 class="title-big-bold">
+      <span class="title-big-bold">
         DEVELOPER
-      </h2>
+      </span>
 
       <span>🇺🇦</span>
-    </div>
+    </router-link>
   </header>
 </template>
 
 <script setup lang="ts">
 // Components
 import TheMenu from "@/components/TheHeader/components/HeaderMenu/HeaderMenu.vue"
+
+// Constant
+import { ROUTES_CONFIG } from '@/router';
 </script>
 
 <style lang="scss" scoped>

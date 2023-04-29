@@ -15,6 +15,7 @@
 // Vendors
 import { computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
+import { useRoute } from "vue-router";
 
 // Components
 import TheHeader from "@/components/TheHeader/TheHeader.vue";
@@ -22,7 +23,6 @@ import TheFooter from "@/components/TheFooter/TheFooter.vue";
 
 // Variables
 import { ROUTES_CONFIG } from "@/router";
-import { useRoute } from "vue-router";
 
 
 const store = useStore()
@@ -34,7 +34,6 @@ onMounted(() => {
 
 const routes = computed(() => route.fullPath)
 const filters = computed(() => store.getters.getFilter)
-const isPending = store.getters.getIsPending
 
 watch(
   () => routes,

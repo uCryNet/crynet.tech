@@ -6,7 +6,7 @@
         <span> & NOTES</span>
       </h2>
       <div class="text text--center">
-        Let's try
+        Let's try to find
       </div>
     </div>
 
