@@ -90,8 +90,8 @@ const editArticle = (article: IArticle) => {
 }
 
 const getPosts = () => {
-  API.getPosts({})
-    .then(res => state.allArticles = res.data)
+  API.getPosts()
+    .then(res => state.allArticles = res.data.data)
     .catch(error => {
       console.error(parseResponseError(error))
     })

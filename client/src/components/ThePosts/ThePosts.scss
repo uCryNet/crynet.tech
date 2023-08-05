@@ -4,7 +4,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     padding-top: 24px;
-    padding-bottom: 24px;
+    padding-bottom: 21px;
 
     @media (max-width: 992px) {
       grid-template-columns: repeat(2, 1fr);

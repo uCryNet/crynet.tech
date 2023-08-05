@@ -4,10 +4,11 @@ import axios from 'axios';
 // Types
 import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 import { IFiltersStore } from "@/store/store.types";
+import { IArticlesResponse } from "@/interfaces/interfaces";
 
 
-const getPosts = (data: IFiltersStore) => {
-  return axios.post(`post/get-all`, data);
+const getPosts = (data?: IFiltersStore) => {
+  return axios.post<IArticlesResponse>(`post/get-all`, data);
 }
 
 const getOnePost = (uri: string) => {

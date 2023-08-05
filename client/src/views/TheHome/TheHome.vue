@@ -12,7 +12,7 @@
 
     <SearchPost />
 
-    <Posts />
+    <ThePosts />
   </div>
 </template>
 
@@ -22,7 +22,7 @@ import { onMounted } from "vue";
 
 // Components
 import SearchPost from "@/components/SearchPost/SearchPost.vue";
-import Posts from "@/components/ThePosts/ThePosts.vue";
+import ThePosts from "@/components/ThePosts/ThePosts.vue";
 
 
 onMounted(() => {
