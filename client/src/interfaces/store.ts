@@ -1,5 +1,6 @@
 // Types
-import { IArticle, ICategory } from "@/interfaces/interfaces";
+import { IArticle } from "@/interfaces/article";
+import { ICategory } from "@/interfaces/category";
 
 
 export interface IFiltersStore {
