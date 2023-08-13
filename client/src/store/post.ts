@@ -2,7 +2,7 @@
 import { Commit } from "vuex";
 
 // Types
-import { IArticle } from "@/interfaces/interfaces";
+import { IArticle, IArticlesResponse } from "@/interfaces/interfaces";
 import { IFiltersStore, IPostStore } from "@/store/store.types";
 
 // Variables
@@ -14,7 +14,13 @@ import parseResponseError from "@/utils/parseResponseError";
 
 const state: IPostStore = {
   posts: [],
-  filters: {},
+  filters: {
+    page: 1,
+    limit: 9
+  },
+  meta: {
+    total_pages: 1
+  },
   isPending: false
 }
 
@@ -29,6 +35,10 @@ const getters = {
 
   getIsPending(state: IPostStore) {
     return state.isPending
+  },
+
+  getMeta(state: IPostStore) {
+    return state.meta
   }
 }
 
@@ -36,7 +46,12 @@ const actions = {
   async getAllPosts({ commit }: { commit: Commit }, data: IFiltersStore | {} = {}) {
     commit("setPending", true)
 
-    API.getPosts(data)
+    const filters= {
+      ...state.filters,
+      ...data
+    }
+
+    API.getPosts(filters)
       .then(res => {
         commit("setPosts", res.data)
         commit("setPending", false)
@@ -54,19 +69,25 @@ const actions = {
 }
 
 const mutations = {
-  setPosts(state: IPostStore, posts: IArticle[]) {
-    state.posts = posts;
+  setPosts(state: IPostStore, data: IArticlesResponse) {
+    state.posts = data.data
+    state.meta = data.meta
   },
 
   setFilters(state: IPostStore, data: IFiltersStore) {
-    const { search, category } = data
+    const {
+      search,
+      category,
+      page
+    } = data
 
     if (search !== undefined) state.filters.search = search
     if (category !== undefined) state.filters.category = category
+    if (page !== undefined) state.filters.page = page
   },
 
   setPending(state: IPostStore, data: boolean) {
-    state.isPending = data;
+    state.isPending = data
   },
 }
 

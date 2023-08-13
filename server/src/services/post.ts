@@ -6,7 +6,7 @@ import Post from '../models/post'
 
 
 class PostService {
-  async get(search = "", category = "") {
+  async get(search: string, category: string, page: number, limit: number) {
     const conditions: Record<string, Object> = {};
 
     if (category) {
@@ -19,7 +19,22 @@ class PostService {
         { text: regex },
       ];
     }
-    return await Post.find(conditions).sort({ _id: 'desc' });
+
+    const totalCount = await Post.estimatedDocumentCount()
+    const data = await Post
+      .find(conditions)
+      .sort({ _id: 'desc' })
+      .limit(limit)
+      .skip((page - 1) * limit)
+
+    const total_pages = Math.ceil(totalCount / limit)
+
+    return {
+      data,
+      meta: {
+        total_pages
+      }
+    }
   }
 
   async create(data: IPostCreate) {

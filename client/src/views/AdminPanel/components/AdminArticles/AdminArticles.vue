@@ -13,31 +13,31 @@
     <div class="all-articles__lists">
       <div
         class="all-articles__list"
-        v-for="list in lists"
-        :key="list._id"
+        v-for="article in lists"
+        :key="article._id"
       >
         <div class="all-articles__list-title">
-          {{ list.title }}
+          {{ article.title }}
         </div>
 
         <div class="all-articles__list-date">
-          {{ list.date }}
+          {{ article.date }}
         </div>
 
         <div class="all-articles__list-category">
-          {{ list.category }}
+          {{ article.category }}
         </div>
 
         <button
           class="all-articles__list-nav all-articles__list-nav-edit"
-          @click="editArticle(list)"
+          @click="editArticle(article)"
         >
           Update
         </button>
 
         <button
           class="all-articles__list-nav all-articles__list-nav-del"
-          @click="deleteArticle(list._id, list.title)"
+          @click="deleteArticle(article._id, article.title)"
         >
           Delete
         </button>
@@ -52,8 +52,8 @@ import { IArticle } from "@/interfaces/interfaces";
 
 
 interface IAdminArticlesProps {
-  editArticle: () => void
-  deleteArticle: () => void
+  editArticle: (article: IArticle) => void
+  deleteArticle: (id: string, title: string) => void
   lists: IArticle[]
 }
 

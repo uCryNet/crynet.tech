@@ -35,12 +35,19 @@ class PostController {
 
   async get(req: Request, res: Response) {
     try {
-      const { search, category } = req.body
+      const {
+        search,
+        category,
+        page,
+        limit,
+      } = req.body
 
-      const searchValid = stringValidate(search)
-      const categoryValid = stringValidate(category)
+      const searchValid = stringValidate(search) || ""
+      const categoryValid = stringValidate(category) || ""
+      const pageValid = parseInt(stringValidate(page?.toString())) || 1
+      const limitValid = parseInt(stringValidate(limit?.toString())) || 9
 
-      const posts = await PostService.get(searchValid, categoryValid)
+      const posts = await PostService.get(searchValid, categoryValid, pageValid, limitValid)
       return res.json(posts)
     } catch (e) {
       return res.status(400).json({ message: "Error in receiving the post", e })

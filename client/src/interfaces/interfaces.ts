@@ -19,3 +19,10 @@ export interface ICategory {
   }[]
   title: string
 }
+
+export interface IArticlesResponse {
+  data: IArticle[]
+  meta: {
+    total_pages: number
+  }
+}
