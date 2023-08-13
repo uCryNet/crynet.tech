@@ -1,7 +1,7 @@
 // Types
-import { ICategoryStore } from "@/store/store.types";
+import { ICategoryStore } from "@/interfaces/store";
 import { Commit } from "vuex";
-import { ICategory } from "@/interfaces/interfaces";
+import { ICategory } from "@/interfaces/category";
 
 // Variables
 import API from "../api/api";

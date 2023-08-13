@@ -56,7 +56,7 @@
 import { computed, defineProps, toRefs } from 'vue';
 
 
-interface IPaginator {
+interface IPaginatorProps {
   totalPages: number
   maxVisibleButtons: number
   currentPage: number
@@ -64,7 +64,7 @@ interface IPaginator {
 }
 
 
-const props = defineProps<IPaginator>();
+const props = defineProps<IPaginatorProps>();
 const {
   totalPages,
   maxVisibleButtons,

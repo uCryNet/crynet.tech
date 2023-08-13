@@ -2,8 +2,8 @@
 import { Commit } from "vuex";
 
 // Types
-import { IArticle, IArticlesResponse } from "@/interfaces/interfaces";
-import { IFiltersStore, IPostStore } from "@/store/store.types";
+import { IFiltersStore, IPostStore } from "@/interfaces/store";
+import { IArticlesResponse } from "@/interfaces/article";
 
 // Variables
 import API from "../api/api";

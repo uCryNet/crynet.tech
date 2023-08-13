@@ -3,8 +3,8 @@ import axios from 'axios';
 
 // Types
 import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
-import { IFiltersStore } from "@/store/store.types";
-import { IArticlesResponse } from "@/interfaces/interfaces";
+import { IFiltersStore } from "@/interfaces/store";
+import { IArticlesResponse } from "@/interfaces/article";
 
 
 const getPosts = (data?: IFiltersStore) => {

@@ -31,7 +31,7 @@ router.get("/api/user/check-access", UserController.checkAccess)
 // router.get("/static/*", FileController.get)
 router.post("/api/file/upload", FileController.upload)
 
-// category
+// category.ts
 router.get("/api/category/get-all", CategoryController.getAll)
 
 module.exports = router;
