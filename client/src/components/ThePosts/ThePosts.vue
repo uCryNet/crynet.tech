@@ -42,7 +42,6 @@ import { useStore } from "vuex";
 import ThePost from "./components/ThePost/ThePost.vue";
 import ThePreloader from "@/components/ThePreloader/ThePreloader.vue";
 import ThePaginator from "@/components/ThePaginator/ThePaginator.vue";
-import { ROUTES_CONFIG } from "@/router";
 
 
 const store = useStore()

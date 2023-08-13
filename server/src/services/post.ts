@@ -20,7 +20,7 @@ class PostService {
       ];
     }
 
-    const totalCount = await Post.estimatedDocumentCount()
+    const totalCount = await Post.countDocuments(conditions)
     const data = await Post
       .find(conditions)
       .sort({ _id: 'desc' })

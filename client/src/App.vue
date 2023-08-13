@@ -39,8 +39,8 @@ watch(
   () => routes,
   ({ value }) => {
     const payload = value === ROUTES_CONFIG.root.path
-      ? { search: "", category: "" }
-      : { category: route.params.category }
+      ? { search: "", category: "", page: 1 }
+      : { category: route.params.category, page: 1 }
 
     store.dispatch("setFilters", payload)
   }, { deep: true }

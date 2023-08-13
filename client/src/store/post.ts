@@ -6,7 +6,7 @@ import { IFiltersStore, IPostStore } from "@/interfaces/store";
 import { IArticlesResponse } from "@/interfaces/article";
 
 // Variables
-import API from "../api/api";
+import API from "@/api/api";
 
 // Utils
 import parseResponseError from "@/utils/parseResponseError";
