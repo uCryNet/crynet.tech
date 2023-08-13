@@ -11,11 +11,11 @@ export const ROUTES_CONFIG = {
     name: 'About',
   },
   article: {
-    path: '/blog/:category.ts/:id',
+    path: '/blog/:category/:id',
     name: 'Article',
   },
   articles: {
-    path: '/blog/:category.ts?',
+    path: '/blog/:category?',
     name: 'Articles',
   },
   login: {

@@ -57,7 +57,7 @@ watch(
   () => state.search,
   (search) => {
     debounce(() => {
-      store.dispatch("setFilters", { search })
+      store.dispatch("setFilters", { search, page: 1 })
     }, 500)
   }
 )
