@@ -15,7 +15,7 @@
       <ThePaginator
         :max-visible-buttons="3"
         :total-pages="meta.total_pages"
-        :current-page="currentPage"
+        :current-page="filters.page"
         :on-change-page="onChangePage"
       />
     </div>
@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
 // Vendors
-import { computed, ref, watch } from "vue";
+import { computed } from "vue";
 import { useStore } from "vuex";
 
 // Components
@@ -49,19 +49,11 @@ const store = useStore()
 const posts = computed(() => store.getters.getAllPost)
 const isPending = computed(() => store.getters.getIsPending)
 const meta = computed(() => store.getters.getMeta)
-
-const currentPage = ref(1)
+const filters = computed(() => store.getters.getFilter)
 
 const onChangePage = (page: number) => {
-  currentPage.value = page;
+  store.dispatch("setFilters", { page })
 }
-
-watch(
-  () => currentPage,
-  (page) => {
-    store.dispatch("setFilters", { page })
-  }, { deep: true }
-)
 </script>
 
 <style scoped lang="scss">
