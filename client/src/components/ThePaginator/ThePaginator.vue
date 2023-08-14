@@ -77,7 +77,11 @@ const startPage = computed(() => {
   if (currentPage.value === 1) return 1
 
   if (currentPage.value === totalPages.value) {
-    return totalPages.value - maxVisibleButtons.value + 1
+    const result = totalPages.value - maxVisibleButtons.value + 1
+
+    return result <= 0
+      ? 1
+      : result
   }
 
   return currentPage.value - 1
