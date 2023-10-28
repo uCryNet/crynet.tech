@@ -27,7 +27,9 @@ class PostService {
       .limit(limit)
       .skip((page - 1) * limit)
 
-    const total_pages = Math.ceil(totalCount / limit)
+    const total_pages = !!limit
+      ? Math.ceil(totalCount / limit)
+      : page
 
     return {
       data,
