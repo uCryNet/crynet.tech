@@ -88,16 +88,18 @@ import parseResponseError from "@/utils/parseResponseError"
 
 
 interface IAdminArticle {
-  clearEditPostData: () => void
+  updatePostData: () => void
   category: ICategory[]
   edit: IArticle
 }
 
 
 const props = defineProps<IAdminArticle>()
-const { clearEditPostData, edit } = toRefs(props)
+const { updatePostData, edit } = toRefs(props)
 
 const store = useStore()
+
+const allCategory = computed(() => store.getters.getAllCategory)
 
 const state = ref<IUpdatePost>({
   _id: "",
@@ -145,7 +147,7 @@ const onFileChanged = ($event: IEvent<HTMLInputElement>) => {
 }
 
 const onCancel = () => {
-  clearEditPostData
+  updatePostData
   clearPostData()
 }
 
@@ -155,10 +157,6 @@ const getContent = async () => {
   const isUpdate = edit.value?._id
   const data = { ...state.value }
 
-  const getPosts = () => {
-    store.dispatch("getAllPosts")
-  }
-
   isUpdate
     ? await API.updatePost(data)
       .then(() => alert(`Article updated!`))
@@ -167,8 +165,7 @@ const getContent = async () => {
       .then(() => alert(`Article added!`))
       .catch(error => console.error(parseResponseError(error)))
 
-  getPosts()
-  clearEditPostData
+  updatePostData
   clearPostData()
 }
 
@@ -183,8 +180,6 @@ onMounted(() => {
     }
   }
 })
-
-const allCategory = computed(() => store.getters.getAllCategory)
 </script>
 
 <style scoped lang="scss">

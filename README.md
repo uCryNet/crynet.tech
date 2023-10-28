@@ -44,11 +44,12 @@ This is my personal blog you can download it and see how it works. Download [mas
 
 ## :white_check_mark: Todos
 :x: Back-end refactoring [BE] \
+:x: Front-end refactoring [FE] \
 :heavy_check_mark: Add features to update image when you update article (old picture need remove) [BE/FE] \
 :x: Add multiple select [FE] \
 :x: Add feature chose several article category [BE/FE] \
 :x: Add multilang [BE/FE] \
 :x: Tests coverage  [BE/FE] \
 :x: Add "2FA for admin login [BE/FE] \
-:x: Add paginator [FE]
+:heavy_check_mark: Add paginator [BE/FE] \
 :x: Update isAdmin solution [FE]

@@ -45,7 +45,7 @@ class PostController {
       const searchValid = stringValidate(search) || ""
       const categoryValid = stringValidate(category) || ""
       const pageValid = parseInt(stringValidate(page?.toString())) || 1
-      const limitValid = parseInt(stringValidate(limit?.toString())) || 9
+      const limitValid = parseInt(stringValidate(limit?.toString())) || 0
 
       const posts = await PostService.get(searchValid, categoryValid, pageValid, limitValid)
       return res.json(posts)

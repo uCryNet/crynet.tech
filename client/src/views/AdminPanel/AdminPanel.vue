@@ -14,7 +14,8 @@
         v-if="state.block === 'article'"
         :edit="state.edit"
         :category="category"
-        :clear-edit-post-data="clearEditPostData"
+        :update-post-data="updatePostData"
+        :get-posts="getPosts"
       />
 
       <AdminArticles
@@ -91,7 +92,10 @@ const editArticle = (article: IArticle) => {
 
 const getPosts = () => {
   API.getPosts()
-    .then(res => state.allArticles = res.data.data)
+    .then(res => {
+      console.log(res.data.data)
+      state.allArticles = res.data.data
+    })
     .catch(error => {
       console.error(parseResponseError(error))
     })
@@ -104,11 +108,11 @@ const deleteArticle = async (id: string, title: string) => {
     await API.deletePost(id)
       .catch(error => console.error(parseResponseError(error)))
 
-    await getPosts()
+    getPosts()
   }
 }
 
-const clearEditPostData = () => {
+const updatePostData = () => {
   state.edit = {
     author: "",
     category: "",
@@ -118,6 +122,8 @@ const clearEditPostData = () => {
     title: "",
     _id: "",
   }
+
+  getPosts()
 }
 
 onMounted(() => {
@@ -132,7 +138,7 @@ watch(
   () => state.block,
   () => {
     if (state.block === MENUS.articles.value && state.edit._id) {
-      clearEditPostData()
+      updatePostData()
     }
   }
 )
