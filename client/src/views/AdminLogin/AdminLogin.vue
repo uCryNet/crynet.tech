@@ -45,9 +45,11 @@
 import { onMounted, reactive, watch, } from "vue";
 import { useRouter } from "vue-router";
 
+// Utils
+import API from "@/api/api"
+
 // Variables
 import { ROUTES_CONFIG } from "@/router";
-import API from "@/api/api"
 
 // Utils
 import parseResponseError from "@/utils/parseResponseError";

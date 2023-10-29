@@ -30,11 +30,9 @@ import { highlightAll } from "prismjs"
 import 'prismjs/themes/prism.css'
 import 'prismjs/themes/prism-okaidia.css'
 
-// Variables
-import API from "@/api/api"
-
 // Utils
-import parseResponseError from "../../utils/parseResponseError";
+import parseResponseError from "@/utils/parseResponseError";
+import API from "@/api/api"
 
 
 const route = useRoute()
