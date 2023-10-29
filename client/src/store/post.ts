@@ -5,12 +5,6 @@ import { Commit } from "vuex";
 import { IFiltersStore, IPostStore } from "@/interfaces/store";
 import { IArticlesResponse } from "@/interfaces/article";
 
-// Variables
-import API from "@/api/api";
-
-// Utils
-import parseResponseError from "@/utils/parseResponseError";
-
 
 const state: IPostStore = {
   posts: [],
@@ -33,7 +27,7 @@ const getters = {
     return state.filters
   },
 
-  getIsPending(state: IPostStore) {
+  getPending(state: IPostStore) {
     return state.isPending
   },
 
@@ -43,29 +37,17 @@ const getters = {
 }
 
 const actions = {
-  async getAllPosts({ commit }: { commit: Commit }, data: IFiltersStore | {} = {}) {
-    commit("setPending", true)
-
-    const filters= {
-      ...state.filters,
-      ...data
-    }
-
-    API.getPosts(filters)
-      .then(res => {
-        commit("setPosts", res.data)
-        commit("setPending", false)
-      })
-      .catch(error => {
-        console.error(parseResponseError(error))
-        commit("setPosts", [])
-        commit("setPending", false)
-      })
+  async setPosts({ commit }: { commit: Commit }, data: IFiltersStore | {} = {}) {
+    commit("setPosts", data)
   },
 
-  setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
+  async setFilters({ commit }: { commit: Commit }, data: IFiltersStore) {
     commit("setFilters", data)
   },
+
+  async setPending({ commit }: { commit: Commit }, data: boolean) {
+    commit("setPending", data)
+  }
 }
 
 const mutations = {

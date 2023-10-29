@@ -47,7 +47,7 @@ import ThePaginator from "@/components/ThePaginator/ThePaginator.vue";
 const store = useStore()
 
 const posts = computed(() => store.getters.getAllPost)
-const isPending = computed(() => store.getters.getIsPending)
+const isPending = computed(() => store.getters.getPending)
 const meta = computed(() => store.getters.getMeta)
 const filters = computed(() => store.getters.getFilter)
 

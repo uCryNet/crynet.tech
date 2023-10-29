@@ -79,8 +79,10 @@ import Editor from '@tinymce/tinymce-vue'
 import { IArticle, ICategory, IEvent } from "@/interfaces/interfaces";
 import { ICreatePost, IUpdatePost } from "@/views/AdminPanel/AdminPanel.types";
 
-// Variables
+// Utils
 import API from "@/api/api"
+
+// Variables
 import { TINYMCE_KEY, SERVER } from "@/config/constant";
 
 // Utils

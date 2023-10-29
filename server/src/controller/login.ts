@@ -6,11 +6,11 @@ import CryptoJS from "crypto-js"
 import { Request, Response } from "express";
 import { Types } from "mongoose"
 
+// Utils
+import { decryptedData } from "../utils";
+
 // Components
 import UserService from '../services/login'
-
-// Variables
-import { decryptedData } from "../utils";
 
 
 const genToken = (id: Types.ObjectId, role: string) => {

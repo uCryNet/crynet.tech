@@ -6,8 +6,6 @@ import { IPostUpdate, IUserSchema } from "../interfaces/interfaces";
 // Components
 import PostService from '../services/post'
 import FileService from '../services/file'
-
-// Variables
 import UserService from "../services/login";
 
 // Utils
