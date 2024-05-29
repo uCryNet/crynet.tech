@@ -93,7 +93,6 @@ const editArticle = (article: IArticle) => {
 const getPosts = () => {
   API.getPosts()
     .then(res => {
-      console.log(res.data.data)
       state.allArticles = res.data.data
     })
     .catch(error => {
