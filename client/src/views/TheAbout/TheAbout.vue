@@ -13,9 +13,6 @@
         <p>When I started freelancing, I realized that there were many web development opportunities available. That's why I decided to pursue this field. Over time, I discovered that I specifically enjoyed front-end development more. I love trying out new things in the IT world.</p>
         <p>And, I'm also a die-hard Linux user. I switched to Linux around the end of 2012. My first distribution was Linux Mint with Cinnamon.</p>
         <br>
-        <p><b>OS:</b> openSUSE Tumbleweed</p>
-        <p><b>DE:</b> KDE Plasma</p>
-        <p><b>IDE:</b> Web Storm</p>
 
         <div class="about__nav">
           <a
@@ -109,7 +106,6 @@ const SKILLS = [
   "CSS",
   "JAVASCRIPT",
   "TYPESCRIPT",
-  "jQ",
   "Preprocessors",
   "Bundlers",
   "UI frameworks",
@@ -121,7 +117,14 @@ const SKILLS = [
   "REDUX",
   "GIT",
   "LINUX",
-  "NODE.JS"
+  "NODE",
+  "EXPRESS",
+  "SQL",
+  "POSTGRESQL",
+  "MARIADB",
+  "MONGODB",
+  "CLICKHOUSE",
+  "RABBITMQ",
 ]
 
 
